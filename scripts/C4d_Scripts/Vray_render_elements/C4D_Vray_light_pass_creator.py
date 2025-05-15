@@ -76,8 +76,61 @@ def getDocumentLights(doc: c4d.documents.BaseDocument):
         topObject = topObject.GetNext()
     return result
 
+# V-Ray Light types in Cinema 4D
+VRAY_LIGHT_TYPES = [
+    1053280,  # V-Ray Rectangle Light
+    1053277,  # V-Ray Dome Light
+    1053278,  # V-Ray Sphere Light
+    1059898,  # V-Ray Mesh Light
+    1053281,  # V-Ray IES Light
+    1053287,  # V-Ray Sun Light
+]
+
+def rename_vray_lights():
+    """Finds and renames V-Ray lights with the 'LS_' prefix if necessary."""
+    doc = c4d.documents.GetActiveDocument()  # Active document
+    renamed_lights = []  # List of renamed lights
+    existing_names = set()  # Store existing names to avoid conflicts
+
+    def scan_objects(obj):
+        """Recursive function to traverse all objects."""
+        while obj:
+            if obj.GetType() in VRAY_LIGHT_TYPES:  # If the object is a V-Ray Light type
+                original_name = obj.GetName()
+
+                # If the name does not start with "LS_", modify it
+                if not original_name.startswith("LS_"):
+                    new_name = f"LS_{original_name}"
+
+                    # Ensure the new name is unique
+                    counter = 1
+                    unique_name = new_name
+                    while unique_name in existing_names:
+                        unique_name = f"{new_name}_{counter}"
+                        counter += 1
+
+                    obj.SetName(unique_name)  # Set the new name
+                    renamed_lights.append(f"{original_name} -> {unique_name}")
+                    existing_names.add(unique_name)  # Add the new name to the set
+
+                else:
+                    existing_names.add(original_name)  # If already correct, store the name
+
+            scan_objects(obj.GetDown())  # Check child objects
+            obj = obj.GetNext()  # Check next object
+
+    scan_objects(doc.GetFirstObject())  # Traverse the hierarchy
+
+    c4d.EventAdd()  # Refresh Cinema 4D
+
+    # Display a dialog with the renamed lights
+    if renamed_lights:
+        return True
+    else:
+        return False
+
 # Main function
-def main():
+def create_light_selects():
     """ Creates a V-Ray Light Select Render element for each VRay light in the document"""
     activeDocument = c4d.documents.GetActiveDocument()
     vrayRenderElementsHook=activeDocument.FindSceneHook(1054363) # ID_VRAY_RENDER_ELEMENTS_SCENE_HOOK
@@ -132,10 +185,14 @@ def main():
             activeDocument.EndUndo()
         c4d.EventAdd()
 
-# Execute main()
-
-if __name__=='__main__':
+# Add the rename functionality to the main script
+if __name__ == '__main__':
     try:
-        main()
+        renamed = rename_vray_lights()
+        create_light_selects()  # Call the main function to create light select passes
+        if renamed:
+            gui.MessageDialog('Renamed V-Ray lights with the "LS_" prefix. All lights are added to the Light Select pass.')
+        else:
+            gui.MessageDialog('No V-Ray lights needed renaming. All lights are added to the Light Select pass.')
     except Exception as error:
-        gui.MessageDialog(' creating light select passes for v-ray lights '.join(map(str, error.args)), c4d.GEMB_ICONSTOP)
+        gui.MessageDialog('Error: ' + ' '.join(map(str, error.args)), c4d.GEMB_ICONSTOP)

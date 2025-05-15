@@ -2,11 +2,22 @@ import os
 import shutil
 import platform
 
-def get_c4d_script_path():
+def get_c4d_version():
+    preferences_path = os.path.expanduser("~/Library/Preferences/Maxon/")
+    if os.path.exists(preferences_path):
+        for folder in os.listdir(preferences_path):
+            if folder.startswith("Maxon Cinema 4D"):
+                return folder  # Extract the full name
+    return None
+
+def get_c4d_script_path(maxon_version=None):
     if platform.system() == "Darwin":
-        return os.path.expanduser("~/Library/Preferences/Maxon/Maxon Cinema 4D 2025_FFA38A4B/library/scripts/")
+        # c4d set the c4d version
+
+        return os.path.expanduser(f"~/Library/Preferences/Maxon/{maxon_version}/library/scripts/")
     elif platform.system() == "Windows":
-        return os.path.join(os.getenv("APPDATA"), "Maxon", "Maxon Cinema 4D 2025_FFA38A4B", "library", "scripts/")
+        # c4d set the c4d version
+        return os.path.join(os.getenv("APPDATA"), "Maxon", maxon_version, "library", "scripts/")
     raise RuntimeError("Unsupported OS")
 
 def copy_files(src, dst):
@@ -20,7 +31,9 @@ def copy_files(src, dst):
 
 def main():
     script_root = os.path.join("scripts", "C4d_Scripts")
-    dst_root = get_c4d_script_path()
+    version = get_c4d_version()
+    dst_root = get_c4d_script_path(version)
+
 
     for folder in os.listdir(script_root):
         full_path = os.path.join(script_root, folder)

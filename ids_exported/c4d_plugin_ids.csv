@@ -1,0 +1,3736 @@
+PluginID;Name;Type
+222;Untriangulate;Command
+222;Untriangulate;Tool
+5100;Polygon;Object
+5102;Light;Object
+5102;Light;Command
+5103;Camera;Object
+5103;Camera;Command
+5104;Floor;Object
+5104;Floor;Command
+5105;Sky;Object
+5105;Sky;Command
+5106;Environment;Object
+5106;Environment;Command
+5107;Loft;Object
+5107;Loft;Command
+5108;FFD;Object
+5108;FFD;Command
+5109;Emitter (Legacy);Object
+5109;Emitter (Legacy);Command
+5110;Deflector;Object
+5110;Deflector;Command
+5111;Gravity;Object
+5111;Gravity;Command
+5112;Rotation;Object
+5112;Rotation;Command
+5113;Wind;Object
+5113;Wind;Command
+5114;Friction;Object
+5114;Friction;Command
+5115;Turbulence;Object
+5115;Turbulence;Command
+5116;Extrude;Object
+5116;Extrude;Command
+5117;Lathe;Object
+5117;Lathe;Command
+5118;Sweep;Object
+5118;Sweep;Command
+5119;Attractor;Object
+5119;Attractor;Command
+5120;Bezier;Object
+5120;Bezier;Command
+5121;Foreground;Object
+5121;Foreground;Command
+5122;Background;Object
+5122;Background;Command
+5124;Destructor;Object
+5124;Destructor;Command
+5125;Metaball;Object
+5125;Metaball;Command
+5126;Instance;Object
+5126;Instance;Command
+5128;Bend;Object
+5128;Bend;Command
+5129;Bulge;Object
+5129;Bulge;Command
+5131;Shear;Object
+5131;Shear;Command
+5133;Taper;Object
+5133;Taper;Command
+5134;Twist;Object
+5134;Twist;Command
+5136;Stage;Object
+5136;Stage;Command
+5140;Null;Object
+5140;Null;Command
+5142;Symmetry;Object
+5143;Wrap;Object
+5143;Wrap;Command
+5145;Explosion;Object
+5145;Explosion;Command
+5146;Formula;Object
+5146;Formula;Command
+5147;Melt;Object
+5147;Melt;Command
+5148;Shatter;Object
+5148;Shatter;Command
+5149;Wind;Object
+5149;Wind;Command
+5150;Array;Object
+5150;Array;Command
+5153;WorkPlane;Object
+5159;Cube;Object
+5159;Cube;Command
+5160;Sphere;Object
+5160;Sphere;Command
+5161;Platonic;Object
+5161;Platonic;Command
+5162;Cone;Object
+5162;Cone;Command
+5163;Torus;Object
+5163;Torus;Command
+5164;Disc;Object
+5164;Disc;Command
+5165;Tube;Object
+5165;Tube;Command
+5166;Figure;Object
+5166;Figure;Command
+5167;Pyramid;Object
+5167;Pyramid;Command
+5168;Plane;Object
+5168;Plane;Command
+5169;Landscape;Object
+5169;Landscape;Command
+5170;Cylinder;Object
+5170;Cylinder;Command
+5171;Capsule;Object
+5171;Capsule;Command
+5172;Oil Tank;Object
+5172;Oil Tank;Command
+5173;Relief;Object
+5173;Relief;Command
+5174;Polygon;Object
+5174;Polygon;Command
+5175;Profile;Object
+5175;Profile;Command
+5176;Flower;Object
+5176;Flower;Command
+5177;Formula;Object
+5177;Formula;Command
+5178;Text Spline;Object
+5178;Text Spline;Command
+5179;n-Side;Object
+5179;n-Side;Command
+5180;4-Side;Object
+5180;4-Side;Command
+5181;Circle;Object
+5181;Circle;Command
+5182;Arc;Object
+5182;Arc;Command
+5183;Cissoid;Object
+5183;Cissoid;Command
+5184;Cycloid;Object
+5184;Cycloid;Command
+5185;Helix;Object
+5185;Helix;Command
+5186;Rectangle;Object
+5186;Rectangle;Command
+5187;Star;Object
+5187;Star;Command
+5188;Cogwheel;Object
+5188;Cogwheel;Command
+5189;Vectorizer;Object
+5189;Vectorizer;Command
+5190;Selection;Object
+5190;Selection;Command
+5612;Phong;Command
+5613;Display;Command
+5616;Material;Command
+5629;Protection;Command
+5636;Motion Blur;Command
+5637;Compositing;Command
+5650;SaveTemp;Tag
+5650;SaveTemp;Command
+5671;UVW;Command
+5673;Polygon Selection;Command
+5674;Point Selection;Command
+5676;Target;Command
+5678;Sun Expression;Tag
+5678;Sun Expression;Command
+5682;Vertex Map;Command
+5683;Restriction;Command
+5684;Metaball;Command
+5685;Bake Particle;Command
+5688;DXFTemp;Tag
+5688;DXFTemp;Command
+5690;Pin Material;Command
+5693;Stop;Command
+5698;Vibrate;Tag
+5698;Vibrate;Command
+5699;Align to Spline;Tag
+5699;Align to Spline;Command
+5700;Align to Path;Tag
+5700;Align to Path;Command
+5701;Edge Selection;Command
+5711;Normal;Command
+5800;Checkerboard;Shader
+5802;Cloud;Shader
+5803;Fire;Shader
+5804;Brick;Shader
+5806;Simple Turbulence;Shader
+5807;Simple Noise;Shader
+5808;Starfield;Shader
+5813;Galaxy;Shader
+5816;Stars;Shader
+5817;Flame;Shader
+5818;Water;Shader
+5820;Sunburst;Shader
+5821;Cyclone;Shader
+5823;Wood;Shader
+5825;Earth;Shader
+5826;Venus;Shader
+5827;Metal;Shader
+5828;Rust;Shader
+5829;Planet;Shader
+5830;Marble;Shader
+5831;Spectral;Shader
+5832;Color;Shader
+5833;Bitmap;Shader
+12002;Stop;Command
+12077;Perspective;Command
+12078;Parallel;Command
+12079;Left;Command
+12080;Right;Command
+12081;Front;Command
+12082;Back;Command
+12083;Top;Command
+12084;Bottom;Command
+12085;Military;Command
+12086;Frog;Command
+12087;Bird;Command
+12088;Gentleman;Command
+12089;Isometric;Command
+12090;Dimetric;Command
+12091;Gouraud Shading;Command
+12092;Quick Shading;Command
+12093;Wireframe;Command
+12094;New;Command
+12095;Open...;Command
+12096;Merge...;Command
+12097;Close;Command
+12098;Save;Command
+12099;Render to Picture Viewer;Command
+12100;Camera;Command
+12101;Object;Command
+12102;Enable Axis;Command
+12103;About;Command
+12104;Quit;Command
+12105;Undo;Command
+12106;Cut;Command
+12107;Copy;Command
+12108;Paste;Command
+12109;Delete;Command
+12112;Select All;Command
+12113;Deselect All;Command
+12130;Adapt to Object Axis;Command
+12131;Adapt to World Axis;Command
+12132;Fit to Object;Command
+12133;Adapt to View;Command
+12134;Mirror Horizontally;Command
+12135;Mirror Vertically;Command
+12139;Points;Command
+12141;Reverse Sequence;Command
+12142;Set First Point;Command
+12144;Connect Objects;Command
+12147;Redraw;Command
+12148;Frame Geometry;Command
+12149;Frame Default;Command
+12150;Magnify;Command
+12151;Frame Selected Objects;Command
+12153;X-Axis / Pitch;Command
+12154;Y-Axis / Heading;Command
+12155;Z-Axis / Bank;Command
+12156;Coordinate System;Command
+12159;Material Manager;Command
+12161;Render Settings;Command
+12162;Render Selection;Command
+12163;Render Viewport;Command
+12165;Render Region;Command
+12167;Save All Materials as...;Command
+12168;Delete Unused Materials;Command
+12169;Apply;Command
+12184;Texture;Command
+12187;Polygons;Command
+12188;Structure Manager;Command
+12190;Hard Interpolation;Command
+12191;Soft Interpolation;Command
+12192;Fit to Image...;Command
+12193;Fit to Region;Command
+12194;Animation;Command
+12196;Empty Spline;Command
+12201;Selected Object as Camera;Command
+12202;Default Camera;Command
+12203;Edit...;Command
+12211;Delete Duplicate Materials;Command
+12218;Save As...;Command
+12221;Rename...;Command
+12233;Current State to Object;Command
+12235;Generate UVW Coordinates;Command
+12236;Make Editable;Command
+12252;Render Materials;Command
+12253;Render All Materials;Command
+12255;Save Project with Assets...;Command
+12270;Revert to Saved...;Command
+12287;Configure;Command
+12288;Frame All;Command
+12294;Select Area;Command
+12297;Redo;Command
+12298;Model;Command
+12305;Console;Command
+12317;Reset Scale;Command
+12333;Sort Materials;Command
+12372;Bake Particles...;Command
+12373;Scene Settings;Command
+12374;Invert Selection;Command
+12390;Close All;Command
+12391;Save All;Command
+12392;Close Window;Command
+12409;Execute Last Plugin;Command
+12410;Record Active Objects;Command
+12411;Play Backwards;Command
+12412;Play Forwards;Command
+12413;Go to Previous Frame;Command
+12414;Go to Next Frame;Command
+12415;Go to Previous Key;Command
+12416;Go to Next Key;Command
+12417;Position;Command
+12418;Scale;Command
+12419;Rotation;Command
+12421;Point Level Animation;Command
+12422;Parameter;Command
+12423;Preview Range;Command
+12424;All Frames;Command
+12425;Autokeying;Command
+12426;Simple;Command
+12427;Cycle;Command
+12428;Ping-Pong;Command
+12429;1;Command
+12430;500;Command
+12431;5;Command
+12432;10;Command
+12433;15;Command
+12434;18;Command
+12435;24;Command
+12436;25;Command
+12437;30;Command
+12438;60;Command
+12439;100;Command
+12440;250;Command
+12441;Scene;Command
+12443;50;Command
+12458;Go to Frame...;Command
+12473;Hide Selected;Command
+12474;Hide Unselected;Command
+12475;Show All;Command
+12476;Invert Visibility;Command
+12477;Undo View;Command
+12478;Redo View;Command
+12479;Invert;Command
+12497;Box;Command
+12498;Skeleton;Command
+12499;Tags;Command
+12500;Linear Workflow Shading;Command
+12501;Go to Start;Command
+12502;Go to End;Command
+12504;Jump Next Selection;Command
+12505;Jump Last Selection;Command
+12506;Jump Page Up;Command
+12507;Jump Page Down;Command
+12508;Jump Home;Command
+12509;Jump End;Command
+12519;Target Camera;Command
+12520;Target Light;Command
+12530;Points;Command
+12532;Polygons;Command
+12534;UVWs;Command
+12539;Isoparms;Command
+12540;Lines;Command
+12541;Undock;Command
+12543;Maximize;Command
+12544;New View Panel;Command
+12552;Store Selection;Command
+12557;Select Connected;Command
+12558;Grow Selection;Command
+12559;Shrink Selection;Command
+12562;Move Down Sequence;Command
+12563;Move Up Sequence;Command
+12566;Equal Tangent Length;Command
+12567;Equal Tangent Direction;Command
+12568;Join Segment;Command
+12569;Break Segment;Command
+12577;2D Tracks;Command
+12664;Close;Command
+12668;Global Status Bar;Command
+12670;Load Layout...;Command
+12671;Fold Palette;Command
+12672;Save as Startup Layout;Command
+12673;Save Layout as...;Command
+12676;Load Palette...;Command
+12677;Save Palette as...;Command
+12679;Locks texture;Command
+12681;Length;Command
+12682;Direction;Command
+13015;New Standard Material;Command
+13016;New Line;Command
+13017;Load Materials...;Command
+13018;Import ASCII Data...;Command
+13020;Save Materials as...;Command
+13021;Export ASCII Data...;Command
+13038;Frame Selected Elements;Command
+13039;Empty Polygon;Command
+13316;Explode Segments;Command
+13320;Undo (Action);Command
+13321;Toggle Selection Tool;Command
+13322;Toggle Modeling Mode;Command
+13323;Select All;Command
+13324;Deselect All;Command
+13364;Backface Culling;Command
+13365;Materials;Command
+13375;New Palette;Command
+13521;Use Animation;Command
+13522;Use Expressions;Command
+13523;Use Generators;Command
+13524;Use Deformers;Command
+13541;Sun Light;Command
+13543;Copy Text;Command
+13544;Cut Text;Command
+13545;Paste Text;Command
+13546;Delete Text;Command
+13553;Convert to Tab;Command
+13563;Move Camera;Command
+13564;Scale Camera;Command
+13565;Orbit Camera;Command
+13566;Move Object;Command
+13567;Scale Object;Command
+13568;Rotate Object;Command
+13569;Scale Modeling;Command
+13570;Magnify;Command
+13571;Free Selection;Command
+13572;Brush Selection;Command
+13573;Rectangle Selection;Command
+13577;Assign UVW Coordinates;Command
+13603;Modeling Pop-up;Command
+13604;Snapping;Command
+13620;Single View;Command
+13621;2 Views Stacked;Command
+13622;2 Views Side-by-Side;Command
+13623;3 Views Top Split;Command
+13624;3 Views Bottom Split;Command
+13625;3 Views Left Split;Command
+13626;3 Views Right Split;Command
+13627;4 Views;Command
+13628;4 Views Top Split;Command
+13629;4 Views Bottom Split;Command
+13630;4 Views Left Split;Command
+13631;4 Views Right Split;Command
+13632;4 Views Stacked;Command
+13633;4 Views Side-by-Side;Command
+13635;View 1;Command
+13636;View 2;Command
+13637;View 3;Command
+13638;View 4;Command
+13639;All Views;Command
+13640;Toggle Active View;Command
+13643;Change Orientation;Command
+13644;1;Command
+13645;2;Command
+13646;3;Command
+13647;4;Command
+13648;5;Command
+13649;6;Command
+13650;7;Command
+13651;8;Command
+13652;9;Command
+13653;Icons;Command
+13654;Text;Command
+13655;Text below Icons;Command
+13656;Original Size;Command
+13657;Large Icons;Command
+13658;Small Icons;Command
+13659;Medium Icons;Command
+13663;X-Ray;Command
+13680;License Manager;Command
+13684;Unfold Palette;Command
+13740;Customize Palettes;Command
+13746;Menu Manager;Command
+13770;Set Vertex Weight...;Command
+13857;Next Scene;Command
+13858;Previous Scene;Command
+13859;Low;Command
+13860;Medium;Command
+13861;High;Command
+13862;Editor On;Command
+13863;Editor Off;Command
+13864;Editor Unchanged;Command
+13865;Renderer On;Command
+13866;Renderer Off;Command
+13867;Renderer Unchanged;Command
+13899;Vertex Map;Command
+13900;General Pop-up;Command
+13906;Lock Icon;Command
+13931;Use as Render View;Command
+13940;Toggle Parent Generator;Command
+13957;Clear Console;Command
+13964;Use Render LOD for Viewport Rendering;Command
+14003;Create Outline;Command
+14004;Cross-Section;Command
+14006;Straighten;Command
+14011;Scene Info;Command
+14023;Align Normals;Command
+14027;Center;Command
+14029;Disconnect;Command
+14038;Mirror;Command
+14039;Optimize;Command
+14041;Reverse Normals;Command
+14046;Split;Command
+14047;Subdivide;Command
+14048;Triangulate;Command
+14050;Untriangulate;Command
+14063;Zoom In;Command
+14064;Zoom Out;Command
+14082;Rename...;Command
+16194;Flush Illumination Caches;Command
+16297;Scroll To Selection;Command
+16298;Select Materials of Active Objects;Command
+16351;Edges;Command
+16367;Weight Subdivision Surface;Command
+16368;Timewarp;Command
+16370;Select Material Tags/Objects;Command
+16377;Maxon Support;Command
+16388;Select Children;Command
+16391;Play Sound;Command
+16430;Show Tracks;Command
+16546;Link XYZ Sub-channels;Command
+16547;Show F-Curves;Command
+16554;New Group Window;Command
+16716;Break Phong Shading;Command
+16717;Unbreak Phong Shading;Command
+16718;Select Broken Phong Edges;Command
+16725;Load Textures;Command
+16726;Unload Textures;Command
+16739;Mini Icons;Command
+16740;Small Icons;Command
+16741;Medium Icons;Command
+16742;Large Icons;Command
+16744;Color;Command
+16745;Diffusion;Command
+16746;Luminance;Command
+16747;Transparency;Command
+16748;Reflection;Command
+16749;Environment;Command
+16750;Bump;Command
+16751;Alpha;Command
+16752;Specular;Command
+16753;Displacement;Command
+16765;Normal;Command
+16766;Custom...;Command
+16767;Show Motions;Command
+16768;Connect Objects + Delete;Command
+16773;Dynamic;Command
+16774;Off;Command
+16775;Document Mode;Command
+16776;Active Tool;Command
+16777;Active Object Type;Command
+16778;Script;Command
+16779;Copy Palette;Command
+16780;Paste Palette;Command
+16781;Clear Palette;Command
+17006;Cinema 4D Menu;Command
+17007;BodyPaint 3D Menu;Command
+17008;User Menu 1;Command
+17009;User Menu 2;Command
+17010;User Menu 3;Command
+17011;User Menu 4;Command
+17012;User Menu 5;Command
+17013;Material;Command
+17014;Material List;Command
+17015;Layer Manager (Compact);Command
+17016;Layer Manager (Expanded/Compact);Command
+17017;Layer Manager (Expanded);Command
+17018;Layer Manager (Active Texture);Command
+17038;UV Mode;Command
+17040;Magnet;Command
+17041;Non-Uniform Scale;Command
+17042;Shear U;Command
+17043;Shear V;Command
+17105;Gouraud Shading (Lines);Command
+17106;Constant Shading;Command
+17107;Quick Shading (Lines);Command
+17108;Hidden Line;Command
+17112;N-Gons;Command
+17124;Show Window Title;Command
+17136;Rotate Modeling Axis;Command
+17137;Move Modeling Axis;Command
+17138;Configure All;Command
+17169;Disable Axis Handles;Command
+17190;Show Help;Command
+17192;Snap Pop-up;Command
+17201;Constant Shading (Lines);Command
+17258;Enable 3D Paint;Command
+17259;Disable 3D Paint;Command
+17301;Full-Screen Mode;Command
+17305;Independent Window;Command
+17380;Show Logo;Command
+17423;Effects;Command
+17424;Transparency;Command
+17425;Shadows;Command
+17426;Post Effects;Command
+17427;Layer Color;Command
+17533;Layers in Single Line;Command
+17551;HQ Noises;Command
+17552;Lock Layout;Command
+17580;Edit Script;Command
+17733;Full-Screen (Group) Mode;Command
+17734;Visible in Full-Screen Mode;Command
+17863;Stereoscopic;Command
+17891;Polygon Islands to Objects;Command
+17892;Change Point Order;Command
+17934;Top;Command
+17935;Left;Command
+17936;Right;Command
+17972;Workplane;Command
+17983;Do not Mirror;Command
+17984;Switch R2L;Command
+17999;Normals;Command
+18063;Select Materials with same Reflectance;Command
+18065;Vertex Colors;Command
+18067;SDS Weights per Vertex;Command
+18068;SDS Weights per Edge;Command
+18069;Tessellation;Command
+18070;SSAO;Command
+18071;Reflections;Command
+18159;Configure Similar;Command
+18160;All;Command
+18161;None;Command
+18162;Load Filter Preset;Command
+18163;Save Preset...;Command
+18164;Null;Command
+18165;Polygon;Command
+18166;Spline;Command
+18167;Generator;Command
+18168;Subdivision Surface;Command
+18169;Deformer;Command
+18170;Camera;Command
+18171;Light;Command
+18172;Environment;Command
+18173;Particle;Command
+18174;Other;Command
+18175;Workplane;Command
+18176;Horizon;Command
+18177;World Axis;Command
+18178;HUD;Command
+18179;SDS Mesh;Command
+18180;Component Highlighting;Command
+18181;Multi-Select Axes;Command
+18182;Axis;Command
+18183;SDS Cage;Command
+18184;N-gon Lines;Command
+18185;Joint;Command
+18186;Ghosting;Command
+18187;Guides;Command
+18188;Object Highlighting;Command
+18189;World Grid;Command
+18190;Handles;Command
+18191;Hair;Command
+18192;Field;Command
+18193;Animation Path;Command
+18194;Geometry Only;Command
+18195;Default;Command
+18203;Magic Bullet Looks;Command
+18206;Safe Frames;Command
+18207;Geometry Only Playback;Command
+18209;Create;Command
+18243;Lines on Shading;Command
+18247;Model Menu;Command
+18249;Sculpt Menu;Command
+18273;Renderer;Command
+18470;Show Camera Attributes;Command
+50000;Render Settings;Command
+51000;Scenes;Command
+52000;Recent Files;Command
+53000;Plugins;Command
+55000;Use Camera;Command
+56000;Switch Layout;Command
+57000;Restore Selection;Command
+58000;Material Extensions;Command
+59000;Node Material Presets;Command
+60000;Export Formats;Command
+65000;Scripts;Command
+66000;Keyframe Selection;Command
+69000;Selection Filter;Command
+70000;Display Filter;Command
+71000;Reflectance Layers;Command
+72000;Node Spaces;Command
+74000;Export Plugins;Command
+150013;3D Painting mode;Command
+160000;Texture List;Command
+164000;Bitmap Filter;Command
+165000;Connected UVs;Command
+170000;New Texture...;Command
+170001;Open Texture...;Command
+170002;Revert Texture to Saved;Command
+170003;Close Texture;Command
+170004;Save Texture;Command
+170005;Save Texture as...;Command
+170006;Save Texture as Copy...;Command
+170007;Copy Merged;Command
+170009;Show UV Mesh;Command
+170022;Mirror U;Command
+170023;Mirror V;Command
+170025;Fit to Screen;Command
+170026;Zoom 100%;Command
+170027;Zoom In;Command
+170028;Zoom Out;Command
+170029;Set Zoom...;Command
+170036;No Icons;Command
+170037;Small Icons;Command
+170038;Medium Icons;Command
+170039;Large Icons;Command
+170050;New Layer;Command
+170051;Add Layer Mask;Command
+170052;Duplicate Layer;Command
+170053;Delete Layer;Command
+170054;Flatten Layers;Command
+170055;Flatten Visible Layers;Command
+170056;Merge Layer Down;Command
+170057;Merge Linked;Command
+170058;Selection from Layer;Command
+170059;New Alpha Channel;Command
+170060;Convert to Grayscale;Command
+170061;Convert to RGB;Command
+170063;Revert to Saved Texture...;Command
+170064;Bitmap Properties;Command
+170066;New Group...;Command
+170070;Load Brushes...;Command
+170071;Export Selection...;Command
+170074;Rename...;Command
+170076;Delete;Command
+170077;As List;Command
+170078;As Icon;Command
+170079;Small Icons;Command
+170080;Medium Icons;Command
+170081;Large Icons;Command
+170082;New Group...;Command
+170086;Import BodyPaint 3D Presets...;Command
+170087;Export Selection...;Command
+170090;Rename...;Command
+170092;Delete;Command
+170093;As List;Command
+170094;As Icon;Command
+170095;Small Icons;Command
+170096;Medium Icons;Command
+170097;Large Icons;Command
+170098;Add Single Channel Preset...;Command
+170100;Copy;Command
+170101;Paste;Command
+170102;Save Brush...;Command
+170103;Texture UV Editor;Command
+170105;Color Settings;Command
+170107;Color Swatches;Command
+170108;Layer Manager;Command
+170109;Preview: Color;Command
+170110;Preview: Diffusion;Command
+170111;Preview: Luminance;Command
+170112;Preview: Transparency;Command
+170113;Preview: Reflection;Command
+170114;Preview: Environment;Command
+170115;Preview: Bump;Command
+170116;Preview: Alpha;Command
+170117;Preview: Specular;Command
+170118;Preview: Displacement;Command
+170119;Multi Channel Mode;Command
+170120;Close All Textures;Command
+170121;Save All Textures;Command
+170122;Select Circle;Command
+170123;Select Rectangle;Command
+170124;Select Polylines;Command
+170125;Select Lasso;Command
+170126;Magic Wand;Command
+170127;Select Color Range;Command
+170128;Select All;Command
+170129;Deselect All;Command
+170130;Invert Selection;Command
+170131;Move Layer;Command
+170132;Magnify;Command
+170133;Eyedropper;Command
+170134;Brush;Command
+170135;Clone Tool;Command
+170136;Eraser;Command
+170137;Fill Bitmap;Command
+170138;Transform Bitmap;Command
+170139;Draw Line;Command
+170140;Draw Text;Command
+170141;Draw Polygon Shape;Command
+170145;Texture Size...;Command
+170146;Canvas Size...;Command
+170147;Rotate Texture...;Command
+170148;Flip Texture Horizontal...;Command
+170149;Flip Texture Vertical...;Command
+170150;Fill Layer;Command
+170151;Fill Polygons;Command
+170152;Outline Polygons;Command
+170153;Create Mask from Selection;Command
+170154;Display Selected Channel;Command
+170155;Tile U;Command
+170156;Tile V;Command
+170157;Clear Bitmap;Command
+170220;Edit Selection Mask;Command
+170221;Remap...;Command
+170222;Store UV;Command
+170223;Restore UV;Command
+170224;Start Interactive Mapping;Command
+170225;Stop Interactive Mapping;Command
+170228;Reset UV;Command
+170229;Fit Canvas to UV;Command
+170230;Add Multi Channel Preset...;Command
+170231;Add Selection to Layer Mask;Command
+170232;Subtract Selection from Layer Mask;Command
+170238;Selection from Layer (Add);Command
+170239;Selection from Layer (Sub);Command
+170340;Paste into Selection;Command
+170437;Feather...;Command
+170438;Grow Selection...;Command
+170439;Shrink Selection...;Command
+170442;Undo (Texture);Command
+170443;Execute Last Filter;Command
+170567;Crop Texture...;Command
+170573;Empty Canvas;Command
+170576;Projection Painting;Command
+170592;Gradient Tool;Command
+170603;As List;Command
+170604;As Icon;Command
+170605;Small Icons;Command
+170606;Medium Icons;Command
+170607;Large Icons;Command
+170612;Edit Spline Tool;Command
+170613;Apply Projection;Command
+170614;Discard Projection;Command
+170615;Toggle Fore-/Background;Command
+170620;Hide Selection;Command
+170624;Preview: Active Channel;Command
+170625;Paint Setup Wizard;Command
+170639;Increase Brush Size;Command
+170640;Decrease Brush Size;Command
+170641;Increase Brush Hardness;Command
+170642;Decrease Brush Hardness;Command
+170643;Increase Brush Pressure;Command
+170644;Decrease Brush Pressure;Command
+170645;Rotate Brush Clockwise;Command
+170646;Rotate Brush Counterclockwise;Command
+170647;Dodge Tool;Command
+170648;Burn Tool;Command
+170649;Smear Tool;Command
+170650;Sponge Tool;Command
+170657;Convert to 8-bit / Channel;Command
+170658;Convert to 16-bit / Channel;Command
+170659;Convert to 32-bit / Channel;Command
+170664;New Layer Set;Command
+170667;Detach Projection Plane;Command
+170674;Preview: Normal;Command
+170686;Freeze 3D View;Command
+170687;Merge Texture...;Command
+170694;New Library...;Command
+170695;Save;Command
+170696;Save as...;Command
+170697;Show in Content Browser;Command
+170698;Show in Content Browser;Command
+170699;New Library...;Command
+170703;Project on Hidden Polygons;Command
+170704;Define Brush Preset...;Command
+170705;Define Color Preset...;Command
+170706;Define Wallpaper Preset...;Command
+170723;Create UV Mesh Layer;Command
+170724;Blur Tool;Command
+170725;Sharpen Tool;Command
+170726;Colorize Tool;Command
+170730;Show Tiled Texture;Command
+170734;Convert To Profile...;Command
+170735;Assign Profile...;Command
+170755;HUD;Command
+170756;Canvas Axis;Command
+170757;Editor Axis;Command
+170758;UV Units;Command
+170759;UV Component Highlighting;Command
+170760;Overlapping Polygons;Command
+170761;UV Map;Command
+170762;Distortion;Command
+170763;Multi-Color Islands;Command
+170764;Configure;Command
+170765;Configure All;Command
+170766;UV Seams;Command
+170767;UV Connectivity;Command
+170768;Filled Polygons;Command
+170769;UV Pins;Command
+170773;Show UV Display;Command
+170774;Lines;Command
+170775;UV No Boundaries;Command
+170776;UV Grid;Command
+170777;Align UV Islands;Command
+170781;Frame Selected UV Elements;Command
+170782;Frame Selected UV Islands;Command
+202520;New PBR Material;Command
+202522;PBR Light;Command
+202535;Online Learning;Command
+202536;Spot Light;Command
+202537;Area Light;Command
+202538;Infinite Light;Command
+202539;Save Incremental;Command
+202540;Save as Template;Command
+202541;New Node Material;Command
+202549;Save as Default Scene;Command
+202565;New Uber Material;Command
+202586;New Default Material;Command
+202623;New Grass Material;Command
+202624;New Hair Material;Command
+202625;New PyroCluster Material;Command
+202626;New PyroCluster VolumeTracer Material;Command
+202627;New Shadow Catcher Material;Command
+202628;New Sketch Material;Command
+202658;Go to Preview End;Command
+202659;Go to Preview Start;Command
+202662;Set Min Preview Range;Command
+202663;Set Max Preview Range;Command
+202664;Delete Keys;Command
+202665;Record Animated;Command
+202666;Record Hierarchy;Command
+202667;Show Position F-Curves;Command
+202668;Show Rotation F-Curves;Command
+202669;Show Scale F-Curves;Command
+202670;Set Range to Markers;Command
+202671;Go to Previous Range;Command
+202672;Go to Next Range;Command
+202673;Create Markers...;Command
+202693;Shadow Hinting;Command
+202708;Color Space;Command
+1000456;PrecisionSelection;Tool
+1000460;Chess...;Command
+1000468;Attribute Manager;Command
+1000474;Preferences;Command
+1000498;ChessMoveTool;Command
+1000498;ChessMoveTool;Tool
+1000581;Send project back...;Command
+1000970;Caustics;VideoPost
+1000974;Make Preview...;Command
+1001001;Look at Camera;Tag
+1001001;Look at Camera;Command
+1001002;Atom Array;Object
+1001002;Atom Array;Command
+1001003;Spherify;Object
+1001003;Spherify;Command
+1001007;Object Glow;VideoPost
+1001008;Color Correction;VideoPost
+1001009;Cel Renderer;VideoPost
+1001010;Sub-Frame Motion Blur;VideoPost
+1001012;Soft Filter;VideoPost
+1001013;Sharpen Filter;VideoPost
+1001014;Median Filter;VideoPost
+1001015;Remote;VideoPost
+1001019;Selector;Command
+1001021;STL (*.stl);Command
+1001034;VRML 2 (*.wrl);Command
+1001036;DXF (*.dxf);Command
+1001038;3D Studio (*.3ds);Command
+1001047;Direct 3D (*.x);Command
+1001049;Lens Effects;VideoPost
+1001058;Convert HDR Cross...;Command
+1001059;Convert HDR Probe...;Command
+1001072;Material Editor;Command
+1001083;Command Line;Command
+1001084;Script Manager;Command
+1001138;XPresso Pool;Command
+1001145;XPresso Manager;Command
+1001147;GvHook;SceneHook
+1001148;;Command
+1001149;XPresso;Tag
+1001149;XPresso;Command
+1001186;Cylindrical Lens;VideoPost
+1001191;Ambient Occlusion;Shader
+1001194;Color Mapping;VideoPost
+1001197;Subsurface Scattering;Shader
+1001253;Legacy Polygon Reduction;Object
+1001253;Legacy Polygon Reduction;Command
+1001400;Depth of Field;VideoPost
+1001401;Glow;VideoPost
+1001402;Highlights;VideoPost
+1001414;TP Geometry;Object
+1001414;TP Geometry;Command
+1001428;Thinking Particles;SceneHook
+1001439;TP Settings;Command
+1001446;TP ParticleDraw;Command
+1001446;TP ParticleDraw;Tool
+1002006;PyroShaderPreview;Command
+1002008;Vector Motion Blur;VideoPost
+1002603;Explosion FX;Object
+1002603;Explosion FX;Command
+1007455;Subdivision Surface;Object
+1007455;Subdivision Surface;Command
+1007539;ChanLum;Shader
+1007573;Weight Subdivision Surface;Command
+1007573;Weight Subdivision Surface;Tool
+1007579;SDS Weight;Tag
+1007579;SDS Weight;Command
+1008796;Spline Rail;Object
+1008796;Spline Rail;Command
+1008913;Send back to Maya;Command
+1008982;Spline;Object
+1008982;Spline;Command
+1009661;Edge Cut;Command
+1009661;Edge Cut;Tool
+1009671;Edge to Spline;Command
+1010136;Melt;Command
+1010819;Axis Center;Command
+1010865;Legacy Boole;Object
+1010865;Legacy Boole;Command
+1011010;Connect;Object
+1011010;Connect;Command
+1011012;Sketch Style;Tag
+1011012;Sketch Style;Command
+1011015;Sketch and Toon;VideoPost
+1011100;Gradient;Shader
+1011101;Falloff;Shader
+1011102;Tiles;Shader
+1011103;Fresnel;Shader
+1011105;Lumas;Shader
+1011106;Proximal;Shader
+1011107;Normal Direction;Shader
+1011108;Backlight;Shader
+1011109;Fusion;Shader
+1011111;Posterizer;Shader
+1011112;Colorizer;Shader
+1011114;Distorter;Shader
+1011115;Projector;Shader
+1011116;Noise;Shader
+1011123;Layer;Shader
+1011124;Spline;Shader
+1011125;preview;Command
+1011126;Matrix Extrude;Command
+1011126;Matrix Extrude;Tool
+1011128;Filter;Shader
+1011132;Baker VP;VideoPost
+1011133;Bake Material...;Command
+1011137;Vertex Map;Shader
+1011144;Sky Video Post;VideoPost
+1011145;Physical Sky;Command
+1011146;Physical Sky;Object
+1011147;#$15Sky Manager...;Command
+1011160;Relax UV;Command
+1011161;Copy UV;Command
+1011162;Paste UV;Command
+1011163;Max UV;Command
+1011164;Flip Sequence;Command
+1011165;Cycle UV CW;Command
+1011166;Cycle UV CCW;Command
+1011167;UV Terrace;Command
+1011168;UV Manager;Command
+1011169;Fit UV to Canvas;Command
+1011170;Optimal Mapping;Command
+1011171;Transform;Command
+1011172;Realign;Command
+1011173;ViewportExtHookHUD;SceneHook
+1011177;Search;Command
+1011178;Fill Selection;Command
+1011178;Fill Selection;Tool
+1011179;Outline Selection;Command
+1011179;Outline Selection;Tool
+1011180;Ring Selection;Command
+1011180;Ring Selection;Tool
+1011181;Convert Selection;Command
+1011182;Measure & Construction;Command
+1011182;Measure & Construction;Tool
+1011183;Extrude;Command
+1011183;Extrude;Tool
+1011192;Loop Selection;Command
+1011192;Loop Selection;Tool
+1011194;Cloud Group;Object
+1011196;Cloud;Object
+1011197;SLA wave scene hook;SceneHook
+1011198;Bake Material;Tag
+1011198;Bake Material;Command
+1011199;Ripple;Shader
+1011961;Sketch Render;Tag
+1011961;Sketch Render;Command
+1011981;View Center;Command
+1011982;Center Axis to;Command
+1011983;Center to Parent;Command
+1011984;Center Parent to;Command
+1011985;Center Object to;Command
+1012061;STHOOK;SceneHook
+1012074;Illustrator 8 (*.ai);Command
+1012095;TUPREFSDUMMY;Tag
+1012095;TUPREFSDUMMY;Command
+1012129;Path Selection;Command
+1012129;Path Selection;Tool
+1012158;Cel;Shader
+1012160;Spots;Shader
+1012161;Art;Shader
+1012166;Hatch;Shader
+1015545;IGES Group;Object
+1015545;IGES Group;Command
+1015546;IGES Trimmed Surface;Object
+1015546;IGES Trimmed Surface;Command
+1015547;IGES Mapped Curve;Object
+1015547;IGES Mapped Curve;Command
+1015548;IGES Surface;Object
+1015548;IGES Surface;Command
+1015549;IGES Curve;Object
+1015549;IGES Curve;Command
+1015650;Material Exchanger...;Command
+1015840;ASCII Animation Import...;Command
+1015924;Collapse;Command
+1016007;Film Move;Command
+1016007;Film Move;Tool
+1016008;Film Magnify;Command
+1016008;Film Magnify;Tool
+1016009;Film Zoom;Command
+1016009;Film Zoom;Tool
+1016010;Zoom In;Command
+1016011;Zoom Out;Command
+1016160;N-gon Triangulation;Command
+1016173;Retriangulate N-gons;Command
+1016174;Remove N-gons;Command
+1016177;Increase SDS Subdivision;Command
+1016178;Decrease SDS Subdivision;Command
+1016179;Isoline Editing;Command
+1016185;Magnet;Command
+1016185;Magnet;Tool
+1016202;Brush;Command
+1016202;Brush;Tool
+1016207;Invert Object Selection;Command
+1016208;Hide Objects;Command
+1016209;Show Objects;Command
+1016440;Allplan (*.xml);Command
+1016699;ToolSoftSelection;Tool
+1016757;Toggle Visible Only;Command
+1017305;Hair;Object
+1017325;Hair Render;VideoPost
+1017326;Hair Collider;Tag
+1017326;Hair Collider;Command
+1017448;Brush Selection;Command
+1017448;Brush Selection;Tool
+1017454;Move;Command
+1017454;Move;Tool
+1017457;Points;Command
+1017458;Guides;Command
+1017459;Roots;Command
+1017460;Tips;Command
+1017487;Vertices;Command
+1017488;Select All;Command
+1017489;Deselect All;Command
+1017490;Hide;Command
+1017491;Show All;Command
+1017495;Invert;Command
+1017510;Grow Selection;Command
+1017510;Grow Selection;Tool
+1017530;Convert Selected;Command
+1017531;Lock Selected;Command
+1017532;Unlock All;Command
+1017533;Hide Locked;Command
+1017534;Scale;Command
+1017534;Scale;Tool
+1017540;Convert to Spline;Command
+1017541;Convert from Spline;Command
+1017542;Cut;Command
+1017542;Cut;Tool
+1017548;Clump;Command
+1017548;Clump;Tool
+1017549;Straighten;Command
+1017549;Straighten;Tool
+1017568;Push;Command
+1017568;Push;Tool
+1017578;Hair;Tag
+1017578;Hair;Command
+1017581;Brush;Command
+1017581;Brush;Tool
+1017617;Comb;Command
+1017617;Comb;Tool
+1017637;Even Segments;Command
+1017638;Set Roots;Command
+1017638;Set Roots;Tool
+1017640;Add Guides;Command
+1017640;Add Guides;Tool
+1017642;Unroot Guides;Command
+1017667;Polygon Hair;Shader
+1017671;Hair Tangents;Tag
+1017671;Hair Tangents;Command
+1017729;Hair Material;Tag
+1017729;Hair Material;Command
+1017746;Hair Selection;Tag
+1017746;Hair Selection;Command
+1017747;Set Selection;Command
+1017874;Light;Tag
+1017874;Light;Command
+1018007;Set Initial State;Command
+1018016;sds_tag_data;Tag
+1018016;sds_tag_data;Command
+1018036;Delete Guides;Command
+1018051;Copy Guides;Command
+1018052;Cut Guides;Command
+1018053;Paste Guides;Command
+1018064;Symmetry;Tool
+1018065;Hair Symmetry Manager;Command
+1018066;Hair Symmetry;Command
+1018067;Mirror;Command
+1018067;Mirror;Tool
+1018068;Rope;Tag
+1018068;Rope;Command
+1018074;Rope Belt;Tag
+1018074;Rope Belt;Command
+1018100;Lasso Selection;Command
+1018100;Lasso Selection;Tool
+1018101;Polygon Selection;Command
+1018101;Polygon Selection;Tool
+1018102;Rectangle Selection;Command
+1018102;Rectangle Selection;Tool
+1018122;Soft Selection;Tool
+1018123;Soft Selection Manager;Command
+1018124;Soft Selection;Command
+1018164;Dynamics Interaction;Command
+1018166;Curl;Command
+1018166;Curl;Tool
+1018169;Rotate;Command
+1018169;Rotate;Tool
+1018180;Dynamic Interaction;Tool
+1018327;Tension;Tag
+1018327;Tension;Command
+1018329;Hair Vertex;Tag
+1018329;Hair Vertex;Command
+1018373;Selection;Command
+1018373;Selection;Tool
+1018385;Render;Tag
+1018385;Render;Command
+1018392;hair_prefs_hidden;Tag
+1018392;hair_prefs_hidden;Command
+1018396;Feathers;Object
+1018396;Feathers;Command
+1018401;Add Hair;Command
+1018421;Use Hair;Command
+1018462;Connect Guides;Command
+1018463;Split Guides;Command
+1018464;Select Hidden;Command
+1018465;Paste to New;Command
+1018466;Hairs to Guides;Command
+1018467;Next Vertex;Command
+1018468;Previous Vertex;Command
+1018470;Unlock Selected;Command
+1018483;Timeline Scroll Bar (Key Area);Command
+1018492;Palette;Command
+1018516;Cut;Command
+1018517;Copy;Command
+1018518;Paste;Command
+1018519;Delete;Command
+1018520;Reverse Sequence;Command
+1018521;Select All;Command
+1018522;Deselect All;Command
+1018523;Ripple Edit;Command
+1018524;Trim to Work Area;Command
+1018525;Expand to Full Time;Command
+1018526;Time Scrollbar Pop-up;Command
+1018529;Split Transform Keys;Command
+1018530;Show Inactive Keys;Command
+1018531;Shift Left;Command
+1018532;Shift Right;Command
+1018533;Fill;Command
+1018535;Delete Markers;Command
+1018538;Quantize;Command
+1018544;Cloner;Object
+1018544;Cloner;Command
+1018545;Matrix;Object
+1018545;Matrix;Command
+1018561;Shader;Object
+1018561;Shader;Command
+1018625;Data Tag;Tag
+1018625;Data Tag;Command
+1018643;Random;Object
+1018643;Random;Command
+1018654;Beat Shader;Shader
+1018655;Tracer;Object
+1018655;Tracer;Command
+1018685;Displacer;Object
+1018685;Displacer;Command
+1018767;Color Shader;Shader
+1018768;Motion Graphics Color Tag;Tag
+1018768;Motion Graphics Color Tag;Command
+1018774;Spline;Object
+1018774;Spline;Command
+1018775;Inheritance;Object
+1018775;Inheritance;Command
+1018791;Fracture;Object
+1018791;Fracture;Command
+1018870;HairHighlightHook;SceneHook
+1018881;Step;Object
+1018881;Step;Command
+1018882;Sound;Object
+1018883;Formula;Object
+1018883;Formula;Command
+1018889;Target;Object
+1018889;Target;Command
+1018935;Time;Object
+1018935;Time;Command
+1018957;MoInstance;Object
+1018957;MoInstance;Command
+1018958;Fur;Object
+1018958;Fur;Command
+1019221;Spline Wrap;Object
+1019221;Spline Wrap;Command
+1019222;PolyFX;Object
+1019222;PolyFX;Command
+1019234;Delay;Object
+1019234;Delay;Command
+1019268;Text;Object
+1019268;Text;Command
+1019326;Motion Graphics Tracer Tag;Tag
+1019326;Motion Graphics Tracer Tag;Command
+1019337;MoGraph Cache;Tag
+1019337;MoGraph Cache;Command
+1019342;Linear Clone Tool;Command
+1019342;Linear Clone Tool;Tool
+1019343;Radial Clone Tool;Command
+1019343;Radial Clone Tool;Tool
+1019344;Grid Clone Tool;Command
+1019344;Grid Clone Tool;Tool
+1019351;Group;Object
+1019351;Group;Command
+1019352;Motion Graphics Dependance Tag;Tag
+1019352;Motion Graphics Dependance Tag;Command
+1019358;MoExtrude;Object
+1019358;MoExtrude;Command
+1019362;Joint;Object
+1019362;Joint;Command
+1019363;Skin;Object
+1019363;Skin;Command
+1019364;Constraint;Tag
+1019364;Constraint;Command
+1019365;Weight;Tag
+1019365;Weight;Command
+1019396;Spline Mask;Object
+1019396;Spline Mask;Command
+1019397;Multi Shader;Shader
+1019499;Weight Tool;Command
+1019499;Weight Tool;Tool
+1019525;MoGraphSceneHook;SceneHook
+1019561;IK;Tag
+1019561;IK;Command
+1019600;Joint Tool;Command
+1019600;Joint Tool;Tool
+1019612;Morph;Tag
+1019612;Morph;Command
+1019633;Morph;Tag
+1019633;Morph;Command
+1019636;CAManagerHook;SceneHook
+1019662;Base Morph;Tag
+1019662;Base Morph;Command
+1019663;Morph Target;Tag
+1019663;Morph Target;Command
+1019677;Falloff;Object
+1019677;Falloff;Command
+1019730;Phong Break Selection;Command
+1019730;Phong Break Selection;Tool
+1019731;Active Morph;Tag
+1019731;Active Morph;Command
+1019744;Driver;Tag
+1019744;Driver;Command
+1019760;Show Help;Command
+1019768;Morph;Object
+1019768;Morph;Command
+1019773;Property Transfer;Command
+1019774;Shrink Wrap;Object
+1019774;Shrink Wrap;Command
+1019782;LegacyVRayBridgeVideoPost;VideoPost
+1019827;Line Up UV;Command
+1019830;Unstitch UV;Command
+1019862;IK-Spline;Tag
+1019862;IK-Spline;Command
+1019881;Bind;Command
+1019883;Align;Command
+1019884;Create IK Chain;Command
+1019937;Reset Pose;Command
+1019938;To Preferred;Command
+1019939;Set Preferred;Command
+1019940;Reset Transform;Command
+1019941;Convert to Nulls;Command
+1019942;Convert to Joints;Command
+1019943;Selection to Joints;Command
+1019944;Use IK;Command
+1019945;Use Joint Symmetry;Command
+1019946;Copy Chain;Command
+1019947;Map Chain;Command
+1019948;Mirror Chain;Command
+1019949;Joints to Spline;Command
+1019950;Spline to Joints;Command
+1019951;Delete Without Children;Command
+1019952;Naming Tool;Command
+1019952;Naming Tool;Tool
+1019953;Mirror Tool;Command
+1019953;Mirror Tool;Tool
+1019954;Set Pose;Command
+1019966;Show Soundwave;Command
+1020032;Paste In Place;Command
+1020034;No Split;Command
+1020035;Split Vector Keys;Command
+1020041;Unlink Time;Command
+1020042;Use Time Format;Command
+1020120;PKHOP;Object
+1020132;PLKHUD;SceneHook
+1020190;Use Constraints;Command
+1020441;LegacyVRayTag;Tag
+1020441;LegacyVRayTag;Command
+1020565;LegacyVRayTag;Tag
+1020565;LegacyVRayTag;Command
+1020898;LegacyVRayTag;Tag
+1020898;LegacyVRayTag;Command
+1021096;Global Illumination;VideoPost
+1021103;Boundary to Circle;Command
+1021131;Boundary to Quad;Command
+1021214;LegacyVRayTag;Tag
+1021214;LegacyVRayTag;Command
+1021280;Squash & Stretch;Object
+1021280;Squash & Stretch;Command
+1021283;Cluster;Object
+1021283;Cluster;Command
+1021284;Jiggle;Object
+1021284;Jiggle;Command
+1021285;Create Cluster;Command
+1021286;Paint Tool;Command
+1021286;Paint Tool;Tool
+1021287;Volume;Object
+1021287;Volume;Command
+1021302;Point Cache;Tag
+1021302;Point Cache;Command
+1021318;Point Cache;Object
+1021318;Point Cache;Command
+1021334;Joint Align Tool;Command
+1021334;Joint Align Tool;Tool
+1021337;Plain;Object
+1021337;Plain;Command
+1021338;MoGraph Selection;Tag
+1021338;MoGraph Selection;Command
+1021340;MoGraph Selection;Command
+1021340;MoGraph Selection;Tool
+1021362;Advanced Mode;Command
+1021385;Brush Selection;Command
+1021386;-;Command
+1021387;-;Command
+1021388;-;Command
+1021389;-;Command
+1021390;-;Command
+1021391;-;Command
+1021392;-;Command
+1021420;Set Camera Pivot;Command
+1021433;Character;Object
+1021433;Character;Command
+1021738;LegacyVRayTag;Tag
+1021738;LegacyVRayTag;Command
+1021824;CMotion;Object
+1021824;CMotion;Command
+1021891;LegacyVRayTag;Tag
+1021891;LegacyVRayTag;Command
+1022113;Character Component;Tag
+1022113;Character Component;Command
+1022119;Pixel;Shader
+1022143;Calculate FPS;Command
+1022211;Doodle Image;Tag
+1022211;Doodle Image;Command
+1022212;Doodle Hook;SceneHook
+1022215;Add Doodle Frame;Command
+1022242;Doodle Object;Object
+1022250;Load Character Template...;Command
+1022251;Save Character Template;Command
+1022252;Save Character Template As...;Command
+1022253;Reload Character Templates;Command
+1022257;Doodle Paint;Command
+1022257;Doodle Paint;Tool
+1022280;Remove Doodle Frame;Command
+1022281;Clear Doodle Frame;Command
+1022285;Set Doodle Viewport;Command
+1022286;Doodle Eraser;Command
+1022286;Doodle Eraser;Tool
+1022292;Component;Object
+1022292;Component;Command
+1022302;Copy Component;Command
+1022303;Cut Component;Command
+1022304;Paste Component;Command
+1022305;Delete Component;Command
+1022307;Paste to Component;Command
+1022308;Paste Mirror Component;Command
+1022309;Mirror to Component;Command
+1022316;COLLADA 1.4 (*.dae);Command
+1022317;COLLADA14IMPORTTAG;Tag
+1022317;COLLADA14IMPORTTAG;Command
+1022346;DPOST;VideoPost
+1022384;Duplicate Doodle Frame;Command
+1022414;Add Transform Constraint;Command
+1022415;Add Aim Constraint;Command
+1022416;Add Parent Constraint;Command
+1022417;Add Up Vector Constraint;Command
+1022418;Add Clamp Constraint;Command
+1022419;Add Spring Constraint;Command
+1022420;Add Mirror Constraint;Command
+1022421;Add Position Constraint;Command
+1022422;Add Rotation Constraint;Command
+1022423;Add Scale Constraint;Command
+1022424;Add Origin Constraint;Command
+1022425;Add Plane Constraint;Command
+1022426;Add Axis Constraint;Command
+1022427;Add Surface Constraint;Command
+1022428;Add Point Constraint;Command
+1022429;Add Spline Constraint;Command
+1022476;To Photoshop;Command
+1022478;Open in BodyPaint 3D...;Command
+1022660;COLLADA14EXPORTTAG;Tag
+1022660;COLLADA14EXPORTTAG;Command
+1022735;Script Folder...;Command
+1022749;Python;Tag
+1022749;Python;Command
+1022807;Run Script...;Command
+1022912;Convert Joints to Polygon Object;Command
+1023334;Add Bounds Constraint;Command
+1023335;Freeze Transform;Command
+1023336;Unfreeze Transform;Command
+1023342;Physical;VideoPost
+1023410;Reload Bitmap;Command
+1023411;Close Bitmap;Command
+1023413;Open in Photoshop...;Command
+1023414;Coverage Render (Viewport);Command
+1023415;Coverage Render...;Command
+1023416;Link Camera to Active View;Command
+1023417;Protect Camera;Command
+1023418;Unprotect Camera;Command
+1023419;Duplicate Camera;Command
+1023420;Enable 3D Paint;Command
+1023421;Disable 3D Paint;Command
+1023422;Remove;Command
+1023423;New Projection Camera ;Command
+1023699;Source Protector...;Command
+1023800;Sculpt;Tag
+1023800;Sculpt;Command
+1023861;Import Legacy Library (*.lib4d)...;Command
+1023866;Python Generator;Object
+1023866;Python Generator;Command
+1024015;Sculpt Layers;Command
+1024168;Draw;Command
+1024168;Draw;Tool
+1024169;Flatten;Command
+1024169;Flatten;Tool
+1024170;Smooth;Command
+1024170;Smooth;Tool
+1024171;Pinch;Command
+1024171;Pinch;Tool
+1024182;Sculpt Objects;SceneHook
+1024189;Erase;Command
+1024189;Erase;Tool
+1024194;Subdivide;Command
+1024195;Increase;Command
+1024196;Decrease;Command
+1024197;Grab;Command
+1024197;Grab;Tool
+1024237;Pose Morph;Tag
+1024237;Pose Morph;Command
+1024476;Camera;Object
+1024476;Camera;Command
+1024490;Plugin Manager;Command
+1024506;Mask;Command
+1024506;Mask;Tool
+1024529;Smoothing;Object
+1024529;Smoothing;Command
+1024542;Correction;Object
+1024542;Correction;Command
+1024543;Mesh;Object
+1024543;Mesh;Command
+1024544;Collision;Object
+1024544;Collision;Command
+1024552;Surface;Object
+1024552;Surface;Command
+1024712;Create Polygon Copy;Command
+1024713;Create Polygon Copy For Every Level;Command
+1024945;Pavement;Shader
+1024983;LegacyVRayTag;Tag
+1024983;LegacyVRayTag;Command
+1025028;Weight Manager;Command
+1025169;Add Transform Morph;Command
+1025170;Add Point Morph;Command
+1025462;Watermark;VideoPost
+1025539;Set Parent;Command
+1025540;Unparent;Command
+1025614;Subsurface Scattering;Shader
+1025623;Project Object;Command
+1025699;Replace With;Command
+1025755;COLLADA 1.5 (*.dae);Command
+1025756;COLLADA15IMPORTTAG;Tag
+1025756;COLLADA15IMPORTTAG;Command
+1025757;COLLADA15EXPORTTAG;Tag
+1025757;COLLADA15EXPORTTAG;Command
+1025763;Add XRef...;Command
+1025766;XRef;Object
+1025766;XRef;Command
+1025773;Reload XRefs;Command
+1025776;XRef Manager;Command
+1025796;XRef;Object
+1025797;XRef;Tag
+1025797;XRef;Command
+1025800;Python;Object
+1025800;Python;Command
+1025807;XRefs;SceneHook
+1025809;Add XRef Options;Command
+1026224;Muscle;Object
+1026224;Muscle;Command
+1026225;Sculpt Symmetry;Command
+1026275;Visual Selector;Tag
+1026275;Visual Selector;Command
+1026277;Terrain Mask;Shader
+1026289;Visual Selector;Command
+1026352;MSkin;Object
+1026352;MSkin;Command
+1026370;FBX (*.fbx);Command
+1026371;FBXExportReferenceTag;Tag
+1026371;FBXExportReferenceTag;Command
+1026374;Reset All;Command
+1026375;Reload Python Plugins;Command
+1026518;Wax;Command
+1026518;Wax;Tool
+1026519;Knife;Command
+1026519;Knife;Tool
+1026576;Weathering;Shader
+1026588;Normalizer;Shader
+1026593;Combine Scene...;Command
+1026701;LegacyVRayShader;Shader
+1026708;Inflate;Command
+1026708;Inflate;Tool
+1026710;Fill;Command
+1026710;Fill;Tool
+1026715;Scrape;Command
+1026715;Scrape;Tool
+1026718;New Script;Command
+1026719;Open Script...;Command
+1026720;Import Script...;Command
+1026721;Save Script;Command
+1026722;Save All Scripts;Command
+1026723;Save Script as...;Command
+1026724;Delete Script from Disk;Command
+1026725;Duplicate Script;Command
+1026759;Render Icon;Command
+1026760;Load Icon...;Command
+1026818;Camera Calibrator;Tag
+1026818;Camera Calibrator;Command
+1026839;CmSceneHook;SceneHook
+1026879;Extract Object From Mask;Command
+1026886;Extract Object From Layer;Command
+1026918;Step;Object
+1026918;Step;Command
+1026919;Weight Manager;Tool
+1026923;Presets;Command
+1026929;Project Object;Command
+1027025;Add Folder;Command
+1027026;Add Layer;Command
+1027028;Delete Layer;Command
+1027029;Clear Layer;Command
+1027030;Clear Mask;Command
+1027032;Merge Visible;Command
+1027033;Flatten;Command
+1027034;Delete Higher Levels;Command
+1027039;Invert Mask;Command
+1027041;Hide Masked;Command
+1027042;Show Masked;Command
+1027117;Position Pass;VideoPost
+1027384;Commander (Legacy);Command
+1027538;Bake Sculpt Objects;Command
+1027556;Repeat;Command
+1027556;Repeat;Tool
+1027593;Locked Workplane;Command
+1027594;Planar Workplane;Command
+1027595;Camera Workplane;Command
+1027624;XRef;Object
+1027636;Interactive Workplane;Command
+1027657;Guide;Object
+1027657;Guide;Command
+1027660;SculptLinkTag;Tag
+1027660;SculptLinkTag;Command
+1027720;Guide Tool;Command
+1027720;Guide Tool;Tool
+1027742;Motion Camera;Tag
+1027742;Motion Camera;Command
+1027743;Camera Morph;Tag
+1027743;Camera Morph;Command
+1027744;Motion Camera;Command
+1027745;Camera Morph;Command
+1027822;Delete Enabled Guides;Command
+1028009;Update Character;Command
+1028063;TargetDistancePicker;SceneHook
+1028082;Alembic (*.abc);Command
+1028083;Alembic Generator;Object
+1028083;Alembic Generator;Command
+1028104;Auto Exchange XRefs;Command
+1028155;Select;Command
+1028156;Reload;Command
+1028157;Unload;Command
+1028158;Exchange...;Command
+1028159;Make Editable;Command
+1028160;Open for Edit;Command
+1028161;Show in Finder;Command
+1028162;Options;Command
+1028163;Remove;Command
+1028164;Exchange All to Proxy;Command
+1028165;Exchange All to Main;Command
+1028166;Selection to Nulls;Command
+1028167;Colorize Joints;Command
+1028172;ABCTempExport;Tag
+1028172;ABCTempExport;Command
+1028185;Load Weights...;Command
+1028186;Save Weights...;Command
+1028189;Save Weights Options;Command
+1028190;Load Weights Options;Command
+1028267;LegacyVRayObject;Object
+1028270;Camera Crane;Tag
+1028270;Camera Crane;Command
+1028271;Camera Crane;Command
+1028366;Sculpt Brush Size;Command
+1028367;Sculpt Brush Size Increase;Command
+1028368;Sculpt Brush Size Decrease;Command
+1028369;Sculpt Brush Pressure;Command
+1028370;Sculpt Brush Pressure Increase;Command
+1028371;Sculpt Brush Pressure Decrease;Command
+1028372;Sculpt Brush Stencil Adjust;Command
+1028373;Sculpt Brush Toggle Stencil Visibility;Command
+1028374;Sculpt Brush Toggle Wireframe;Command
+1028384;Toggle Symmetry Plane X;Command
+1028385;Toggle Symmetry Plane Y;Command
+1028386;Toggle Symmetry Plane Z;Command
+1028388;Sculpt Brush Size Increase Big Steps;Command
+1028389;Sculpt Brush Size Decrease Big Steps;Command
+1028390;Sculpt Brush Pressure Increase Big Steps;Command
+1028391;Sculpt Brush Pressure Decrease Big Steps;Command
+1028393;Motion Tracker;Object
+1028398;Normal Pass;VideoPost
+1028458;Alembic Archive Hook;SceneHook
+1028462;Grow Grass;Command
+1028463;Architectural Grass;Tag
+1028463;Architectural Grass;Command
+1028481;SceneHook;SceneHook
+1028859;Load Sculpt Preset;Command
+1028860;Load Stamp Preset;Command
+1028861;Load Stencil Preset;Command
+1028866;Copy Mask;Command
+1028867;Paste Mask;Command
+1028868;BiRender;VideoPost
+1029169;Amplify;Command
+1029169;Amplify;Tool
+1029259;Project Mesh;Command
+1029281;CameraMorphDrawSceneHook;SceneHook
+1029338;MotionCameraDrawSceneHook;SceneHook
+1029340;-X;Command
+1029341;+X;Command
+1029342;-Y;Command
+1029343;+Y;Command
+1029344;-Z;Command
+1029345;+Z;Command
+1029346;-X;Command
+1029347;+X;Command
+1029348;-Y;Command
+1029349;+Y;Command
+1029350;-Z;Command
+1029351;+Z;Command
+1029352;-X;Command
+1029353;+X;Command
+1029354;-Y;Command
+1029355;+Y;Command
+1029356;-Z;Command
+1029357;+Z;Command
+1029358;X;Command
+1029359;Y;Command
+1029360;Z;Command
+1029361;Freehand;Command
+1029362;DragDab;Command
+1029363;DragRect;Command
+1029364;Line;Command
+1029365;Lasso Fill;Command
+1029366;Poly Fill;Command
+1029367;Rectangle Fill;Command
+1029486;Project Asset Inspector;Command
+1029529;Unsubdivide;Command
+1029645;Sculpt Brush Fill Backfaces;Command
+1029813;Select All;Command
+1029814;Deselect All;Command
+1029815;Select Missing Assets;Command
+1029816;Select Assets of Active Elements;Command
+1029817;Invert Selection;Command
+1029818;Auto Show in Attribute Manager;Command
+1029819;Localize Filenames;Command
+1029820;Globalize Filenames;Command
+1029821;Relink Assets...;Command
+1029822;Replace Asset(s) with...;Command
+1029823;Filter Bar;Command
+1029824;Asset;Command
+1029825;Path;Command
+1029826;Absolute Path;Command
+1029827;New File Path;Command
+1029828;Scene Element;Command
+1029829;Breadcrumb;Command
+1029830;Layer;Command
+1029908;Position Constraint;Tag
+1029908;Position Constraint;Command
+1029909;Vector Constraint;Tag
+1029909;Vector Constraint;Command
+1029910;Planar Constraint;Tag
+1029910;Planar Constraint;Command
+1029911;Camera Orientation Constraint;Tag
+1029911;Camera Orientation Constraint;Command
+1029912;Mask Constraint;Tag
+1029912;Mask Constraint;Command
+1030000;Set UVW from Projection;Command
+1030178;Wavefront OBJ (*.obj);Command
+1030471;LegacyVRayObject;Object
+1030472;LegacyVRayObject;Object
+1030499;SculptBrushModifierSceneHook;SceneHook
+1030659;Annotation;Tag
+1030659;Annotation;Command
+1030679;Annotation Tag SceneHook;SceneHook
+1030871;Annotation Tool;Command
+1030871;Annotation Tool;Tool
+1031207;UV Peeler;Command
+1031207;UV Peeler;Tool
+1031225;Trim Track;Command
+1031226;Untrim Track;Command
+1031233;Full Solve;Command
+1031234;Motion Tracker Graph View;Command
+1031330;Insert Key at Track Position;Command
+1031331;Remove Key;Command
+1031332;Create User Track Here;Command
+1031333;Create User Tracks;Command
+1031333;Create User Tracks;Tool
+1031334;Create Mask;Command
+1031334;Create Mask;Tool
+1031335;Create Position Constraint;Command
+1031335;Create Position Constraint;Tool
+1031336;Create Vector Constraint;Command
+1031336;Create Vector Constraint;Tool
+1031337;Create Planar Constraint;Command
+1031337;Create Planar Constraint;Tool
+1031338;2D View;Command
+1031339;3D View;Command
+1031429;Select;Command
+1031429;Select;Tool
+1031433;Formula;Shader
+1031682;Select All Auto Tracks;Command
+1031683;Select All User Tracks;Command
+1031684;Select Reconstructed Tracks;Command
+1031685;Invert Selection;Command
+1031686;Hide Selected;Command
+1031687;Hide Unselected;Command
+1031688;Show All;Command
+1031689;Invert Visibility;Command
+1031690;Delete Selected;Command
+1031691;Restore Deleted;Command
+1031702;Insert Key Here;Command
+1031703;Split Mask edge here;Command
+1031705;Track Bidirectional;Command
+1031706;Track Forward;Command
+1031707;Track Backward;Command
+1031708;Lens Distortion;Shader
+1031709;Lens Distortion;VideoPost
+1031710;Lock Track;Command
+1031711;Unlock Track;Command
+1032090;ArchiCAD 18+ Scene Combine...;Command
+1032107;Substance Assets;SceneHook
+1032108;Substance Asset Manager;Command
+1032109;Load Substance...;Command
+1032171;Substance Shader;Shader
+1032178;CombineAc18_AutoCombine_SceneHook;SceneHook
+1032514;Lens Distortion;Command
+1032514;Lens Distortion;Tool
+1032560;Motion Tool Data Tag (internal);Tag
+1032560;Motion Tool Data Tag (internal);Command
+1032646;LegacyVRayObject;Object
+1033522;Sculpt To Pose Morph;Command
+1033766;Sculpt Brush Custom Plane Adjust;Command
+1033825;Variation;Shader
+1033961;Display Color;Shader
+1034008;Top-Down Mode;Command
+1034009;Graph Mode;Command
+1034010;2D Tracking Errors;Command
+1034011;2D Tracking Speed;Command
+1034012;2D Tracking Acceleration;Command
+1034014;Frame All;Command
+1034015;Frame Selected;Command
+1034016;Go to Current Frame;Command
+1034017;Show Filter Trims;Command
+1034257;No Grid;Command
+1034258;Subframes;Command
+1034259;Fine;Command
+1034260;Middle;Command
+1034261;Per Second;Command
+1034262;Camera 2D Mode;Command
+1034656;Substance Asset;Object
+1034807;Clear Assets;Command
+1035447;Delta Mush;Object
+1035447;Delta Mush;Command
+1035496;Delta Mush;Tag
+1035496;Delta Mush;Command
+1035602;LegacyVRayObject;Object
+1035609;Lock View on Tracks;Command
+1035731;Thin Film;Shader
+1036063;;Command
+1036066;Switch Substance Engine...;Command
+1036100;Object Tracker;Object
+1036219;Redshift;VideoPost
+1036221;RS IPR;Command
+1036222;RS Object;Tag
+1036222;RS Object;Command
+1036229;RS Shader Graph Editor;Command
+1036370;Full Footage;Command
+1036371;Keep in Foreground;Command
+1036372;Frame Selected Tracks;Command
+1036373;Frame All Tracks;Command
+1036374;Motion Tracker;Command
+1036375;Object Tracker;Command
+1036376;Auto Update Tracks;Command
+1036428;BodyPaint SceneHook;SceneHook
+1036433;Alembic Tag;Tag
+1036433;Alembic Tag;Command
+1036448;Point Generator;Object
+1036536;Nudge Track Left;Command
+1036537;Nudge Track Right;Command
+1036538;Nudge Track Up;Command
+1036539;Nudge Track Down;Command
+1036557;Voronoi Fracture;Object
+1036557;Voronoi Fracture;Command
+1036560;Voronoi Fracture Tag;Tag
+1036560;Voronoi Fracture Tag;Command
+1036698;LegacyVRayObject;Object
+1036748;Redshift;SceneHook
+1036751;RS Light;Object
+1036751;RS Light;Command
+1036753;New RS Material;Command
+1036754;RS Sky;Object
+1036754;RS Sky;Command
+1036755;#$0 RS Lights;Command
+1036756;RS Feedback Display;Command
+1036757;RS Environment;Object
+1036757;RS Environment;Command
+1036759;#$0 RS Materials;Command
+1036760;RS Camera;Tag
+1036760;RS Camera;Command
+1036764;Connect Node to Output;Command
+1036768;Cut;Command
+1036769;Copy;Command
+1036770;Paste;Command
+1036771;Delete;Command
+1036775;Create Texture Node;Command
+1036975;Reload Substances;Command
+1037041;MeshObject Scene Hook;SceneHook
+1037143;Select All;Command
+1037144;Deselect All;Command
+1037161;LegacyVRayShader;Shader
+1037184;Alembic Morph;Tag
+1037184;Alembic Morph;Command
+1037258;LegacyVRayShader;Shader
+1037313;LegacyVRayShader;Shader
+1037358;LegacyVRayShader;Shader
+1037364;LegacyVRayShader;Shader
+1037427;LegacyVRayShader;Shader
+1037462;LegacyVRayShader;Shader
+1037565;LegacyVRayTag;Tag
+1037565;LegacyVRayTag;Command
+1037614;LegacyVRayShader;Shader
+1037876;Tone Mapping;VideoPost
+1038335;LegacyVRayShader;Shader
+1038367;Link List to OM Selection;Command
+1038368;Lock Mode;Command
+1038369;Flat Sort;Command
+1038370;Hierarchical Sort;Command
+1038371;Weight Tag Sort;Command
+1038376;Name Sort;Command
+1038399;Cut;Command
+1038400;Copy;Command
+1038401;Paste;Command
+1038402;Delete;Command
+1038403;Delete Unused Substances;Command
+1038404;Select from Active Materials;Command
+1038405;Select from Marked Materials;Command
+1038406;Select from Active Objects;Command
+1038407;Select Materials;Command
+1038408;Select Objects;Command
+1038409;Enable All;Command
+1038410;Disable All;Command
+1038411;Preferences;Command
+1038412;Create Standard Materials;Command
+1038413;Create Metallic Materials;Command
+1038414;Create Glossy Materials;Command
+1038415;Duplicate;Command
+1038416;Duplicate with Materials;Command
+1038417;Apply Substance Preset;Command
+1038418;Merge Substance Preset;Command
+1038419;Export Substance Preset;Command
+1038420;Cache Selected;Command
+1038421;Cache Modified;Command
+1038422;Cache All;Command
+1038423;Clear Cache for Selected;Command
+1038424;Clear Cache for All;Command
+1038450;Load Substances From Folder...;Command
+1038649;RS Proxy;Object
+1038649;RS Proxy;Command
+1038650;RS Proxy (*.rs);Command
+1038653;RS Sun & Sky Rig;Command
+1038655;RS Volume;Object
+1038655;RS Volume;Command
+1038657;Clear Files;Command
+1038658;Optimize All Nodes;Command
+1038659;Colorize Graph;Command
+1038662;#$1 RS Cameras;Command
+1038663;Preferences;Command
+1038666;RS RenderView;Command
+1038668;Render to RenderView;Command
+1038669;Infinite Light;Command
+1038670;Point Light;Command
+1038671;Spot Light;Command
+1038672;Area Light;Command
+1038673;Dome Light;Command
+1038674;IES Light;Command
+1038675;Portal Light;Command
+1038676;Physical Sun;Command
+1038677;Standard;Command
+1038678;Fisheye;Command
+1038679;Spherical;Command
+1038680;Cylindrical;Command
+1038681;Stereo-Spherical;Command
+1038682;Connect Node to Viewport;Command
+1038683;RS Asset Manager;Command
+1038684;Select All;Command
+1038685;Deselect All;Command
+1038686;Invert Selection;Command
+1038687;Select Missing Files;Command
+1038688;Show in Attribute Manager;Command
+1038689;Replace Files With...;Command
+1038690;Relink Files...;Command
+1038691;Localize Files;Command
+1038692;Globalize Files;Command
+1038693;RS AOV Manager;Command
+1038947;Depth of Field;Command
+1038963;UV Transform;Command
+1038986;LegacyVRayShader;Shader
+1039080;LegacyVRayObject;Object
+1039096;Get Redshift;Command
+1039327;LegacyVRayShader;Shader
+1039858;Volume;Object
+1039859;Volume Builder;Object
+1039859;Volume Builder;Command
+1039860;Volume Builder Tag;Tag
+1039860;Volume Builder Tag;Command
+1039861;Volume Mesher;Object
+1039861;Volume Mesher;Command
+1039862;Volume Filter;Object
+1039863;Volume Mesh...;Command
+1039865;Volume (*.vdb);Command
+1039866;Volume Loader;Object
+1039866;Volume Loader;Command
+1039867;Volume Set;Object
+1039867;Volume Set;Command
+1039950;;Command
+1039951;;Command
+1039955;Motion Tracker Track View;Command
+1040017;Logger Settings;Command
+1040031;Export Selected Objects as...;Command
+1040113;SDF Smooth;Command
+1040114;SDF Dilate and Erode;Command
+1040173;Select All;Command
+1040174;Deselect All;Command
+1040175;Invert Selection;Command
+1040176;Cut;Command
+1040177;Copy;Command
+1040178;Paste;Command
+1040179;Delete;Command
+1040182;Layout Graph;Command
+1040183;Convert Materials;Command
+1040189;RS Post-Effects;VideoPost
+1040191;RS ShaderNode;Shader
+1040193;Clear Memory Caches;Command
+1040194;Online Manual...;Command
+1040195;Workflow Guides...;Command
+1040196;Download Latest Version...;Command
+1040197;Support Forums...;Command
+1040198;Report a Bug...;Command
+1040199;Getting Started...;Command
+1040202;Cache Textures;Command
+1040203;Delete Cached Textures;Command
+1040204;Use Cached Textures;Command
+1040205;Start / Stop RenderView IPR;Command
+1040206;Start RenderView IPR;Command
+1040207;Stop RenderView IPR;Command
+1040211;RS BakeSet;Object
+1040211;RS BakeSet;Command
+1040212;Bake Textures;Command
+1040216;Commander;Command
+1040218;Render All Materials;Command
+1040219;Render Materials;Command
+1040221;Convert All Materials;Command
+1040222;Create Materials from Selected Substance Assets;Command
+1040223;Reset Preferences;Command
+1040225;Convert to Nodes;Command
+1040226;Convert All Materials to Nodes;Command
+1040228;Use Node Materials for Presets;Command
+1040233;Matrix Scatter;Command
+1040235;Clear Baked Textures;Command
+1040237;Material Override;VideoPost
+1040239;Start IPR;Command
+1040240;Refresh;Command
+1040241;AOV;Command
+1040242;Bucket Mode;Command
+1040243;Freeze Tessellation;Command
+1040244;Freeze Geometry;Command
+1040245;Clay Mode;Command
+1040246;Options;Command
+1040247;Take Snapshot;Command
+1040250;Set Color Space using OCIO;Command
+1040252;RT;Command
+1040254;Redshift Material Presets;Command
+1040255;Redshift Material Tools;Command
+1040256;Standard;Command
+1040257;Fisheye;Command
+1040258;Spherical;Command
+1040259;Cylindrical;Command
+1040260;Stereo-Spherical;Command
+1040261;Hybrid Mode;Command
+1040262;Reload Textures;Command
+1040264;Materials;Command
+1040265;Utilities;Command
+1040448;Radial Field;Object
+1040448;Radial Field;Command
+1040449;Group Field;Object
+1040449;Group Field;Command
+1040459;Volume Save Manager Hook;SceneHook
+1040464;Face Capture;Object
+1040642;Moves by Maxon;Command
+1040737;Fog Smooth;Command
+1040738;Fog Add;Command
+1040764;Show File in Finder;Command
+1040765;Open File in Default Application;Command
+1040766;Open Asset in Picture Viewer;Command
+1040767;Show Asset in Manager;Command
+1040768;Show Element in Manager;Command
+1040814;Bake as Alembic;Command
+1040815;Bake as Alembic + Delete;Command
+1040839;Moves Pose Morph Helper;Tag
+1040839;Moves Pose Morph Helper;Command
+1040866;Moves Eye;Tag
+1040866;Moves Eye;Command
+1040942;Moves Face Shader;Shader
+1041110;2D Tracks;Command
+1041129;glTF (*.gltf/*.glb);Command
+1041349;User Data;Tag
+1041349;User Data;Command
+1041451;Field Force;Object
+1041451;Field Force;Command
+1041475;42;Command
+1050456;Cache Layer;Object
+1050500;Image;Command
+1050501;Video;Command
+1050502;Audio;Command
+1050503;External Cache;Command
+1050504;Referenced 3D;Command
+1050505;Other;Command
+1050522;Consolidate Assets;Command
+1050557;Take;Command
+1050586;Element Type;Command
+1050848;Type;Command
+1050849;Format;Command
+1050850;Resolution;Command
+1050882;File Size;Command
+1050980;Denoiser;VideoPost
+1050981;Clear Cached Volumes;Command
+1050994;;Shader
+1051186;Node Space;Command
+1051315;Normal;Command
+1051433;By Asset;Command
+1051435;By Element Type;Command
+1051436;By Layer;Command
+1051437;By Take;Command
+1051438;By Node Space;Command
+1051496;Sign-Out;Command
+1051534;By Type;Command
+1051539;By Format;Command
+1051540;No Grouping;Command
+1053042;Mode;Command
+1053110;Pack UV (Geometric);Command
+1053272;V-Ray;VideoPost
+1053274;Start Interactive Render;Command
+1053275;Ambient Light;Object
+1053275;Ambient Light;Command
+1053276;Direct Light;Object
+1053276;Direct Light;Command
+1053277;Dome Light;Object
+1053277;Dome Light;Command
+1053278;IES Light;Object
+1053278;IES Light;Command
+1053279;Omni Light;Object
+1053279;Omni Light;Command
+1053280;Rectangle Light;Object
+1053280;Rectangle Light;Command
+1053281;Sphere Light;Object
+1053281;Sphere Light;Command
+1053282;Spot Light;Object
+1053282;Spot Light;Command
+1053283;Physical Camera;Tag
+1053283;Physical Camera;Command
+1053284;Dome Camera;Tag
+1053284;Dome Camera;Command
+1053287;V-Ray Sun;Object
+1053287;V-Ray Sun;Command
+1053301;UV Unwrap;Command
+1053309;uvhook;SceneHook
+1053312;UV Weld and Relax;Command
+1053360;Body Capture;Object
+1053373;UV Weld;Command
+1053469;Mirror Selection (Legacy);Command
+1053590;Commander (Legacy);Command
+1053946;GoZ Importer;Command
+1054051;Render Elements;Command
+1054124;VRayFresnel;Shader
+1054150;StrNotFound;Object
+1054151;StrNotFound;Object
+1054152;StrNotFound;Object
+1054153;StrNotFound;Object
+1054154;StrNotFound;Object
+1054155;StrNotFound;Object
+1054156;StrNotFound;Object
+1054157;StrNotFound;Object
+1054158;StrNotFound;Object
+1054159;StrNotFound;Object
+1054160;StrNotFound;Object
+1054166;UV Display 3D SceneHook;SceneHook
+1054167;GoZ Exporter;Command
+1054188;Scene Nodes;SceneHook
+1054189;Node Editor;Command
+1054224;StrNotFound;Object
+1054225;Asset Browser;Command
+1054230;GoZ Install;Command
+1054295;Face Group;Tag
+1054295;Face Group;Command
+1054317;StrNotFound;Object
+1054357;Add UV Pins;Command
+1054358;Remove UV Pins;Command
+1054363;V-Ray Render Elements Hook;SceneHook
+1054392;GoZ Assign Polygroup;Command
+1054538;Pose Library Browser;Command
+1054643;Light Material;Command
+1054644;V-Ray Material;Command
+1054645;Al Surface Material;Command
+1054646;Bump Material;Command
+1054647;Car Paint 2 Material;Command
+1054648;Fast SSS2 Material;Command
+1054650;Hair Next Material;Command
+1054652;Stochastic Flakes;Command
+1054653;Toon Material;Command
+1054728;V-Ray Proxy;Object
+1054728;V-Ray Proxy;Command
+1054750;Remesh;Object
+1054750;Remesh;Command
+1054755;Magic Bullet Looks;VideoPost
+1054777;Physical Camera;Command
+1054778;Dome Camera;Command
+1054856;V-Ray VFB;Command
+1054858;Character Definition;Tag
+1054858;Character Definition;Command
+1055036;Thumbnail View;Command
+1055048;StrNotFound;Object
+1055048;StrNotFound;Command
+1055049;StrNotFound;Object
+1055049;StrNotFound;Command
+1055050;V-Ray Proxy Hook;SceneHook
+1055052;VRayLayered;Shader
+1055068;Character Solver;Tag
+1055068;Character Solver;Command
+1055070;Object Properties;Tag
+1055070;Object Properties;Command
+1055123;Start Production Render;Command
+1055140;V-Ray Sun;Command
+1055174;VRaySky;Shader
+1055179;USD (*.usda/*.usdc/*.usdz);Command
+1055198;Blend Material;Command
+1055207;UV Straighten;Command
+1055209;2Sided Material;Command
+1055217;Image Transparency;Command
+1055219;Geometry;Tag
+1055219;Geometry;Command
+1055221;Open Capture;Command
+1055222;Merge Capture;Command
+1055224;Open File in Default Application;Command
+1055225;Show Files in Finder;Command
+1055226;Delete Capture Locally;Command
+1055227;Synchronize Previews;Command
+1055228;Remove Incomplete Downloads;Command
+1055229;Moves Preferences...;Command
+1055238;V-Ray Sun with Sky;Command
+1055243;Tween Tool;Command
+1055243;Tween Tool;Tool
+1055274;Node Editor Preferences;Command
+1055275;Play Movie;Command
+1055276;Play Sound;Command
+1055278;Overwrite Asset Version!;Command
+1055307;USD Scene Hook;SceneHook
+1055313;Send to Magic Bullet Looks;Command
+1055343;V-Ray Legacy Scene Conversion Hook;SceneHook
+1055347;UV Rectangularize;Command
+1055400;VRayDirt;Shader
+1055401;VRayDistance;Shader
+1055413;Update USD Changes;Command
+1055414;Close USD Bridge;Command
+1055536;Character Definition Tool;Command
+1055553;IES Light;Command
+1055604;VRayFalloff;Shader
+1055613;VRayC4DBake;Shader
+1055619;VRayBitmap;Shader
+1055633;V-Ray VFB Hook;SceneHook
+1055635;Distributed Rendering;Command
+1055656;StrNotFound;Object
+1055660;VRayTriPlanar;Shader
+1055682;VRayCurvature;Shader
+1055728;StrNotFound;Object
+1055729;Environment Fog;Object
+1055729;Environment Fog;Command
+1055759;StrNotFound;Object
+1055760;StrNotFound;Object
+1055761;StrNotFound;Object
+1055762;StrNotFound;Object
+1055794;V-Ray Proxy (*.vrmesh);Command
+1055823;Online Documentation;Command
+1055906;Scatter Pen;Command
+1055906;Scatter Pen;Tool
+1055907;Scatter;Object
+1055908;Place;Command
+1055908;Place;Tool
+1056001;Select All UV Seams;Command
+1056014;V-Ray VolumeGrid;Object
+1056014;V-Ray VolumeGrid;Command
+1056084;Online Help Center;Command
+1056085;About;Command
+1056122;Check For Update;Command
+1056127;StrNotFound;Object
+1056133;Add Materials to Database;Command
+1056137;Add Objects to Database;Command
+1056140;Add Scene to Database;Command
+1056142;Dynamic Place;Command
+1056142;Dynamic Place;Tool
+1056144;Submit to Chaos Cloud;Command
+1056176;VRayMultiSubTex;Shader
+1056209;Add File to Database...;Command
+1056222;Data Inspector;Command
+1056238;StrNotFound;Object
+1056239;StrNotFound;Object
+1056274;V-Ray Volume Grid Scene Hook;SceneHook
+1056275;StrNotFound;Object
+1056275;StrNotFound;Command
+1056285;Scanned Material;Command
+1056295;Convert V-Ray 3 scene;Command
+1056305;V-Ray VolumeGrid;Command
+1056347;VRayRamp;Shader
+1056362;Data Capture;Object
+1056362;Data Capture;Command
+1056501;StrNotFound;Object
+1056501;StrNotFound;Command
+1056623;Open Duplicated Browser;Command
+1056624;Rename...;Command
+1056814;Data Inspector;Command
+1056836;Track Modifier;Tag
+1056836;Track Modifier;Command
+1056850;ZZ;Command
+1057168;Compute Object;Command
+1057194;Project and Document Tabs;Command
+1057220;Simulation;SceneHook
+1057221;Simulation Scene;Object
+1057221;Simulation Scene;Command
+1057269;Cosmos Asset;Object
+1057269;Cosmos Asset;Command
+1057358;New Default Material;Command
+1057359;New PBR Material;Command
+1057360;Soft Selection;Command
+1057371;Existing Material;Command
+1057372;Select Material;Command
+1057373;Select Material Tag;Command
+1057380;V-Ray Fur;Object
+1057380;V-Ray Fur;Command
+1057381;New Standard Material;Command
+1057382;New Node Material;Command
+1057383;New Uber Material;Command
+1057384;New Grass Material;Command
+1057385;New Hair Material;Command
+1057386;New Pyrocluster Material;Command
+1057387;New Pyrocluster VolumeTracer Material;Command
+1057388;New Shadow Catcher Material;Command
+1057389;New Sketch Material;Command
+1057409;Presets;Command
+1057411;Rename;Command
+1057412;Delete;Command
+1057413;Load;Command
+1057429;Duplicate;Command
+1057439;Cosmos Browser;Command
+1057445;V-Ray Clipper;Object
+1057445;V-Ray Clipper;Command
+1057469;Convert Selected Lights to Redshift;Command
+1057470;Convert All Lights to Redshift;Command
+1057471;Convert All Cameras to Redshift;Command
+1057472;Convert Selected Cameras to Redshift;Command
+1057509;Link Size;Command
+1057510;Link Strength;Command
+1057512;Link Stencil;Command
+1057516;RS Camera;Object
+1057516;RS Camera;Command
+1057623;Edit Palettes;Command
+1057648;Coordinate Manager;Command
+1057664;Forger (*.fpk);Command
+1057837;Axis and Soft Selection;Command
+1057841;Current Frame;Command
+1057843;Socket Server Plugin;Command
+1057878;VRayCombineColor;Shader
+1057879;VRayCombineFloat;Shader
+1057880;VRayMix;Shader
+1057881;VRayNormalMap;Shader
+1057883;VRayBezierCurveColor;Shader
+1057884;VRayOutput;Shader
+1057885;VRayFloatToColor;Shader
+1057886;VRayMaxGamma;Shader
+1057887;VRayColorCorrection;Shader
+1057888;VRayAColorOp;Shader
+1057889;VRayTexUVW;Shader
+1057890;VRayUVWChannel;Shader
+1057899;Vector Import;Object
+1057899;Vector Import;Command
+1057903;Vector Import Info;Tag
+1057903;Vector Import Info;Command
+1057910;Reload Databases;Command
+1057913;Browser Preferences...;Command
+1057923;Light Lister;Command
+1057994;Send Project to iPad;Command
+1057998;Delete;Command
+1058001;Search;Command
+1058060;ScatterPlacementHook;SceneHook
+1058129;VRayUVWRandomizer;Shader
+1058422;Python Embedded Change Monitor;SceneHook
+1058447;Flatten;Command
+1058447;Flatten;Tool
+1058461;Fit Circle;Command
+1058461;Fit Circle;Tool
+1058499;Smooth Edges;Command
+1058499;Smooth Edges;Tool
+1058510;Poke Polygons;Command
+1058529;Set Flow;Command
+1058529;Set Flow;Tool
+1058532;V-Ray Scene;Object
+1058532;V-Ray Scene;Command
+1058543;Straighten Edges;Command
+1058543;Straighten Edges;Tool
+1058570;V-Ray Cosmos Hook;SceneHook
+1058583;V-Ray Interactive Update Hook;SceneHook
+1058592;Equal Spacing;Command
+1058592;Equal Spacing;Tool
+1058655;V-Ray Scene (*.vrscene);Command
+1058681;Task Manager;Command
+1058682;Chaos Scatter;Object
+1058682;Chaos Scatter;Command
+1058744;Send to IDE;Command
+1058747;Al Surface Node Material;Command
+1058751;V-Ray Node Material;Command
+1058752;Hair Next Node Material;Command
+1058753;Light Node Material;Command
+1058754;Fast SSS2 Node Material;Command
+1058755;Bump Node Material;Command
+1058756;Blend Node Material;Command
+1058757;2Sided Node Material;Command
+1058758;Car Paint 2 Node Material;Command
+1058895;Connector;Tag
+1058895;Connector;Command
+1058901;Renderable Spline;Tag
+1058901;Renderable Spline;Command
+1059024;#$0 Cloth;Command
+1059025;#$1 Rope;Command
+1059026;#$3 Connector;Command
+1059027;#$4 Cloth Belt;Command
+1059028;#$5 Rope Belt;Command
+1059029;#$6 Collider;Command
+1059061;V-Ray Decal;Object
+1059061;V-Ray Decal;Command
+1059074;Goto to connected Node;Command
+1059117;Override Material;Command
+1059122;Override Node Material;Command
+1059205;Convert Materials;Command
+1059206;VRaySoftbox;Shader
+1059243;Symmetrize;Command
+1059289;VRayEdges;Shader
+1059320;VRayParticleSamplerTexture;Shader
+1059360;Convert Scene Colors;Command
+1059387;Pyro Emitter;Tag
+1059387;Pyro Emitter;Command
+1059388;#$7 Pyro Emitter;Command
+1059492;V-Ray Enmesh;Object
+1059492;V-Ray Enmesh;Command
+1059505;V-Ray Particles;Object
+1059505;V-Ray Particles;Command
+1059580;Pyro Output;Object
+1059580;Pyro Output;Command
+1059602;V-Ray Bake Object;Object
+1059602;V-Ray Bake Object;Command
+1059603;#$2 Soft Body;Command
+1059736;Symmetrize Selection;Command
+1059737;Database;Command
+1059739;By Database;Command
+1059748;gozScenehook;SceneHook
+1059764;#$7 Balloon;Command
+1059829;VRayHairSampler;Shader
+1059839;Make Shadow Catcher;Command
+1059883;V-Ray Fur;Command
+1059898;Mesh Light;Object
+1059898;Mesh Light;Command
+1059899;V-Ray Enmesh;Command
+1059904;VRayOCIO;Shader
+1059922;VRaySamplerInfo;Shader
+1059981;Rigid Body;Tag
+1059981;Rigid Body;Command
+1059982;#$9 Rigid Body;Command
+1060011;Symmetry;Object
+1060011;Symmetry;Command
+1060029;Export to USD Layer;Command
+1060033;V-Ray Toolbar;Command
+1060041;Color Space;Command
+1060042;By Color Space;Command
+1060059;StrNotFound;Object
+1060099;OSL Material;Command
+1060100;VRayOSL;Shader
+1060101;Commander...;Command
+1060110;Edge Trimming;Shader
+1060142;#$8 Pyro Fuel;Command
+1060145;Set Color Space using OCIO;Command
+1060164;Download Cosmos Assets;Command
+1060179;Thicken;Object
+1060179;Thicken;Command
+1060191;VRayUserColor;Shader
+1060192;VRayUserInteger;Shader
+1060193;VRayUserScalar;Shader
+1060284;VRayCellular;Shader
+1060286;VRayNoiseMax;Shader
+1060288;Thicken;Command
+1060288;Thicken;Tool
+1060290;VRaySmoke;Shader
+1060291;VRaySplat;Shader
+1060299;VRayStucco;Shader
+1060300;VRayTiles;Shader
+1060305;Viewport Interactive Rendering;Command
+1060306;StrNotFound;Object
+1060307;V-Ray Toon;Object
+1060307;V-Ray Toon;Command
+1060397;V-Ray EULA;Command
+1060414;Code Exchanger Settings;Command
+1060415;Start/Stop Code Exchanger;Command
+1060422;Projection;Object
+1060422;Projection;Command
+1060457;;SceneHook
+1060498;Pattern Selection;Command
+1060498;Pattern Selection;Tool
+1060580;Toon Node Material;Command
+1060643;Chaos Collaboration;Command
+1060649;Normal Edit - Hard;Command
+1060650;Normal Edit - Reverse;Command
+1060656;Normal Edit - Soft;Command
+1060657;Normal Edit - Align;Command
+1060664;Normal Edit - From Selected;Command
+1060665;Normal Edit - To Selected;Command
+1060677;Normal Edit - Average;Command
+1060679;Boolean;Object
+1060679;Boolean;Command
+1060715;Property Transfer;Tool
+1060726;Condition;Object
+1060726;Condition;Command
+1060818;V-Ray Profiler;Command
+1060823;Boolean;Tag
+1060823;Boolean;Command
+1060887;Particle Group;Object
+1060887;Particle Group;Command
+1060906;Pattern Direction Manipulator;Object
+1060907;Chaos Scatter;Command
+1061066;Resolution;Command
+1061095;Normal Editing;Command
+1061097;OSL Node Material;Command
+1061132;Surface Color;Shader
+1061158;Polygon Indexes;Command
+1061174;Point Indexes;Command
+1061175;Math;Object
+1061175;Math;Command
+1061199;Kill;Object
+1061199;Kill;Command
+1061200;Basic Emitter;Object
+1061200;Basic Emitter;Command
+1061231;StrNotFound;Object
+1061337;StrNotFound;Object
+1061340;Switch Material;Command
+1061370;Switch Node Material;Command
+1061436;V-Ray Environment;Object
+1061436;V-Ray Environment;Command
+1061625;Stochastic Flakes Node Material;Command
+1061626;VRayRemap;Shader
+1061627;VrayRGBToHSV;Shader
+1061628;VRayFloatOperation;Shader
+1061629;VRayVectorProduct;Shader
+1061630;VRayComposeColor;Shader
+1061631;VRayColorRange;Shader
+1061632;VRayBumpToGlossiness;Shader
+1061637;Flock;Object
+1061637;Flock;Command
+1061708;V-Ray Plugin;SceneHook
+1061730;VRayUVWExplicit;Shader
+1061731;VRayUVWProjection;Shader
+1061732;VRayUVWObject;Shader
+1061733;VRayUVWTransform;Shader
+1061765;VRaySceneAsset;Shader
+1061766;V-Ray Scene Asset;Object
+1061766;V-Ray Scene Asset;Command
+1061778;Reproduce;Object
+1061778;Reproduce;Command
+1061780;Color Mapper;Object
+1061780;Color Mapper;Command
+1061801;Predator Prey;Object
+1061801;Predator Prey;Command
+1061835;VRmat Material;Command
+1061836;VRmat Node Material;Command
+1061841;Collide;Object
+1061841;Collide;Command
+1061850;Pyro Advect;Object
+1061850;Pyro Advect;Command
+1061953;VRayClamp;Shader
+1061976;Joint Object Settings Tag;Tag
+1061976;Joint Object Settings Tag;Command
+1061981;VRayUVWPlace2D;Shader
+1061985;Surface Attract;Object
+1061985;Surface Attract;Command
+1062038;Multi Group;Object
+1062038;Multi Group;Command
+1062045;Switch Group;Object
+1062045;Switch Group;Command
+1062059;Output Geometry;Command
+1062060;Shrink to Fit;Command
+1062061;Select Contents;Command
+1062128;Stick;Object
+1062128;Stick;Command
+1062493;Navigate back;Command
+1062494;Navigate forward;Command
+1062533;Field Condition;Object
+1062533;Field Condition;Command
+1062535;Data Mapper;Object
+1062535;Data Mapper;Command
+1062541;Look;Object
+1062541;Look;Command
+1062542;Spin;Object
+1062542;Spin;Command
+1062543;Turn;Object
+1062543;Turn;Command
+1062564;Spline Emitter;Object
+1062564;Spline Emitter;Command
+1062565;Blend;Object
+1062565;Blend;Command
+1062577;Mesh Emitter;Object
+1062577;Mesh Emitter;Command
+1062591;#$1 Fixed;Command
+1062592;#$3 Linear;Command
+1062593;#$2 Angular;Command
+1062594;#$4 Spherical;Command
+1062595;#$5 Wheel Suspension;Command
+1062613;Time Condition;Object
+1062613;Time Condition;Command
+1062951;Joint Deform Tag;Tag
+1062951;Joint Deform Tag;Command
+1062953;Field Driver;Tag
+1062953;Field Driver;Command
+1063097;Generate Preview;Command
+1063166;VRayRandom;Shader
+1063167;VRayRaySwitch;Shader
+1063168;VRayMask;Shader
+1063169;VRayCondition;Shader
+1063170;VRayGrid;Shader
+1063227;Align Top;Command
+1063228;Align Vertical Centers;Command
+1063229;Align Bottom;Command
+1063230;Align Left;Command
+1063231;Align Horizontal Centers;Command
+1063232;Align Right;Command
+1063260;Particle Node Modifier;Object
+1063260;Particle Node Modifier;Command
+1063388;Undo History;Command
+1063407;Undo History;Command
+1063475;GoZ (.goz) Export;Command
+1063476;GoZ (.gozip) Export;Command
+1063483;V-Ray Luminaire;Object
+1063483;V-Ray Luminaire;Command
+1063518;V-Ray Gaussians;Object
+1063518;V-Ray Gaussians;Command
+1063739;Scanned Node Material;Command
+1063765;Follow Spline;Object
+1063765;Follow Spline;Command
+1063766;Cinema 4D Home;Command
+1064034;Learning Panel;Command
+1064212;Learning Handler;Command
+1064224;Scanned Material Polygon Picker;Tool
+1064233;Locate Command...;Command
+1064268;StrNotFound;Command
+1064355;StrNotFound;Command
+1064422;Add Scene to Database;Command
+1064788;Chaos Telemetry Settings;Command
+1064894;Denoiser;Command
+10234234;RPF;VideoPost
+31028063;RSCameraObjectTargetDistancePicker;SceneHook
+100001200;Cappucino;Command
+100001315;TimeWarp;Command
+100001315;TimeWarp;Tool
+100001609;Auto Redraw...;Command
+100001735;Retarget;Tag
+100001735;Retarget;Command
+100001736;PoseMixer;Tag
+100001736;PoseMixer;Command
+100001740;Quaternion;Tag
+100001740;Quaternion;Command
+100004007;Cloth Surface;Object
+100004007;Cloth Surface;Command
+100004020;Cloth;Tag
+100004020;Cloth;Command
+100004021;Collider;Tag
+100004021;Collider;Command
+100004022;Cloth Belt;Tag
+100004022;Cloth Belt;Command
+100004023;Cache Tool;Command
+100004023;Cache Tool;Tool
+100004700;Object Manager;Command
+100004704;Layer Manager;Command
+100004706;Small Icons;Command
+100004707;Medium Icons;Command
+100004708;Large Icons;Command
+100004709;;Command
+100004713;Object Profiler;Command
+100004719;Show Path Bar;Command
+100004720;Set as Root;Command
+100004721;Go to Main Level;Command
+100004722;One Level Up;Command
+100004723;Add Bookmark;Command
+100004724;Manage Bookmarks;Command
+100004725;Default Bookmark;Command
+100004726;Solo;Command
+100004727;View;Command
+100004728;Render;Command
+100004729;Manager;Command
+100004730;Locking;Command
+100004731;Generators;Command
+100004732;Deformers;Command
+100004733;Expressions;Command
+100004734;Animation;Command
+100004735;Delete;Command
+100004736;Add Objects to Layer;Command
+100004737;Select from Layer;Command
+100004738;New Layer;Command
+100004739;Delete All;Command
+100004740;Unfold All;Command
+100004741;Fold All;Command
+100004742;Merge Layers Preset...;Command
+100004743;Save Layers Preset as...;Command
+100004745;Flat Tree;Command
+100004746;Show Filter;Command
+100004748;Unfold All;Command
+100004749;Fold All;Command
+100004750;Sort by Name;Command
+100004753;Layers;Command
+100004758;Layers;Command
+100004759;Remove from Layer;Command
+100004760;Delete Unused Layers;Command
+100004762;Show Search Bar;Command
+100004763;Restore Selection;Command
+100004764;Merge Objects...;Command
+100004765;Save Selected Objects as...;Command
+100004766;Select All;Command
+100004767;Deselect All;Command
+100004768;Select Children;Command
+100004769;Scroll to Selection;Command
+100004770;Edit...;Command
+100004771;Rename...;Command
+100004772;Group Objects;Command
+100004773;Ungroup Objects;Command
+100004774;Object Information;Command
+100004775;Scene Information;Command
+100004777;Copy Tag to Children;Command
+100004778;Select Child Tags of Same Type;Command
+100004779;Viewport Default;Command
+100004780;Viewport On;Command
+100004781;Viewport Off;Command
+100004782;Renderer Unchanged;Command
+100004783;Renderer On;Command
+100004784;Renderer Off;Command
+100004785;Object Activation;Command
+100004786;Select Visible;Command
+100004787;Delete;Command
+100004788;Extensions;Command
+100004791;Manage Bookmarks;Command
+100004794;Invert Selection;Command
+100004796;Merge Layers;Command
+100004797;Select All;Command
+100004798;Deselect All;Command
+100004799;Invert Selection;Command
+100004801;New Layer from Object Selection;Command
+100004802;Unfold Selected;Command
+100004803;Fold Selected;Command
+100004807;Bookmarks;Command
+100004808;BaseSettings Hook;SceneHook
+100004809;Add to New Layer;Command
+100004810;Vertical Tags;Command
+100004815;Sound Scrubbing Hook;SceneHook
+100004819;Cut;Command
+100004820;Copy;Command
+100004821;Paste;Command
+100004839;Pivot;Object
+100004839;Pivot;Command
+100004840;XRef;Command
+100004841;Save for Cineware...;Command
+100004842;Show Custom Icons;Command
+180000010;Spring;Object
+180000010;Spring;Command
+180000011;Connector;Object
+180000011;Connector;Command
+180000012;Motor;Object
+180000012;Motor;Command
+180000041;#$5 Rigid Body;Command
+180000042;#$6 Soft Body;Command
+180000043;#$7 Collider Body;Command
+180000044;#$8 Ghost Body;Command
+180000100;Bullet;SceneHook
+180000102;Dynamics Body;Tag
+180000102;Dynamics Body;Command
+180000103;Force;Object
+180000103;Force;Command
+180000105;Bullet (*.bullet);Command
+180000107;Dynamics Body (Hidden);Tag
+180000107;Dynamics Body (Hidden);Command
+180420201;Current Scene State to Classic;Command
+180420202;PersistentHook;SceneHook
+180420300;Scene Nodes Tag;Tag
+180420300;Scene Nodes Tag;Command
+180420302;Add Archigrass Tag;Command
+180420400;Scene Nodes Deformer;Object
+180420500;Scene Nodes Generator;Object
+180420600;Scene Nodes Generator;Object
+180420700;Scene Nodes Generator;Object
+180429000;Edit Asset as Group;Command
+189001001;Last Execution;Command
+189001002;Current Frame;Command
+189001003;Current Frame After Editing;Command
+189001004;All Frames;Command
+189001101;Time;Command
+189001102;Percentage;Command
+189001103;Dynamic;Command
+189001200;Show in Object Manager;Command
+190000000;Print Heat Map;Command
+190000001;Enable Heat Map;Command
+190000005;Dump Capsule;Command
+190000006;Puffy Unicorn Reset;Command
+200000011;Reload Scheme;Command
+200000031;Default Light...;Command
+200000045;Projection Man;Command
+200000065;Set Point Value;Command
+200000065;Set Point Value;Tool
+200000067;Duplicate;Command
+200000067;Duplicate;Tool
+200000068;Arrange;Command
+200000068;Arrange;Tool
+200000069;Transfer;Command
+200000069;Transfer;Tool
+200000070;Randomize;Command
+200000070;Randomize;Tool
+200000071;Center;Command
+200000071;Center;Tool
+200000078;ViewportExtHookhighlight;SceneHook
+200000079;MeasureSceneHook;SceneHook
+200000082;Measure Object;Object
+200000083;Brush Selection;Command
+200000083;Brush Selection;Tool
+200000084;Rectangle Selection;Command
+200000084;Rectangle Selection;Tool
+200000085;Lasso Selection;Command
+200000085;Lasso Selection;Tool
+200000086;Polygon Selection;Command
+200000086;Polygon Selection;Tool
+200000087;ToolModelingAxis;Tool
+200000088;Move;Command
+200000088;Move;Tool
+200000089;Scale;Command
+200000089;Scale;Tool
+200000090;Rotate;Command
+200000090;Rotate;Tool
+200000108;32-bit Preview Options...;Command
+200000118;Simple XRef;Object
+200000118;Simple XRef;Command
+200000146;Add to new Layer;Command
+200000147;Remove from Layer;Command
+200000148;Layer;Command
+200000162;Convert Object Selection to XRef;Command
+200000163;Convert Material Selection to XRef;Command
+200000204;Quit and Free License;Command
+200000213;PaintSetup Wizard;Command
+200000215;Send to ArchiCAD;Command
+200000216;ArchiExchangeCADHook;SceneHook
+200000264;Legal Information;Command
+200000273;Reload All Textures;Command
+200000277;Scale Scene...;Command
+200000278;Restore Code Editor;Command
+200000287;Timeline Scroll Bar (Power Area);Command
+200000299;Shift Priority;Tag
+200000299;Shift Priority;Command
+200001004;Resource Editor;Command
+200001005;Resource Editor (Port);Command
+200001021;Add Nodes...;Command
+200001022;Save New Version...;Command
+200001023;Save as New Asset...;Command
+200001025;Edit Asset;Command
+300000116;Script Log;Command
+300000186;Command Manager;Command
+300001009;Cut;Command
+300001010;Copy;Command
+300001011;Paste;Command
+300001012;Delete;Command
+300001013;Select All;Command
+300001014;Deselect All;Command
+300001015;Copy;Command
+300001016;Paste;Command
+300001017;Select All;Command
+300001018;Deselect All;Command
+300001021;Cut;Command
+300001022;Copy;Command
+300001023;Paste;Command
+300001024;Delete;Command
+300001025;Select All;Command
+300001026;Deselect All;Command
+300001027;Cut;Command
+300001028;Copy;Command
+300001029;Paste;Command
+300001030;Delete;Command
+300001031;Select All;Command
+300001032;Deselect All;Command
+300001033;Invert Selection;Command
+300001045;Ambient Occlusion;VideoPost
+300001053;Copy;Command
+300001054;Paste;Command
+300001055;Select All;Command
+300001056;Deselect All;Command
+300001061;Viewport Renderer;VideoPost
+300001070;IES Light...;Command
+300001077;Material Scene Hook;SceneHook
+300001079;Node-based;Shader
+300001097;Send to Picture Viewer;Command
+300001111;Toggle Last Two Tools;Command
+300001116;Send to Magic Bullet Looks;Command
+300001122;Fixed Width;Command
+300001123;Fixed Height;Command
+300001132;Draw Workplane Behind;Command
+300001141;Create Overlay Layout;Command
+300002003;Undo;Command
+300002004;Redo;Command
+300002005;Export Licensing Overview...;Command
+300002136;Team Render Machines...;Command
+300002144;Team Render to Picture Viewer...;Command
+300002149;Add Machine...;Command
+300002150;Small Icons;Command
+300002151;Medium Icons;Command
+300002152;Large Icons;Command
+300002153;Icon;Command
+300002154;Name;Command
+300002155;Info;Command
+300002156;Checkbox;Command
+300002157;Address;Command
+300002158;Bucket Color;Command
+300002159;Show Filter;Command
+300002161;Save Machines...;Command
+300002162;Load Machines...;Command
+300002163;Preferences;Command
+300002167;Share Machine over Network;Command
+300002168;Unverify...;Command
+300002174;Verify...;Command
+300002209;Ping...;Command
+300002229;Connection Test...;Command
+300002230;Remove...;Command
+300002232;Restart Clients...;Command
+300002233;Restart All Clients...;Command
+400009000;Start XPresso Calculation;Command
+400009001;Performance View...;Command
+430000000;Sniper;SceneHook
+430000021;Interactive Render Region;Command
+430000031;Save Interactive Render Region...;Command
+430000041;Interactive Render Region Settings;Command
+430000700;Picture Viewer;Command
+430000730;Open Image...;Command
+430000731;Stop Rendering...;Command
+430000733;Copy;Command
+430000734;Paste;Command
+430000735;Small Icons;Command
+430000736;Medium Icons;Command
+430000737;Large Icons;Command
+430000738;Render Output;Command
+430000739;Remove Image;Command
+430000740;Remove All Images;Command
+430000741;Go to Preview Start;Command
+430000742;Go to Previous Image;Command
+430000743;Play Backwards;Command
+430000744;Play Stop;Command
+430000745;Play Forwards;Command
+430000746;Go to Next Image;Command
+430000747;Go to Preview End;Command
+430000749;Run from Start;Command
+430000750;Link Time;Command
+430000751;Ping-Pong;Command
+430000753;Sequence FPS;Command
+430000754;1;Command
+430000755;5;Command
+430000756;10;Command
+430000757;15;Command
+430000758;18;Command
+430000759;24;Command
+430000760;25;Command
+430000761;30;Command
+430000762;50;Command
+430000763;60;Command
+430000764;100;Command
+430000765;AB Compare;Command
+430000767;Swap AB;Command
+430000768;Set as A;Command
+430000769;Set as B;Command
+430000771;Animate Second ;Command
+430000773;Difference;Command
+430000774;Auto Zoom Mode;Command
+430000775;12.5%;Command
+430000776;25%;Command
+430000777;50%;Command
+430000778;100%;Command
+430000779;200%;Command
+430000780;400%;Command
+430000781;800%;Command
+430000782;Zoom In;Command
+430000783;Zoom Out;Command
+430000785;Select All;Command
+430000786;Deselect All;Command
+431000000;Grid Point Snap;Command
+431000001;Grid Line Snap;Command
+431000003;Guide Angle;Command
+431000005;Enable Quantizing;Command
+431000006;Align Workplane to X;Command
+431000007;Align Workplane to Y;Command
+431000008;Align Workplane to Z;Command
+431000009;Align Workplane to Selection;Command
+431000010;GDNLL;Object
+431000011;Align Selection to Workplane;Command
+431000012;Axis Workplane;Command
+431000013;Mid Point Snap;Command
+431000014;Guide Mid Point Snap;Command
+431000015;Bevel;Command
+431000015;Bevel;Tool
+431000016;3D Snap;Command
+431000018;Auto Snap ;Command
+431000019;2D Snap;Command
+431000021;Edge Slide;Tool
+431000027;Mesh Check Hook;SceneHook
+431000028;Bevel;Object
+431000028;Bevel;Command
+431000030;Slide;Tool
+431000031;PolyPenObject;Object
+431000032;Modeling Objects Hook;SceneHook
+431000045;Vertex Color;Command
+431000046;Modeling Settings;Command
+431000053;Take Manager;Command
+431000055;Take Hook;SceneHook
+431000056;New Take;Command
+431000057;Delete Takes;Command
+431000059;Viewport Solo;Command
+431000060;Viewport Solo Hierarchy;Command
+431000061;Viewport Solo Automatic;Command
+431000067;Render All Takes;Command
+431000068;Render Marked Takes;Command
+431000069;Current Take to New Document;Command
+431000070;Save All Takes with Assets...;Command
+431000071;Save Marked Takes with Assets...;Command
+431000075;Group;Object
+431000076;Place Holder Object;Object
+431000077;Add Override Group;Command
+431000078;Delete Override Groups;Command
+431000079;Delete Overrides;Command
+431000081;Auto Take;Command
+431000083;Show Empty Folders;Command
+431000087;Take Tree Mode;Command
+431000088;Override Tree Mode;Command
+431000089;Dual Tree Mode;Command
+431000092;PopUp Manager;Command
+431000095;Team Render All Takes;Command
+431000096;Team Render Marked Takes;Command
+431000097;Add Scene with All Takes;Command
+431000098;Add Scene with Marked Takes;Command
+431000099;Open With All Takes;Command
+431000100;Open With Marked Takes;Command
+431000101;Link Selection to Other Managers;Command
+431000102;Objects;Command
+431000103;Tags;Command
+431000104;Materials;Command
+431000105;Shaders;Command
+431000106;Layers;Command
+431000107;Others;Command
+431000108;Lock Overrides;Command
+431000110;Parameters;Command
+431000111;Enable Status/Visibility;Command
+431000112;Transformations;Command
+431000113;Camera;Command
+431000114;Render Settings;Command
+431000117;All;Command
+431000118;None;Command
+431000121;Save Take Preset...;Command
+431000122;Load Take Preset...;Command
+431000126;Copy;Command
+431000127;Paste;Command
+431000141;Take Assignment;Command
+431000142;Take Assignment;Command
+431000143;Take Assignment;Command
+431000144;Take Assignment;Command
+431000145;Remove from Current Take;Command
+431000146;Remove from Current Take;Command
+431000147;Remove from Current Take;Command
+431000148;Remove from Current Take;Command
+431000151;Remove from All Takes;Command
+431000152;Remove from All Takes;Command
+431000153;Remove from All Takes;Command
+431000154;Remove from All Takes;Command
+431000163;Line Cut;Command
+431000163;Line Cut;Tool
+431000164;Plane Cut;Command
+431000164;Plane Cut;Tool
+431000165;Loop/Path Cut;Command
+431000165;Loop/Path Cut;Tool
+431000167;Plane Manipulator;Object
+431000168;Knife Line Manipulator;Object
+431000169;Convert Vertex Map;Command
+431000170;Pivot Manipulator;Object
+431000172;Subdivision Manipulator;Object
+431000174;LOD;Object
+431000174;LOD;Command
+431000182;Lod Hook;SceneHook
+431000191;Write Mesh To JSON;Command
+431000202;Resolve Non-Manifold;Command
+431000208;Tool System Hook;SceneHook
+431000214;Forger Tag;Tag
+431000214;Forger Tag;Command
+431000216;Enable Symmetry;Command
+431000220;Symmetry;Command
+440000042;Connect Points/Edges;Command
+440000043;Dissolve;Command
+440000044;Spin Edge;Command
+440000045;Lighting Tool;Command
+440000045;Lighting Tool;Tool
+440000050;Camera Shader;Shader
+440000051;COFFEE;Object
+440000054;MoSpline;Object
+440000054;MoSpline;Command
+440000088;Move Parent;Command
+440000092;Cursor Mode;Command
+440000093;Center Mode;Command
+440000094;Object Mode;Command
+440000095;Camera Mode;Command
+440000101;Polygon Normals;Command
+440000102;Gimbaling Rotation;Command
+440000104;Lock Camera Pivot;Command
+440000106;Nudge Up;Command
+440000107;Nudge Down;Command
+440000108;Nudge Left;Command
+440000109;Nudge Right;Command
+440000110;Vertex Normals;Command
+440000111;Snap Scenehook;SceneHook
+440000113;Guide Snap;Command
+440000114;Intersection Snap;Command
+440000115;Point Snap;Command
+440000116;Spline Snap;Command
+440000117;Dynamic Guide;Command
+440000118;Snap Radius Slider;Command
+440000121;Enable Snap;Command
+440000122;Spline Midpoint Snap;Command
+440000123;Edge Snap;Command
+440000124;Edge Midpoint Snap;Command
+440000125;Polygon Snap;Command
+440000126;Polygon Center Snap;Command
+440000127;Grid/Workplane Snap;Command
+440000128;Axis Snap;Command
+440000129;Perpendicular Snap;Command
+440000131;Quantize Move Slider;Command
+440000132;Quantize Scale Slider;Command
+440000133;Quantize Rotate Slider;Command
+440000134;Quantize Texture Slider;Command
+440000136;GDNLL;Object
+440000138;Tool Specific Snap;Command
+440000144;Resize Brush;Command
+440000149;Spline Pen;Command
+440000149;Spline Pen;Tool
+440000150;Sketch;Command
+440000150;Sketch;Tool
+440000163;Tweak;Command
+440000164;Interaction;Tag
+440000164;Interaction;Command
+440000167;Spline Smooth;Command
+440000167;Spline Smooth;Tool
+440000168;Spline Union;Command
+440000169;Spline Subtract;Command
+440000170;Spline And;Command
+440000174;Spline Arc Tool;Command
+440000174;Spline Arc Tool;Tool
+440000186;Undo;Command
+440000187;Redo;Command
+440000188;Cut;Command
+440000189;Copy;Command
+440000190;Paste;Command
+440000191;Select All;Command
+440000192;Deselect All;Command
+440000193;Delete;Command
+440000212;Spline Or;Command
+440000213;Spline Intersect;Command
+440000219;Push Apart;Object
+440000219;Push Apart;Command
+440000231;MoGraph Weightmap;Tag
+440000231;MoGraph Weightmap;Command
+440000232;MoGraph Weight Paintbrush;Command
+440000232;MoGraph Weight Paintbrush;Tool
+440000234;ReEffector;Object
+440000234;ReEffector;Command
+440000237;Swap Cloner/Matrix;Command
+440000242;Hide Selected;Command
+440000243;Spherical Field;Object
+440000243;Spherical Field;Command
+440000255;Sound;Object
+440000255;Sound;Command
+440000266;Linear Field;Object
+440000266;Linear Field;Command
+440000267;Box Field;Object
+440000267;Box Field;Command
+440000268;Cylinder Field;Object
+440000268;Cylinder Field;Command
+440000269;Cone Field;Object
+440000269;Cone Field;Command
+440000272;Torus Field;Object
+440000272;Torus Field;Command
+440000274;Capsule Field;Object
+440000274;Capsule Field;Command
+440000277;Python Field;Object
+440000277;Python Field;Command
+440000280;Formula Field;Object
+440000280;Formula Field;Command
+440000281;Random Field;Object
+440000281;Random Field;Command
+440000282;Shader Field;Object
+440000282;Shader Field;Command
+440000283;Sound Field;Object
+440000283;Sound Field;Command
+440000304;Cache Clone;Tag
+440000304;Cache Clone;Command
+440000352;Pixel Snap;Command
+440000355;Quantization Parameters;Command
+450000000;Normal Move;Command
+450000000;Normal Move;Tool
+450000001;Normal Scale;Command
+450000001;Normal Scale;Tool
+450000002;Normal Rotate;Command
+450000002;Normal Rotate;Tool
+450000003;Smooth Shift;Command
+450000003;Smooth Shift;Tool
+450000004;Inset;Command
+450000004;Inset;Tool
+450000006;Polygon Pen;Command
+450000006;Polygon Pen;Tool
+450000007;Create Point;Command
+450000007;Create Point;Tool
+450000008;Bridge;Command
+450000008;Bridge;Tool
+450000009;Weld;Command
+450000009;Weld;Tool
+450000010;Close Polygon Hole;Command
+450000010;Close Polygon Hole;Tool
+450000011;Stitch and Sew;Command
+450000011;Stitch and Sew;Tool
+450000012;Slide;Command
+450000014;Iron;Command
+450000014;Iron;Tool
+450000017;Set Objects;Command
+450000017;Set Objects;Tool
+450000023;#$30Cloud Tool;Command
+450000023;#$30Cloud Tool;Tool
+450000039;Round;Command
+450000039;Round;Tool
+450000042;Clone;Command
+450000042;Clone;Tool
+450000043;Chamfer;Command
+450000043;Chamfer;Tool
+450000045;Array;Command
+450000045;Array;Tool
+450000046;Project;Command
+450000046;Project;Tool
+450000051;Bake Object...;Command
+450000057;Connect Clouds;Command
+450000058;#$50Cloud;Command
+450000059;#$40Cloud Group;Command
+450000225;Stereoscopic;VideoPost
+450000226;Stereoscopic;SceneHook
+450000252;Spline;Command
+450000256;Stereo Camera;Command
+450000273;Convert Render Space;Command
+465000402;Cineware;Tag
+465000402;Cineware;Command
+465001001;Record Current State;Command
+465001002;Delete Unused Tracks;Command
+465001003;Spline;Command
+465001004;Region Tool;Command
+465001005;Ripple Edit;Command
+465001006;Delete;Command
+465001007;Timeline Preferences;Command
+465001008;Cut;Command
+465001009;Paste;Command
+465001010;Copy;Command
+465001011;Select All Objects;Command
+465001012;Select All;Command
+465001013;Invert Object Selection;Command
+465001014;Invert Key/Clip Selection;Command
+465001015;Select the Keys From/To;Command
+465001016;Go to Current Frame;Command
+465001017;Frame Selected;Command
+465001018;Go to Start;Command
+465001019;Go to End;Command
+465001020;Frame Scene Settings;Command
+465001021;Go to Marker;Command
+465001022;Go to Next Marker;Command
+465001023;Go to Previous Marker;Command
+465001024;Go to Next Key;Command
+465001025;Go to Previous Key;Command
+465001026;Go to First Key/Motion Clip;Command
+465001027;Go to Last Key/Motion Clip;Command
+465001028;Frame Preview Range;Command
+465001029;Set Preview to Selection;Command
+465001030;Set Preview Range;Command
+465001031;Set Preview to View;Command
+465001032;Frame All;Command
+465001033;Frame the View From/To;Command
+465001034;Animated Only;Command
+465001036;Link View with Preview Range;Command
+465001037;Automatic Mode;Command
+465001038;Small Icons;Command
+465001039;Medium Icons;Command
+465001040;Large Icons;Command
+465001041;Show Path Bar;Command
+465001042;Set as Root;Command
+465001043;Go to Main Level;Command
+465001044;One Level Up;Command
+465001045;Show Search Bar;Command
+465001046;Show Filter;Command
+465001047;Delete Search;Command
+465001048;Tolerant Selection;Command
+465001049;Show Track Values;Command
+465001050;Show Preview Range;Command
+465001052;Only OM Selection;Command
+465001054;Hide Selected Elements;Command
+465001055;Hide Unselected Elements;Command
+465001056;Show All;Command
+465001057;Remove Selected Objects;Command
+465001058;Remove All Objects;Command
+465001059;Fold All;Command
+465001060;Unfold All;Command
+465001061;Bake Objects;Command
+465001062;Position Track to Spline;Command
+465001063;Spline to Position Track;Command
+465001065;Delete every nth Key;Command
+465001066;Quantize Selection;Command
+465001067;Delete Frames;Command
+465001068;Trim Before;Command
+465001069;Trim After;Command
+465001070;Add the Key At;Command
+465001071;Key Mute;Command
+465001073;Enable Snap;Command
+465001074;Snap;Command
+465001075;Enable Frame Snapping;Command
+465001076;Fine;Command
+465001077;Middle;Command
+465001078;Per Second;Command
+465001080;Subframes;Command
+465001081;No Grid;Command
+465001082;Show Velocity;Command
+465001083;Auto Relative;Command
+465001084;Reset Relative;Command
+465001085;Show Keys of Selected Curves;Command
+465001086;Show Tangents of Selected Keys;Command
+465001087;Show All Tracks;Command
+465001088;Show All Keys;Command
+465001089;Move Sequence/Curve;Command
+465001090;Function;Command
+465001091;Soft;Command
+465001092;Linear;Command
+465001093;Step;Command
+465001094;Ease In;Command
+465001095;Ease Ease;Command
+465001096;Ease Out;Command
+465001097;Mirror X;Command
+465001098;Mirror Y;Command
+465001099;Simplify Curve;Command
+465001100;Show All Tangents;Command
+465001101;Reset Tangents;Command
+465001102;Auto Tangents - Classic;Command
+465001103;Break Tangents;Command
+465001104;Lock Time;Command
+465001105;Lock Value;Command
+465001106;Zero Angle (Tangent);Command
+465001107;Zero Length (Tangent);Command
+465001108;Lock Tangent Angles;Command
+465001109;Lock Tangent Length;Command
+465001110;Clamp;Command
+465001111;Formula;Command
+465001112;Ridge;Command
+465001113;Ramp up;Command
+465001114;Ramp down;Command
+465001115;Cycle;Command
+465001116;View Snapshot 1;Command
+465001117;Create Snapshot 1;Command
+465001118;Swap Snapshot 1;Command
+465001119;Add to New Layer;Command
+465001120;Remove from Layer;Command
+465001121;Default Bookmark;Command
+465001122;Add Bookmark;Command
+465001123;Create Markers at View Boundary;Command
+465001124;Create Marker at Current Frame;Command
+465001125;Delete All Markers;Command
+465001126;Set Marker to Selection;Command
+465001127;Go to First Marker;Command
+465001128;Go to Last Marker;Command
+465001129;Key/F-Curve/Motion Mode;Command
+465001130;Unify;Command
+465001132;Link TL/OM Selection;Command
+465001133;Clean Tracks;Command
+465001134;View Snapshot 2;Command
+465001135;View Snapshot 3;Command
+465001136;View Snapshot 4;Command
+465001137;View Snapshot 5;Command
+465001138;Create Snapshot 2;Command
+465001139;Create Snapshot 3;Command
+465001140;Create Snapshot 4;Command
+465001141;Create Snapshot 5;Command
+465001142;Swap Snapshot 2;Command
+465001143;Swap Snapshot 3;Command
+465001144;Swap Snapshot 4;Command
+465001145;Swap Snapshot 5;Command
+465001146;Insert Frames;Command
+465001147;Breakdown;Command
+465001148;Off Before;Command
+465001149;Constant Before;Command
+465001150;Continue Before;Command
+465001151;Repeat Before;Command
+465001152;Offset Repeat Before;Command
+465001153;Oscillate Before;Command
+465001154;Off After;Command
+465001155;Constant After;Command
+465001156;Continue After;Command
+465001157;Repeat After;Command
+465001158;Offset Repeat After;Command
+465001159;Oscillate After;Command
+465001160;Reduced Modification Mode;Command
+465001161;No Curve Edit;Command
+465001162;Curve;Command
+465001163;Move;Command
+465001164;Scale;Command
+465001165;Reset RM Curve;Command
+465001166;Show Before/After Curve;Command
+465001167;Move/Scale;Command
+465001168;Move Key/Motion Clip Left;Command
+465001169;Move Key/Motion Clip Right;Command
+465001170;Delete all Regions;Command
+465001171;Bake Clips;Command
+465001172;Add Motion Clip with Animation;Command
+465001173;Add Motion Layer;Command
+465001174;Add Motion Layer with Animation;Command
+465001176;Add Motion Clip;Command
+465001177;Convert to Motion Source;Command
+465001178;Show in Dope Sheet;Command
+465001179;Show in F-Curve Mode;Command
+465001180;Make Transition;Command
+465001181;Cut/Connect;Command
+465001182;Add Compound Motion Clip;Command
+465001183;Move Keys with Motion Clip;Command
+465001184;Remove Motion Clips after Compound Creation;Command
+465001185;Add Motion Clip;Command
+465001186;Config Motion View;Command
+465001187;Add Motion;Command
+465001188;Add Motion Source;Command
+465001189;Convert Motion Clip to Motion Source;Command
+465001190;F-Curve Mode;Command
+465001191;Dope Sheet;Command
+465001192;Convert to Motion Clip;Command
+465001193;Motion Mode;Command
+465001194;Only Active Animation Layer;Command
+465001195;F-Curve Interaction in Motion Layer;Command
+465001196;Animation Layer;Command
+465001197;Show Motion Sources;Command
+465001198;Convert Layer to Keyframe Animation;Command
+465001200;Snap Settings;Command
+465001201;Select Range...;Command
+465001202;Frame Range...;Command
+465001203;Add Key At...;Command
+465001204;Delete every nth Frame...;Command
+465001205;Delete Frames...;Command
+465001207;Set Preview Range (legacy)...;Command
+465001208;Insert Frames...;Command
+465001209;Simplify...;Command
+465001210;Formula...;Command
+465001211;Cycle...;Command
+465001214;Key Reducer;Command
+465001215;Reset RM Curve;Command
+465001216;Move/Scale...;Command
+465001217;Add Motion Clip at...;Command
+465001218;Motion View;Command
+465001219;Bake Objects...;Command
+465001220;Euler Filter...;Command
+465001222;Loop After;Command
+465001223;Save Preset;Command
+465001226;User Mode;Command
+465001300;Set Constant Velocity;Command
+465001301;Reset Constant Velocity;Command
+465001302;Unify Tangent Length;Command
+465001303;Unify Tangent Angle;Command
+465001304;Keep Visual Angle;Command
+465001305;Show Min/Max Values;Command
+465001306;Show Soundwave;Command
+465001307;Fold Selected;Command
+465001308;Unfold Selected;Command
+465001309;AutoTangent - Fixed Slope;Command
+465001310;Weighted Tangent;Command
+465001311;Remove Overshooting;Command
+465001312;Automatic Weighting;Command
+465001313;Show Tangent of Selected Curves;Command
+465001314;One Directional Selection Linking;Command
+465001315;Deselect All;Command
+465001316;Lock Ratio;Command
+465001317;Only Active Take;Command
+465001318;Play Forwards;Command
+465001319;Euler Filter;Command
+465001320;Breakdown Color;Command
+465001321;Auto Frame Mode;Command
+465001322;Paste In Place;Command
+465001323;Copy Ease;Command
+465001324;Paste Ease;Command
+465001325;Show Materials;Command
+465001326;Show Scene Settings and Others;Command
+465001327;Show Objects;Command
+465001328;Show Tags;Command
+465001329;Default;Command
+465001330;Character Anim;Command
+465001331;Create Marker from Key Selection;Command
+465001400;Linear;Command
+465001401;Step;Command
+465001402;Spline;Command
+465001403;Soft;Command
+465001404;Ease In;Command
+465001405;Ease Out;Command
+465001406;Ease Ease;Command
+465001516;Timeline;Command
+465001535;Animation;SceneHook
+465001536;To Do;SceneHook
+465001537;To Do;Tag
+465001537;To Do;Command
+465001541;Timeline (Dope Sheet);Command
+465001542;Timeline (F-Curve);Command
+465001602;UpdateMerge Hook;SceneHook
+465001705;Preferences;Command
+465001706;Open Duplicated Picture Viewer;Command
+465001707;Save Image as...;Command
+465001708;Pixel Aspect;Command
+465001710;Fold All;Command
+465001711;Unfold All;Command
+465001713;Create Render Setting from Render;Command
+465001714;Rendering;Command
+465001715;Clear Cache;Command
+465001716;Full Size;Command
+465001717;Half Size;Command
+465001718;Quarter Size;Command
+465001719;Multi-Pass Layers;Command
+465001720;Simple;Command
+465001721;Cycle;Command
+465001722;Filter;Command
+465001723;Swap Vert./Horiz.;Command
+465001724;Show Line;Command
+465001725;Show Text;Command
+465001726;Set as Preview Start;Command
+465001727;Set as Preview End;Command
+465001730;Fill Cache;Command
+465001736;Third Size;Command
+465001737;Additional Picture Viewers;Command
+465001738;Play Sound;Command
+465001739;Single-Pass Layers;Command
+465001750;Show File in Finder;Command
+465001753;Clear Hard Disk Cache;Command
+465001754;All Frames;Command
+465001759;Title Safe;Command
+465001760;Action Safe;Command
+465001761;Full-Screen Mode;Command
+465001762;Hide Outline in Full-Screen Mode;Command
+465001763;Stills;Command
+465001764;Animations;Command
+465001765;Rendered Elements;Command
+465001766;Loaded Elements;Command
+465001767;Saved Elements;Command
+465001768;Enable Color Profile;Command
+465001769;Navigator/Histogram;Command
+465001801;Fit to Screen;Command
+465001802;Automatic Size;Command
+465001803;Recent Files;Command
+465001805;Create Stereo Image From AB;Command
+465001806;Sync AB Animation;Command
+465001955;AE Live Link;Command
+465002000;Add Tracks;Command
+465002001;Layers;Command
+465002002;Bookmarks;Command
+465002003;Frame Marker;Command
+465002004;Sounds;Command
+465002101;Polygon Reduction;Object
+465002101;Polygon Reduction;Command
+465002102;Alternate Modeling Delete Component Command;Command
+465002103;SDF Close and Open;Command
+465002105;Fog Multiply;Command
+465002107;Fog Invert;Command
+465002109;Fog Range Map;Command
+465002111;Fog Curve;Command
+465002113;Vector Smooth;Command
+465002115;Vector Scale;Command
+465002117;Vector Rotate;Command
+465002119;Vector Invert;Command
+465002121;Vector Normalize;Command
+465002123;Vector Curl;Command
+465002126;Clear UV Pins;Command
+465002211;Node Editor;Command
+465002300;Frame All;Command
+465002301;Delete;Command
+465002302;Group Nodes;Command
+465002303;Cut;Command
+465002304;Copy;Command
+465002305;Paste;Command
+465002306;Duplicate;Command
+465002307;Frame Selected;Command
+465002308;Center Selected;Command
+465002309;Select All Nodes;Command
+465002310;Deselect All;Command
+465002311;Arrange Selected Nodes;Command
+465002312;New Empty Group;Command
+465002313;Ungroup Nodes;Command
+465002315;Delete Unused Nodes;Command
+465002316;Select Connected Nodes;Command
+465002317;Select Upstream Nodes;Command
+465002318;Select Downstream Nodes;Command
+465002319;Snap to Grid;Command
+465002320;Center All;Command
+465002321;New Empty Scaffold;Command
+465002322;Group In Scaffold...;Command
+465002323;Convert Scaffold to Group;Command
+465002325;Zoom In;Command
+465002326;Zoom Out;Command
+465002327;Open in Material Editor;Command
+465002328;Select in Material Manager;Command
+465002333;Exit Group;Command
+465002334;Enter Group;Command
+465002335;Go to Next History;Command
+465002339;Convert To Asset...;Command
+465002340;Edit Asset as Group;Command
+465002341;Print Heat Map;Command
+465002342;Remove Unused Ports;Command
+465002343;Fold All Ports;Command
+465002346;Show Grid;Command
+465002347;Hide All Ports;Command
+465002348;Show Connected Ports;Command
+465002349;Show All Ports;Command
+465002350;Show Preview;Command
+465002352;Zoom 100%;Command
+465002355;Show Navigator;Command
+465002356;Start Node;Command
+465002358;Solo Node;Command
+465002359;Show Info;Command
+465002360;Material;Command
+465002361;Scene;Command
+465002362;Open Material in Node Editor;Command
+465002363;Arrange All Nodes;Command
+465002364;Create Value Node from Clipboard;Command
+465002366;Capsule;Command
+465002367;NE_SceneHook;SceneHook
+465002368;Disconnect;Command
+465002390;Delete Scaffold and Contents;Command
+465002400;Remove All Inspectors;Command
+465002401;Enable Heat Map;Command
+465002402;Heat Map Relative Mode;Command
+465002403;New Note;Command
+465002500;Loop Carried Value;Command
+465002501;Memory;Command
+465002502;Nodes Mesh;Command
+465002503;Nodes Spline;Command
+465002504;Nodes Modifier;Command
+465002505;Nodes Selection;Command
+465002506;Points Modifier;Command
+465002507;Object Group;Command
+465002600;Group;Command
+465002601;Loop Carried Value;Command
+465002602;Memory;Command
+465002603;Nodes Mesh;Command
+465002604;Nodes Spline;Command
+465002605;Nodes Modifier;Command
+465002606;Nodes Selection;Command
+465002607;Points Modifier;Command
+465002608;Object Group;Command
+465003000;Motion System;Tag
+465003000;Motion System;Command
+465003002;Motion Clip;Object
+465003035;Clean Motion Source;Command
+465003037;Use Motion System;Command
+465003039;Delete Unused Motion Sources;Command
+465003042;Copy Motion Source;Command
+465003044;Add Motion Clip...;Command
+465003045;Copy Motion Source...;Command
+465003046;Add Picture to Motion Source;Command
+465003048;Add Relative Animation Layer;Command
+465003049;Load Motion Source...;Command
+465003050;Save Motion Source As...;Command
+465003051;Save All Motion Sources As...;Command
+465003052;Motion Source Group;Object
+465003053;Group Motion Source;Command
+465003054;Ungroup Motion Source;Command
+465003058;Reset Motion Source Length;Command
+465003065;Add Empty Motion Layer;Command
+465003066;Open Motion Source Preset...;Command
+465003067;Save Motion Source Preset...;Command
+465003068;Add Absolute Animation Layer;Command
+465003500;Render Queue;Command
+465003509;RenderManager Hook;SceneHook
+465003510;Delete;Command
+465003511;Add Current Scene;Command
+465003512;Edit Scene;Command
+465003513;Start Rendering;Command
+465003515;Stop Rendering;Command
+465003516;Revert to Saved;Command
+465003517;Open in Picture Viewer...;Command
+465003518;Open...;Command
+465003519;Delete All;Command
+465003520;Preferences;Command
+465003521;Show Image in Finder;Command
+465003523;Open Log;Command
+465003524;Display Details;Command
+465003525;Add to Render Queue...;Command
+465003526;Load Preset...;Command
+465003527;Save Preset...;Command
+465003528;Show Multi-Pass Image in Finder;Command
+465003530;System;Command
+465003531;Render;Command
+465003532;Scene;Command
+465003533;Texture Errors;Command
+465003534;Check Textures;Command
+465003535;Show in Finder;Command
+465990000;Data Inspector;Command
+600000013;C4D_Vray_light_renamer;Command
+600000014;C4D_Vray_light_pass_creator;Command
+600000015;mcp_server;Command
+600000106;untitled;Command
