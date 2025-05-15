@@ -3,3 +3,20 @@
 
 venv
 .venv
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Python
+__pycache__/
+*.pyc
+
+# Environments
+.venv/
+env/
