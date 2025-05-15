@@ -2,10 +2,11 @@ import os
 import shutil
 import platform
 
-SCRIPTS = ["Vray_render_elements"]  # Add more folder names here if needed
+SCRIPTS = ["Vray_render_elements"]  # Add additional script folders here
 
 
-def get_c4d_version():
+def get_all_c4d_versions():
+    """Return all Cinema 4D version folders under Maxon preferences (Windows or macOS)."""
     if platform.system() == "Darwin":
         preferences_path = os.path.expanduser("~/Library/Preferences/Maxon/")
     elif platform.system() == "Windows":
@@ -16,17 +17,18 @@ def get_c4d_version():
     if not os.path.exists(preferences_path):
         raise FileNotFoundError("Maxon preferences folder not found")
 
-    for folder in sorted(os.listdir(preferences_path), reverse=True):
-        if "Cinema 4D" in folder:
-            return folder
-    raise RuntimeError("Could not detect installed Cinema 4D version")
+    return [
+        folder
+        for folder in os.listdir(preferences_path)
+        if os.path.isdir(os.path.join(preferences_path, folder)) and "Cinema 4D" in folder
+    ]
 
 
-def get_c4d_script_path(maxon_version):
+def get_c4d_script_path(version_folder):
     if platform.system() == "Darwin":
-        return os.path.expanduser(f"~/Library/Preferences/Maxon/{maxon_version}/library/scripts/")
+        return os.path.expanduser(f"~/Library/Preferences/Maxon/{version_folder}/library/scripts/")
     elif platform.system() == "Windows":
-        return os.path.join(os.getenv("APPDATA"), "Maxon", maxon_version, "library", "scripts/")
+        return os.path.join(os.getenv("APPDATA"), "Maxon", version_folder, "library", "scripts/")
     else:
         raise RuntimeError("Unsupported OS")
 
@@ -42,13 +44,15 @@ def copy_files(src, dst):
 
 def main():
     script_root = os.path.join("scripts", "C4d_Scripts")
-    version = get_c4d_version()
-    dst_root = get_c4d_script_path(version)
+    c4d_versions = get_all_c4d_versions()
 
-    for script_folder in SCRIPTS:
-        full_path = os.path.join(script_root, script_folder)
-        if os.path.isdir(full_path):
-            copy_files(full_path, dst_root)
+    for version_folder in c4d_versions:
+        dst_root = get_c4d_script_path(version_folder)
+        print(f"📂 Installing to: {dst_root}")
+        for script_folder in SCRIPTS:
+            full_path = os.path.join(script_root, script_folder)
+            if os.path.isdir(full_path):
+                copy_files(full_path, dst_root)
 
 
 if __name__ == "__main__":
