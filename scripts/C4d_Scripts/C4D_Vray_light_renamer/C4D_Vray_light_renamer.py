@@ -1,3 +1,6 @@
+# Version: 1.1.0
+# Last Updated: 2025-05-15
+
 import c4d
 from c4d import gui
 
