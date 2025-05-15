@@ -1,0 +1,368 @@
+ID;Label
+898;Layer
+900;Name
+5002;Anti-Aliasing
+5008;Width
+5009;Height
+5015;Custom Frames
+5016;Frame Range
+5017;From
+5018;To
+5019;Fields
+5020;Frame Rate
+5021;Active Object Only
+5022;Default Light
+5023;Use Project Frame Rate
+5024;Show Texture Errors
+5025;Ray Depth
+5026;Shadow Depth
+5027;Ray Threshold
+5033;Format
+5034;Warning:
+5035;Name
+5036;Alpha Channel
+5038;Straight Alpha
+5039;Separate Alpha
+5040;Generate File
+5041;File
+5043;Horizontal Steps
+5044;Start Angle
+5045;End Angle
+5046;Vertical Steps
+5047;Start Angle
+5048;End Angle
+5052;Volumetric Lighting
+5061;Level of Detail
+5063;Reflection Depth
+5064;Textures
+5065;Default X Resolution
+5066;Default Y Resolution
+5069;Blurriness
+5070;Filter
+5071;Threshold
+5072;Min Level
+5073;Max Level
+5074;Use Object Properties
+5075;8 Bit Dithering
+5076;Save
+5077;Depth
+5078;MIP Scale
+5079;Render HUD
+5080;Cache Shadow Maps
+5081;Frame Step
+5082;Consider Multi-Passes
+5090;Force Pre-Roll
+5200;Save
+5201;Multi-Layer File
+5202;Enable Multi-Pass Rendering
+5203;Format
+5204;Options...
+5205;Separate Lights
+5206;File
+5207;Depth
+5208;Mode
+5209;Warning:
+5210;Layer Name as Suffix
+5211;Shadow Correction
+5212;Save
+5213;Target Application
+5214;Relative
+5215;Include 3D Data
+5216;Include Timeline Marker
+5217;Save FBX File
+5218;Save Alembic File
+5219;Bake View Transform
+5300;Renderer
+5301;Use Display Tag LOD
+5401;Post Effects
+5502;Motion Scale
+5603;Global Brightness
+5604;Sub Polygon Displacement
+5606;Straight Alpha
+5702;Options...
+6002;Lock Ratio
+6003;
+6004;Resolution
+6005;
+6006;Film Aspect
+6007;
+6008;Pixel Aspect
+6009;
+6010;Image Resolution: 
+6011;
+6012;Render Doodle
+6013;Include Sound
+6014;Save
+6015;Annotations
+6016;Transparency
+6017;Refraction
+6018;Reflection
+6019;Shadow
+6020;Limit Reflections to Floor/Sky
+6021;Limit Shadows to Soft
+6022;
+6023;Identical Noise Distribution
+6024;Subsurface Scattering
+6025;Adapt Data Rate
+7000;Bucket Width
+7001;Bucket Height
+7002;Automatic Size
+7003;Bucket Sequence
+7004;Render Region
+7005;Left Border
+7006;Top Border
+7007;Right Border
+7008;Bottom Border
+8000;Enable Stereoscopic Rendering
+8001;Channels
+8002;Mode
+8003;Additional Parallax (pixel)
+8004;System
+8005;Method
+8006;Alignment
+8007;System
+8009;Left Mirror X
+8010;Left Mirror Y
+8011;Right Mirror X
+8012;Right Mirror Y
+8013;Swap Left/Right
+8014;Left
+8015;Right
+8017;Type
+8018;Use Folder for Saving
+8021;Calculate Stereoscopic Images
+8022;Non-Stereoscopic Image
+8023;Single Channel
+9000;Distribute Subsurface Caches
+9001;Distribute Ambient Occlusion Caches
+9002;Distribute Irradiance Caches
+9003;Distribute Radiosity Map Caches
+9004;Distribute Light Mapping Caches
+9201;User Defined Layer Name
+10000;Material Override
+10001;Custom Material
+10002;Mode
+10003;Materials
+10004;Diffuse Color
+10006;Luminance
+10007;Transparency
+10008;Reflectance
+10011;Bump
+10012;Normal
+10013;Alpha
+10015;Displacement
+10018;Preserve
+10019;The node materials are not supported.
+28501;Copy from IRR
+28502;Small Fragments
+28507;Image Color Profile
+28508;Filter Width
+28509;Filter Height
+28510;Custom Size
+28511;Clip Negative Component
+110050;Basic Properties
+1041666;Icon
+1041668;Icon File / ID
+1041670;Icon Color
+1041671;Color
+1041672;
+1050439;
+1050440;Node Space
+536870958;
+536871126;
+536871127;
+536871128;
+536871129;
+536871130;
+536871131;
+536871132;
+536871133;
+536871134;
+536871135;
+536871136;
+536871137;
+536871138;
+536871139;
+536871140;
+536871141;
+536871142;
+536871143;
+536871144;
+536871145;
+536871146;
+536871147;
+536871148;
+536871149;
+536871150;
+536871151;
+536871152;
+536871153;
+536871154;
+536871155;
+536871156;
+536871157;
+536871158;
+536871159;
+536871160;
+536871161;
+536871162;
+536871163;
+536871164;
+536871165;
+536871166;
+536871167;
+536871168;
+536871169;
+536871170;
+536871171;
+536871172;
+536871173;
+536871174;
+536871175;
+536871176;
+536871177;
+536871178;
+536871179;
+536871180;
+536871181;
+536871182;
+536871183;
+536871184;
+536871185;
+536871186;
+536871187;
+536871188;
+536871189;
+536871190;
+536871191;
+536871192;
+536871193;
+536871194;
+536871195;
+536871196;
+536871197;
+536871198;
+536871199;
+536871200;
+536871201;
+536871202;
+536871203;
+536871204;
+536871205;
+536871206;
+536871207;
+536871208;
+536871209;
+536871210;
+536871211;
+536871212;
+536871213;
+536871214;
+536871215;
+536871216;
+536871217;
+536871218;
+536871219;
+536871220;
+536871221;
+536871222;
+536871223;
+536871224;
+536871225;
+536871226;
+536871227;
+536871228;
+536871229;
+536871230;
+536871231;
+536871232;
+536871233;
+536871234;
+536871235;
+536871236;
+536871237;
+536871238;
+536871239;
+536871240;
+536871241;
+536871242;
+536871243;
+536871244;
+536871245;
+536871246;
+536871247;
+536871248;
+536871249;
+536871250;
+536871251;
+536871252;
+536871253;
+536871254;
+536871255;
+536871256;
+536871257;
+536871258;
+536871259;
+536871260;
+536871261;
+536871262;
+536871263;
+536871264;
+536871265;
+536871266;
+536871267;
+536871268;
+536871269;
+536871270;
+536871271;
+536871272;
+536871273;
+536871274;
+536871275;
+536871276;
+536871277;
+536871278;
+536871279;
+536871280;
+536871281;
+536871282;
+536871283;
+536871284;
+536871285;
+536871286;
+536871287;
+536871288;
+536871289;
+1452452530;Width
+1452452531;Height
+1452452532;Resolution
+1452452533;Regular Image
+1452452534;Multi-Pass Image
+1452452535;Frames: 
+1452452537;Save Project File...
+1452452538;Compositing Project File
+1452452539;QuickTime VR Options
+1452452541;Output
+1452452542;Save
+1452452543;Anti-Aliasing
+1452452544;Options
+1452452545;Multi-Pass
+1452452547;V-Ray
+1452452547;V-Ray
+1452452548;Magic Bullet Looks
+1452452548;Magic Bullet Looks
+1452452549;Redshift
+1452452549;Redshift
+1452453547;Post Effects
+1452453547;Post Effects Pass
+1452462548;Enable Magic Bullet Looks
+1452463547;Enable Post Effects Pass
+1452464546;
+1452472547;Stereoscopic
+1452472548;Anaglyph
+1452472549;Side-by-Side
+1452472550;Interlaced
+1452472600;Team Render
+1452472601;Single Image
+1452472602;Material Override
+1452472603;Warning:
