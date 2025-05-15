@@ -21,3 +21,21 @@ Open Terminal (macOS/Linux) or Command Prompt (Windows):
 git clone https://github.com/ernyeizoli/postbox_scripts.git ~/postbox_scripts
 cd ~/postbox_scripts
 python c4d_installer.py
+```
+
+---
+
+### 🔄 Step 2: Update the Scripts
+
+To update the scripts to the latest version, run the following commands in Terminal (macOS/Linux) or Command Prompt (Windows):
+(open a terminal in the folder of the scripts)
+
+```bash
+cd ~/postbox_scripts
+git pull
+python c4d_installer.py
+```
+
+This will fetch the latest changes from the repository and re-run the installer to apply updates.
+
+
