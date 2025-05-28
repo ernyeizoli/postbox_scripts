@@ -215,9 +215,5 @@ if __name__ == '__main__':
     try:
         renamed = rename_vray_lights()
         create_light_selects()  # Call the main function to create light select passes
-        if renamed:
-            gui.MessageDialog('Renamed V-Ray lights with the "LS_" prefix. All lights are added to the Light Select pass.')
-        else:
-            gui.MessageDialog('No V-Ray lights needed renaming. All lights are added to the Light Select pass.')
     except Exception as error:
         gui.MessageDialog('Error: ' + ' '.join(map(str, error.args)), c4d.GEMB_ICONSTOP)
