@@ -6,6 +6,23 @@ from c4d import gui
 from c4d import documents
 
 # Creates the render element object instance and populates its relevant parameters
+def find_or_create_folder(parent, name, folder_id=1054150):
+    """Find or create a V-Ray Render Element folder manually."""
+    child = parent.GetDown()
+    while child:
+        if child.GetName() == name and child.GetType() == folder_id:
+            return child
+        child = child.GetNext()
+
+    folder = c4d.BaseObject(folder_id)
+    if not folder:
+        raise Exception("❌ Failed to allocate V-Ray RE folder")
+    folder.SetName(name)
+    folder.ChangeNBit(c4d.NBIT_OHIDE, c4d.NBITCONTROL_SET)
+    folder.InsertUnderLast(parent)
+    return folder
+
+
 
 def createLightSelect(light: c4d.BaseObject, createdNames: set, existingLightSelects: set):
     # ID_VRAY_RENDER_ELEMENT_LIGHT_SELECT
@@ -142,6 +159,12 @@ def create_light_selects():
         # ID_VRAY_RENDER_ELEMENT_ROOT
         if branchInfo['id']==1054149:
             vrayRenderElementsRootHead=branchInfo['head']
+            # Create or find group folder structure
+            # Create folders manually under the root
+            beautyGroup = find_or_create_folder(vrayRenderElementsRootHead, "01 Beauty Rebuild  Passes")
+            lightSelectGroup = find_or_create_folder(beautyGroup, "01-02 Light Select Passes")
+
+
             break
 
     if not vrayRenderElementsRootHead:
@@ -149,7 +172,7 @@ def create_light_selects():
     
     # Gather existing Light Select passes
     existingLightSelects = set()
-    child = vrayRenderElementsRootHead.GetDown()
+    child = lightSelectGroup.GetDown()
     while child:
         if child.IsInstanceOf(1054224):  # ID_VRAY_RENDER_ELEMENT_LIGHT_SELECT
             existingLightSelects.add(child.GetName())
@@ -167,8 +190,10 @@ def create_light_selects():
         # Iterate over all the gathered lights and create a new Light Select RE for each light.
         for light in documentLights:
             lightSelectRE = createLightSelect(light, renderElementNames, existingLightSelects)
+
             if lightSelectRE:
-                lightSelectRE.InsertUnderLast(vrayRenderElementsRootHead)
+
+                lightSelectRE.InsertUnderLast(lightSelectGroup)
                 if undoStarted:
                     anythingAdded = True
                     activeDocument.AddUndo(c4d.UNDOTYPE_NEWOBJ, lightSelectRE)
