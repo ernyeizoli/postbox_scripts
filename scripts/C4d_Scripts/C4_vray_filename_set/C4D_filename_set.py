@@ -8,6 +8,14 @@ from c4d import gui
 ID_VRAY_VIDEOPOST = 1053272
 VRAY_VP_OUTPUT_SETTINGS_FILENAME = 1000403  # Based on your enum
 
+def get_current_file_path():
+    doc = c4d.documents.GetActiveDocument()  # Get the active document
+    file_path = doc.GetDocumentPath()  # Get the file path
+    file_name = doc.GetDocumentName()  # Get the file name
+    full_path = f"{file_path}/{file_name}" if file_path else "Unsaved Document"
+    
+    return file_path, file_name, full_path
+
 def set_vray_vp_output_filename(new_filename):
     doc = c4d.documents.GetActiveDocument()
     if not doc:
