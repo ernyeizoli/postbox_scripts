@@ -90,7 +90,7 @@ def set_render_save_path(file_path, render_settings_name):
     doc.AddUndo(c4d.UNDOTYPE_CHANGE, rd)
         
     base_path, _ = file_path.split("Post_Production", 1)
-    render_folder_path = base_path + "Post_Production/007_Render/002_3D_Render/"
+    render_folder_path = base_path + "Post_Production/007_Render/002_3D_Render/$prj/"
 
     # Set the paths
     # Set standard C4D render output path

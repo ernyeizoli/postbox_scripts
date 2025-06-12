@@ -2,7 +2,7 @@ import os
 import shutil
 import platform
 
-SCRIPTS = ["Vray_render_elements"]  # Add additional script folders here
+SCRIPTS = ["C4D_vray_filename_set", "C4D_vray_light_renamer", "C4D_vray_render_elements"]  # Add additional script folders here
 
 
 def get_all_c4d_versions():
@@ -43,7 +43,7 @@ def copy_files(src, dst):
 
 
 def main():
-    script_root = os.path.join("scripts", "C4d_Scripts")
+    script_root = os.path.join("scripts", "C4D_Scripts")
     c4d_versions = get_all_c4d_versions()
 
     for version_folder in c4d_versions:
