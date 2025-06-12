@@ -11,8 +11,6 @@
 (function organizeEXRLayers(thisObj) {
     var scriptName = "Ultimate EXR Organizer";
 
-    // --- ⚙️ USER CONFIGURATION: EDIT THESE NAMES ⚙️ ---
-    //
     // Instructions: Find the exact name of your effect in the After Effects "Effects & Presets" panel
     // and type it inside the quotes. If you don't want to add a specific effect,
     // just leave the quotes empty, like "".
