@@ -1,4 +1,4 @@
-# 🛠️ Postbox Scripts - Installation & Auto-Update Guide
+# 🛠️ Postbox Scripts
 
 Some scripts for use internally to automate the repetitive tasks.
 
@@ -23,6 +23,14 @@ Each artist's computer does not need Git. Instead, installer scripts (`ae_instal
 
 -   **Trigger:** This can be done manually, or set up to run automatically on system restart.
 -   **Action:** The installer scripts detect all local versions of After Effects and Cinema 4D and copy the latest scripts from the shared drive into the correct local folders. This ensures that every artist has the most up-to-date toolset without needing to interact with Git directly.
+
+#### Stage 3: Cinema 4D
+
+Extensions -> Script manager, from the dropdown select the script and drag and drop to the toolbar.
+
+#### Stage 3: AFter Effects
+
+Window -> select the wanted script.
 
 ---
 
