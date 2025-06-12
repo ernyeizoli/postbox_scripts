@@ -8,7 +8,7 @@ import platform
 # Add the names of the script files you want to install.
 # The script assumes they are located in a subfolder named "AE_Scripts".
 SCRIPTS_TO_INSTALL = [
-    "EXR_organizer.jsx"
+    "PBV_organizer.jsx"
 ]
 
 # --- PLATFORM AND ADMIN CHECKS (WINDOWS ONLY) ---
