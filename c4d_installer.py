@@ -2,11 +2,12 @@ import os
 import shutil
 import platform
 
-SCRIPTS = ["C4D_vray_filename_set", "C4D_vray_light_renamer", "C4D_vray_render_elements"]  # Add additional script folders here
+# Add the names of the script folders you want to install
+SCRIPTS = ["C4D_vray_filename_set", "C4D_vray_light_renamer", "C4D_vray_render_elements"]
 
 
 def get_all_c4d_versions():
-    """Return all Cinema 4D version folders under Maxon preferences (Windows or macOS)."""
+    """Return all Cinema 4D version folders under Maxon preferences (Windows or macOS) that do not have a postfix."""
     if platform.system() == "Darwin":
         preferences_path = os.path.expanduser("~/Library/Preferences/Maxon/")
     elif platform.system() == "Windows":
@@ -17,14 +18,21 @@ def get_all_c4d_versions():
     if not os.path.exists(preferences_path):
         raise FileNotFoundError("Maxon preferences folder not found")
 
+    # The list comprehension now filters out folders ending in '_x', '_c', etc.
     return [
         folder
         for folder in os.listdir(preferences_path)
-        if os.path.isdir(os.path.join(preferences_path, folder)) and "Cinema 4D" in folder
+        if (
+            os.path.isdir(os.path.join(preferences_path, folder))
+            and "Cinema 4D" in folder
+            # ADDED: This condition excludes folders with a postfix like '_c' or '_x'.
+            and not (len(folder) > 2 and folder[-2] == '_' and folder[-1].isalpha())
+        )
     ]
 
 
 def get_c4d_script_path(version_folder):
+    """Constructs the path to the 'library/scripts' folder for a given C4D version."""
     if platform.system() == "Darwin":
         return os.path.expanduser(f"~/Library/Preferences/Maxon/{version_folder}/library/scripts/")
     elif platform.system() == "Windows":
@@ -34,6 +42,7 @@ def get_c4d_script_path(version_folder):
 
 
 def copy_files(src, dst):
+    """Copies all files from a source directory to a destination directory."""
     os.makedirs(dst, exist_ok=True)
     for item in os.listdir(src):
         src_item = os.path.join(src, item)
@@ -43,16 +52,29 @@ def copy_files(src, dst):
 
 
 def main():
-    script_root = os.path.join("scripts", "C4D_Scripts")
-    c4d_versions = get_all_c4d_versions()
+    """Main function to find C4D versions and copy scripts."""
+    try:
+        script_root = os.path.join("scripts", "C4D_Scripts")
+        c4d_versions = get_all_c4d_versions()
 
-    for version_folder in c4d_versions:
-        dst_root = get_c4d_script_path(version_folder)
-        print(f"📂 Installing to: {dst_root}")
-        for script_folder in SCRIPTS:
-            full_path = os.path.join(script_root, script_folder)
-            if os.path.isdir(full_path):
-                copy_files(full_path, dst_root)
+        if not c4d_versions:
+            print("❌ No matching Cinema 4D installation folders found.")
+            return
+
+        print(f"Found {len(c4d_versions)} target installation(s): {', '.join(c4d_versions)}")
+
+        for version_folder in c4d_versions:
+            dst_root = get_c4d_script_path(version_folder)
+            print(f"\n📂 Installing scripts to: {dst_root}")
+            for script_folder in SCRIPTS:
+                full_path = os.path.join(script_root, script_folder)
+                if os.path.isdir(full_path):
+                    copy_files(full_path, dst_root)
+                else:
+                    print(f"⚠️ Script folder not found, skipping: {full_path}")
+
+    except (FileNotFoundError, RuntimeError) as e:
+        print(f"❌ An error occurred: {e}")
 
 
 if __name__ == "__main__":

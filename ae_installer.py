@@ -2,16 +2,27 @@ import ctypes
 import os
 import shutil
 import sys
+import platform
+
+# --- CONFIGURATION ---
+# Add the names of the script files you want to install.
+# The script assumes they are located in a subfolder named "AE_Scripts".
+SCRIPTS_TO_INSTALL = [
+    "EXR_organizer.jsx"
+]
+
+# --- PLATFORM AND ADMIN CHECKS (WINDOWS ONLY) ---
 
 def is_admin():
-    """Checks if the script is running with administrative privileges."""
+    """Checks if the script is running with administrative privileges on Windows."""
     try:
         return ctypes.windll.shell32.IsUserAnAdmin()
-    except:
+    except AttributeError:
+        # This will fail on non-Windows systems, which is expected.
         return False
 
 def run_as_admin():
-    """Re-runs the script with administrative privileges."""
+    """Re-runs the script with administrative privileges on Windows."""
     ctypes.windll.shell32.ShellExecuteW(
         None,
         "runas",
@@ -21,41 +32,97 @@ def run_as_admin():
         1
     )
 
-def copy_file():
-    """Copies the file from the source to the destination."""
-    #source_path = r"\\10.10.101.10\creative\work\Postbox\01_Config\Postbox_scripts\EXR_organizer.jsx"
-    # Make sure the source_path includes the FULL FILENAME
-    source_path = r"C:\Users\User\Documents\dev\postbox_scripts\scripts\AE_Scripts\EXR_organizer.jsx"
+# --- DYNAMIC PATH FINDING ---
 
-    # The destination path is already correct
-    destination_path = r"C:\Program Files\Adobe\Adobe After Effects 2025\Support Files\Scripts\ScriptUI Panels\EXR_organizer.jsx"
+def get_all_ae_versions():
+    """Return all Adobe After Effects application folders (Windows or macOS)."""
+    if platform.system() == "Darwin":  # macOS
+        base_path = "/Applications"
+    elif platform.system() == "Windows":
+        base_path = os.environ.get("PROGRAMFILES", r"C:\Program Files")
+        if not base_path:
+             raise RuntimeError("Could not find the Program Files directory.")
+        base_path = os.path.join(base_path, "Adobe")
+    else:
+        raise RuntimeError(f"Unsupported OS: {platform.system()}")
 
+    if not os.path.exists(base_path):
+        raise FileNotFoundError(f"Adobe installation directory not found at: {base_path}")
+
+    return [
+        folder
+        for folder in os.listdir(base_path)
+        if "Adobe After Effects" in folder and os.path.isdir(os.path.join(base_path, folder))
+    ]
+
+def get_ae_script_path(version_folder):
+    """Constructs the path to the 'ScriptUI Panels' folder for a given AE version."""
+    if platform.system() == "Darwin":
+        base_path = "/Applications"
+        return os.path.join(base_path, version_folder, "Scripts", "ScriptUI Panels")
+    elif platform.system() == "Windows":
+        base_path = os.path.join(os.environ.get("PROGRAMFILES", r"C:\Program Files"), "Adobe")
+        return os.path.join(base_path, version_folder, "Support Files", "Scripts", "ScriptUI Panels")
+    else:
+        raise RuntimeError(f"Unsupported OS: {platform.system()}")
+
+# --- CORE FILE OPERATIONS ---
+
+def copy_script_file(src_file, dst_folder):
+    """Copies a single script file to the destination folder."""
+    destination_path = os.path.join(dst_folder, os.path.basename(src_file))
     try:
-        print(f"Attempting to copy file from: {source_path}")
-        print(f"To: {destination_path}")
-        
+        print(f"  Attempting to copy: {os.path.basename(src_file)}")
         # Create destination directory if it doesn't exist
-        os.makedirs(os.path.dirname(destination_path), exist_ok=True)
-        
-        shutil.copy(source_path, destination_path)
-        print("\nFile copied successfully! ✅")
+        os.makedirs(dst_folder, exist_ok=True)
+        shutil.copy2(src_file, destination_path)
+        print(f"  ✅ Copied successfully to {destination_path}")
 
     except FileNotFoundError:
-        print(f"\nError: Source file not found at {source_path}. ❌")
-        print("Please ensure the network drive is accessible.")
+        print(f"  ❌ Error: Source file not found at {src_file}.")
     except PermissionError:
-        print(f"\nError: Permission denied to write to {destination_path}. ❌")
-        print("Please ensure you have the necessary administrator rights.")
+        print(f"  ❌ Error: Permission denied to write to {dst_folder}.")
     except Exception as e:
-        print(f"\nAn unexpected error occurred: {e} ❌")
+        print(f"  ❌ An unexpected error occurred: {e}")
+
+# --- MAIN EXECUTION ---
+
+def main():
+    """Main function to find AE versions and copy scripts."""
+    try:
+        # Assumes this script is in a 'dev' folder, and scripts are in a parallel 'scripts' folder
+        script_source_root = os.path.join(os.path.dirname(__file__), "scripts", "AE_Scripts")
+        
+        ae_versions = get_all_ae_versions()
+
+        if not ae_versions:
+            print("❌ No Adobe After Effects installation folders found.")
+            return
+
+        print(f"Found {len(ae_versions)} target installation(s): {', '.join(ae_versions)}\n")
+
+        for version in ae_versions:
+            print(f"📂 Installing scripts for {version}...")
+            destination_folder = get_ae_script_path(version)
+            
+            for script_name in SCRIPTS_TO_INSTALL:
+                source_file_path = os.path.join(script_source_root, script_name)
+                copy_script_file(source_file_path, destination_folder)
+            print("-" * 20)
+
+    except (FileNotFoundError, RuntimeError) as e:
+        print(f"❌ A critical error occurred: {e}")
 
 if __name__ == "__main__":
-    if is_admin():
-        copy_file()
-    else:
-        print("Administrator privileges are required. Requesting permission...")
-        run_as_admin()
+    # If on Windows, check for admin rights. If not admin, request them and restart.
+    if platform.system() == "Windows":
+        if not is_admin():
+            print("Administrator privileges are required. Requesting permission...")
+            run_as_admin()
+            sys.exit() # Exit the non-admin instance
 
-    # This input is to keep the console window open after the script finishes
-    # so the user can see the output.
+    # Run the main installer logic
+    main()
+
+    # Keep the console window open to see the output
     input("\nPress Enter to exit.")
