@@ -54,7 +54,9 @@ def copy_files(src, dst):
 def main():
     """Main function to find C4D versions and copy scripts."""
     try:
-        script_root = os.path.join("scripts", "C4D_Scripts")
+        # Get the directory where this script is located
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        script_root = os.path.join(base_dir, "scripts", "C4D_Scripts")
         c4d_versions = get_all_c4d_versions()
 
         if not c4d_versions:
