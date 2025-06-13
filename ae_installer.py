@@ -91,7 +91,8 @@ def main():
     """Main function to find AE versions and copy scripts."""
     try:
         # Assumes this script is in a 'dev' folder, and scripts are in a parallel 'scripts' folder
-        script_source_root = os.path.join(os.path.dirname(__file__), "scripts", "AE_Scripts")
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        script_source_root = os.path.join(base_dir, "scripts", "AE_Scripts")
         
         ae_versions = get_all_ae_versions()
 
