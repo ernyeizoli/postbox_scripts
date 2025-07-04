@@ -1,6 +1,3 @@
-# Version: 1.1.0
-# Last Updated: 2025-05-28
-
 import c4d
 from c4d import gui
 
@@ -11,32 +8,32 @@ VRAY_VP_OUTPUT_SETTINGS_FILENAME = 1000403  # Based on your enum
 # Nested render suffix dictionary
 RENDER_SETTINGS = {
     "HW_PREVIEW": {
-        "beauty_suffix": "$prj_$camera_HW_",
+        "beauty_suffix": "$prj_$take_$camera_HW_",
         "has_mp": False,
         "mp_suffix": "",
         "has_vray": False,
         "vray_suffix": ""
     },
     "STANDARD_MP": {
-        "beauty_suffix": "$prj_$camera_",
+        "beauty_suffix": "$prj_$take_$camera_",
         "has_mp": True,
-        "mp_suffix": "$prj_$camera_MP_",
+        "mp_suffix": "$prj_$take_$camera_MP_",
         "has_vray": False,
         "vray_suffix": ""
     },
     "VRAY_DRAFT": {
-        "beauty_suffix": "$prj_$camera_RGB",
+        "beauty_suffix": "$prj_$take_$camera_RGB",
         "has_mp": False,
         "mp_suffix": "",
         "has_vray": True,
-        "vray_suffix": "$prj_$camera_MP_$frame"
+        "vray_suffix": "$prj_$take_$camera_MP_$frame"
     },
     "VRAY_HQ": {
-        "beauty_suffix": "$prj_$camera_RGB",
+        "beauty_suffix": "$prj_$take_$camera_RGB",
         "has_mp": False,
         "mp_suffix": "",
         "has_vray": True,
-        "vray_suffix": "$prj_$camera_MP_$frame"
+        "vray_suffix": "$prj_$take_$camera_MP_$frame"
     }
 }
 
@@ -90,7 +87,7 @@ def set_render_save_path(file_path, render_settings_name):
     doc.AddUndo(c4d.UNDOTYPE_CHANGE, rd)
         
     base_path, _ = file_path.split("Post_Production", 1)
-    render_folder_path = base_path + "Post_Production/007_Render/002_3D_Render/$prj/"
+    render_folder_path = base_path + "Post_Production/007_Render/002_3D_Render/$prj/$take/"
 
     # Set the paths
     # Set standard C4D render output path
