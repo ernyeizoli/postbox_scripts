@@ -76,6 +76,7 @@
             "flattenBtn: Button { text:'FLATTEN SELECTED COMP' }," +
             "organizeBtn: Button { text:'ORGANIZE LAYERS' }," +
             "deleteBtn: Button { text:'DELETE UNUSED' }," +
+            "launchScannerBtn: Button { text:'RUN FOOTAGE VERSION SCANNER' }," + // <-- Add this line
             "}";
         myPanel.grp = myPanel.add(res);
 
@@ -232,6 +233,37 @@
             }
             app.endUndoGroup();
             alert("✅ Deletion complete.\n" + deletedCount + " unused hidden layers removed.");
+        };
+
+        // --- LAUNCH FOOTAGE VERSION SCANNER BUTTON ---
+        myPanel.grp.launchScannerBtn.onClick = function() {
+            // Get the file path of the currently running panel script
+            var currentScriptFile = new File($.fileName);
+
+            // Get the parent folder and then go one level up
+            var targetFolder = currentScriptFile.parent.parent;
+
+            // Construct the path to the scanner script
+            var scannerScriptPath = targetFolder.fsName + "/FootageVersionScanner.jsx";
+
+            // Create a File object for the scanner script
+            var scannerScriptFile = new File(scannerScriptPath);
+
+            // Check if the scanner script exists
+            if (!scannerScriptFile.exists) {
+                return alert("⚠️ Scanner script not found:\n" + scannerScriptPath);
+            }
+
+            // Execute the scanner script
+            app.beginUndoGroup("Run Footage Version Scanner");
+            try {
+                // Load and run the scanner script
+                $.evalFile(scannerScriptFile);
+            } catch (e) {
+                alert("Error running scanner script: " + e.toString());
+            } finally {
+                app.endUndoGroup();
+            }
         };
 
         myPanel.layout.layout(true);
