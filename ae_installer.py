@@ -5,10 +5,14 @@ import sys
 import platform
 
 # --- CONFIGURATION ---
-# Add the names of the script files you want to install.
-# The script assumes they are located in a subfolder named "AE_Scripts".
 SCRIPTS_TO_INSTALL = [
-    "PBV_organizer.jsx"
+    "PBV_organizer.jsx",
+    "PBV_Comp_helper.jsx"
+]
+
+SCRIPTS_TO_SCRIPTS_FOLDER = [
+    "process_footage.py",
+    "FootageVersionScanner.jsx"
 ]
 
 # --- PLATFORM AND ADMIN CHECKS (WINDOWS ONLY) ---
@@ -66,6 +70,17 @@ def get_ae_script_path(version_folder):
     else:
         raise RuntimeError(f"Unsupported OS: {platform.system()}")
 
+def get_ae_scripts_folder(version_folder):
+    """Constructs the path to the 'Scripts' folder for a given AE version."""
+    if platform.system() == "Darwin":
+        base_path = "/Applications"
+        return os.path.join(base_path, version_folder, "Scripts")
+    elif platform.system() == "Windows":
+        base_path = os.path.join(os.environ.get("PROGRAMFILES", r"C:\Program Files"), "Adobe")
+        return os.path.join(base_path, version_folder, "Support Files", "Scripts")
+    else:
+        raise RuntimeError(f"Unsupported OS: {platform.system()}")
+
 # --- CORE FILE OPERATIONS ---
 
 def copy_script_file(src_file, dst_folder):
@@ -90,7 +105,6 @@ def copy_script_file(src_file, dst_folder):
 def main():
     """Main function to find AE versions and copy scripts."""
     try:
-        # Assumes this script is in a 'dev' folder, and scripts are in a parallel 'scripts' folder
         base_dir = os.path.dirname(os.path.abspath(__file__))
         script_source_root = os.path.join(base_dir, "scripts", "AE_Scripts")
         
@@ -104,11 +118,19 @@ def main():
 
         for version in ae_versions:
             print(f"📂 Installing scripts for {version}...")
+
+            # Copy to ScriptUI Panels
             destination_folder = get_ae_script_path(version)
-            
             for script_name in SCRIPTS_TO_INSTALL:
                 source_file_path = os.path.join(script_source_root, script_name)
                 copy_script_file(source_file_path, destination_folder)
+
+            # Copy to Scripts folder
+            scripts_folder = get_ae_scripts_folder(version)
+            for script_name in SCRIPTS_TO_SCRIPTS_FOLDER:
+                source_file_path = os.path.join(script_source_root, script_name)
+                copy_script_file(source_file_path, scripts_folder)
+
             print("-" * 20)
 
     except (FileNotFoundError, RuntimeError) as e:
