@@ -1,8 +1,13 @@
 // This script will organize your files in project panel, You can move all the specific files to their particular folders respectively, 
 {
 	function myScript(thisObj){
-		function myScript_buildUI(thisObj){
-			var myPanel = (thisObj instanceof Panel) ? thisObj : new Window("palette", "PBV Delivery 2.0", undefined, {resizeable:true});
+        function myScript_buildUI(thisObj){
+            var myPanel = (thisObj instanceof Panel) ? thisObj : new Window("palette", "PBV Delivery 2.2", undefined, {resizeable:true});
+            var justDoItButton = myPanel.add("button",[10,10,125,30], "JUST DO IT!");
+            var justDoItText = justDoItButton.text;
+            var divider = myPanel.add("panel", [10, 10, 125, 15]); // Méret beállítása a gombok méretének felére
+            divider.graphics.backgroundColor = divider.graphics.newBrush (divider.graphics.BrushType.SOLID_COLOR, [1, 1, 0], 1);
+
             var myButton = myPanel.add("button",[10,10,125,30], "Folder Structure");
             var movecomps = myPanel.add("button",[10,10,125,30], "Move Comps");
             var moveAi = myPanel.add("button",[10,10,125,30], "Move Vector files");
@@ -12,19 +17,20 @@
             var movesound = myPanel.add("button",[10,10,125,30], "Move Sound");
             var movesolids = myPanel.add("button",[10,10,125,30], "Move Solids");
             var deletefolders = myPanel.add("button",[10,10,125,30], "Delete Empty Folders");
-            var label = myPanel.add("statictext", [28, 0, 150, 30], "Postbox Delivery - 2023");
+            var label = myPanel.add("statictext", [28, 0, 150, 30], "Postbox Delivery - 2024");
 
-        // Állítsd be a szöveg formázását és igazítását
-        label.graphics.font = ScriptUI.newFont("Arial-BoldMT", "BOLD", 16);
-        label.graphics.foregroundColor = label.graphics.newPen(label.graphics.PenType.SOLID_COLOR, [1, 1, 0], 1);
-        label.alignment = "center";    
-        movesolids.graphics.foregroundColor = label.graphics.newPen(label.graphics.PenType.SOLID_COLOR, [1, 1, 0], 1);
-    
-		    myButton.helpTip = "Create the right Directories";
-			myButton.onClick = function() {
+            // Állítsd be a szöveg formázását és igazítását
+            label.graphics.font = ScriptUI.newFont("Arial-BoldMT", "BOLD", 16);
+            label.graphics.foregroundColor = label.graphics.newPen(label.graphics.PenType.SOLID_COLOR, [1, 1, 0], 1);
+            label.alignment = "center";    
+            movesolids.graphics.foregroundColor = label.graphics.newPen(label.graphics.PenType.SOLID_COLOR, [1, 1, 0], 1);
+               
+            myButton.helpTip = "Create the right Directories";
+            myButton.onClick = function() {
       
         var mainFolder = false;
 
+        
         for (var i = 1; i <= app.project.rootFolder.numItems; i++) {
             if ((app.project.rootFolder.item(i) instanceof FolderItem) && (app.project.rootFolder.item(i).name == "_ASSETS")) {
                 mainFolder = app.project.rootFolder.item(i);
@@ -86,27 +92,101 @@
         }
 
 }
-		
+//Move Comps		
 movecomps.helpTip = "Move all the compositions to comp folder";			
-movecomps.onClick = function(){
-var compFolder = null;
-  for (var i = 1; i <= app.project.numItems; i++){
-    if ((app.project.item(i) instanceof FolderItem) && (app.project.item(i).name == "COMPS")){
-      compFolder = app.project.item(i);
-      break;
-    }
-  }
+movecomps.onClick = function() {
+    var compFolder = null;
+    var rootFolder = app.project.rootFolder;
+    var activeComp = app.project.activeItem; // Az aktuálisan aktív kompozíció lekérdezése
 
-  if (compFolder == null) return;
-  var comps = [];
-for(var i = 1; i <= app.project.numItems; i++){
-    if(app.project.item(i) instanceof CompItem)
-    comps.push(app.project.item(i));
-  }
-  for (var i = 0; i < comps.length; i++)
-        comps[i].parentFolder = compFolder;
-  
-  }
+    // COMPS mappa keresése vagy létrehozása
+    for (var i = 1; i <= app.project.numItems; i++) {
+        if ((app.project.item(i) instanceof FolderItem) && (app.project.item(i).name == "COMPS")) {
+            compFolder = app.project.item(i);
+            break;
+        }
+    }
+
+    if (compFolder == null) {
+        compFolder = rootFolder.items.addFolder("COMPS"); // Létrehozzuk, ha nem létezik
+    }
+
+    var comps = [];
+
+    // Összegyűjtjük az összes kompozíciót
+    for (var i = 1; i <= app.project.numItems; i++) {
+        if (app.project.item(i) instanceof CompItem) {
+            comps.push(app.project.item(i));
+        }
+    }
+
+    // Az összes kompozíciót áthelyezzük a COMPS mappába, kivéve az aktív kompozíciót
+    for (var i = 0; i < comps.length; i++) {
+        if (comps[i] !== activeComp) { // Az aktív kompozíció marad a gyökérben
+            comps[i].parentFolder = compFolder;
+        }
+    }
+
+    // Az aktív kompozíció a gyökérben marad, nem mozgatjuk
+    if (activeComp != null) {
+        activeComp.parentFolder = rootFolder; // Gyökérben hagyjuk
+    }
+};
+
+
+//JUST DO IT BUTTON
+  justDoItButton.onClick = function() {
+    // Pre-funkció: az összes mappa átnevezése "temp"-re
+    for (var i = 1; i <= app.project.numItems; i++) {
+        var item = app.project.item(i);
+        if (item instanceof FolderItem) {
+            item.name = "temp"; // Mappák átnevezése "temp"-re
+        }
+    }
+
+    // Iterálás az alábbi gombokon, és mindegyik gomb funkcionalitásának 20-szeri végrehajtása
+    for (var i = 0; i < 20; i++) {
+        myButton.onClick();
+        movecomps.onClick();
+        moveAi.onClick();
+        movepng.onClick();
+        movepsd.onClick();
+        moveplates.onClick();
+        movesound.onClick();
+        movesolids.onClick();
+
+        // Temp mappa tartalmának áthelyezése a SOLIDS mappába
+        var tempFolder = null;
+        var solidsFolder = null;
+
+        // Megkeressük a "temp" nevű mappát
+        for (var j = 1; j <= app.project.numItems; j++) {
+            if ((app.project.item(j) instanceof FolderItem) && (app.project.item(j).name == "temp")) {
+                tempFolder = app.project.item(j);
+                break;
+            }
+        }
+
+        // Megkeressük vagy létrehozzuk a "SOLIDS" mappát
+        for (var k = 1; k <= app.project.numItems; k++) {
+            if ((app.project.item(k) instanceof FolderItem) && (app.project.item(k).name == "SOLIDS")) {
+                solidsFolder = app.project.item(k);
+                break;
+            }
+        }
+
+        // Ha találtunk temp mappát, áthelyezzük a tartalmát a SOLIDS mappába
+        if (tempFolder) {
+            for (var l = 1; l <= tempFolder.numItems; l++) {
+                tempFolder.item(l).parentFolder = solidsFolder;
+            }
+        }
+
+        deletefolders.onClick(); // Üres mappák törlése
+    }
+};
+
+
 
 // Move AI/Eps Code
 
