@@ -7,7 +7,7 @@ import platform
 # --- CONFIGURATION ---
 SCRIPTS_TO_INSTALL = [
     "PBV_organizer.jsx",
-    "PBV_Comp_helper.jsx"
+    "PBV_Delivery_3.jsx"
 ]
 
 SCRIPTS_TO_SCRIPTS_FOLDER = [
