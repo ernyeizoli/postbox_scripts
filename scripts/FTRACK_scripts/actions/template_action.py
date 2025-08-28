@@ -6,6 +6,9 @@ import datetime
 import os
 from dotenv import load_dotenv
 
+import logging
+logger = logging.getLogger(__name__)
+
 class CreateProjectFromCopyAction:
     """Action to create a new project by copying an existing one."""
 
@@ -39,7 +42,8 @@ class CreateProjectFromCopyAction:
             'items': [{
                 'label': self.label,
                 'actionIdentifier': self.identifier,
-                'icon': 'https://static.ftrack.com/images/icons/light/replicate.svg'
+                'icon': 'https://cdn.jsdelivr.net/npm/feather-icons/dist/icons/copy.svg'
+
             }]
         }
 
@@ -211,18 +215,9 @@ class CreateProjectFromCopyAction:
             if source_child.entity_type not in ['Task', 'Milestone']:
                 self._clone_recursive(source_child, new_child)
 
-if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO)
-    load_dotenv()
-    
-    try:
-        session = ftrack_api.Session(auto_connect_event_hub=True)
-    except Exception as e:
-        logging.error(f"Could not create ftrack session. Error: {e}", exc_info=True)
-        sys.exit(1)
-        
+def register(session):
+    """Register the project copy action."""
+    logger.info("Registering Project Copy Action...")
     action = CreateProjectFromCopyAction(session)
-    action.register()
-    
-    logging.info("Action listener started. Press Ctrl+C to stop.")
-    session.event_hub.wait()
+    action.register() # The class's own register method
+    logger.info("Project Copy Action registered.")
