@@ -1,4 +1,6 @@
 # docker-compose.yml
+# version 1
+
 services:
   ftrack-server:
     # This tells Portainer to build an image instead of pulling one.
