@@ -1,33 +1,41 @@
-name: Build and Deploy Ftrack Scripts
+# .github/workflows/deploy_ftrack.yml
 
+name: Build and Deploy Ftrack Scripts
 
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    paths:
+      - 'scripts/FTRACK_scripts/**'
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      # ... (checkout and login steps)
+      - name: Checkout Ftrack Scripts
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            scripts/FTRACK_scripts
 
-      # 3. Build and Push Docker Image
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
       - name: Build and Push Docker Image
         uses: docker/build-push-action@v5
         with:
-          context: ./scripts/FTRACK_scripts
+          # ✅ Corrected context to build from the workspace root
+          context: .
           push: true
           tags: ghcr.io/${{ github.repository_owner }}/ftrack-server:latest
-          
-          # ✅ Pass all required secrets from GitHub to the Docker build
           secrets: |
             FTRACK_SERVER=${{ secrets.FTRACK_SERVER }}
             FTRACK_API_USER=${{ secrets.FTRACK_API_USER }}
             FTRACK_API_KEY=${{ secrets.FTRACK_API_KEY }}
 
-      # 4. Trigger the Portainer Redeploy
-      # This step will fail until you add the PORTAINER_WEBHOOK secret, which is okay for now.
       - name: Trigger Portainer Redeploy
         run: curl -X POST ${{ secrets.PORTAINER_WEBHOOK }}
