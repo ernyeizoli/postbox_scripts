@@ -5,9 +5,7 @@ name: Build and Deploy Ftrack Scripts
 on:
   push:
     branches: [ "main" ]
-    paths:
-      - 'scripts/FTRACK_scripts/**'
-
+    
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
