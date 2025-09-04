@@ -1,0 +1,20 @@
+# docker-compose.yml
+services:
+  ftrack-server:
+    # This tells Portainer to build an image instead of pulling one.
+    build:
+      # The path from the root of your repo to the folder with the Dockerfile.
+      context: ./scripts/FTRACK_scripts
+      dockerfile: Dockerfile
+    
+    restart: unless-stopped
+    
+    # Tells the container to get these variables from Portainer's environment.
+    environment:
+      - FTRACK_SERVER
+      - FTRACK_API_USER
+      - FTRACK_API_KEY
+      
+    # Uncomment and adjust if your application uses a network port.
+    # ports:
+    #   - "8000:8000"
