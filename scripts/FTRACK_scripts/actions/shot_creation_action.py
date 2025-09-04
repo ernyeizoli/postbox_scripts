@@ -17,16 +17,13 @@ def create_tasks_for_new_shot(session, event):
     """
     Listens for ftrack.update events and creates default tasks
     when a new 'Shot' type is created.
+    This version is idempotent and uses batch commits.
     """
     logger.info("--- Event received, processing entities... ---")
     
-    # We iterate through all entities in the event payload
     for entity in event['data'].get('entities', []):
-        
         logger.info(f"Inspecting entity: {entity.get('entity_type')} with action: {entity.get('action')}")
 
-        # This logic is based on the event data we discovered:
-        # We look for a new entity ('action': 'add') that is a Shot.
         if (entity.get('action') == 'add' and 
             entity.get('entity_type') == 'Shot'):
 
@@ -39,19 +36,17 @@ def create_tasks_for_new_shot(session, event):
             
             shot_object = None
             # Retry logic to handle potential database commit delays
-            for i in range(5): # Try up to 5 times
-                # We query for 'Task' as confirmed by the event payload
+            for i in range(5):
                 shot_object = session.get('Shot', shot_id)
                 if shot_object:
                     logger.info(f"Successfully fetched ftrack object on attempt {i+1}. Object Name: '{shot_object['name']}'")
-                    break  # Exit the loop if we found the object
-                
+                    break
                 logger.warning(f"Attempt {i+1}: Shot object not found yet. Retrying in 1 second...")
-                time.sleep(1) # Wait for 1 second before trying again
+                time.sleep(1)
 
             if not shot_object:
                 logger.error(f"Failed to fetch details for shot {shot_id} after multiple attempts. Aborting for this entity.")
-                continue # Move to the next entity in the event
+                continue
 
             try:
                 project = shot_object['project']
@@ -60,7 +55,6 @@ def create_tasks_for_new_shot(session, event):
                 # --- Define your task template here ---
                 task_names = ['Animation', 'Lighting', 'Compositing']
                 
-                # NEW: Get the specific Status and Priority objects once
                 status = session.query('Status where name is "Not Started"').first()
                 priority = session.query('Priority where name is "None"').first()
 
@@ -70,33 +64,51 @@ def create_tasks_for_new_shot(session, event):
                     logger.warning("Could not find Priority 'None'. Tasks will be created with the default priority.")
 
                 logger.info(f"--- Starting Task Creation for Shot: '{shot_object['name']}' (ID: {shot_id}) ---")
+                
+                tasks_created_count = 0
                 for task_name in task_names:
                     
-                    # NEW: Find the Task Type that matches the task_name for each task
-                    task_type = session.query(f'Type where name is "{task_name}"').first()
+                    # +++ FIX 1: IDEMPOTENCY CHECK +++
+                    # Check if a task with the same name already exists on this shot.
+                    existing_task = session.query(
+                        f'Task where name is "{task_name}" and parent.id is "{shot_id}"'
+                    ).first()
 
+                    if existing_task:
+                        logger.info(f"Task '{task_name}' already exists. Skipping.")
+                        continue # Move to the next task name
+
+                    task_type = session.query(f'Type where name is "{task_name}"').first()
                     if not task_type:
                         logger.warning(f"Could not find a Task Type named '{task_name}'. Skipping creation of this task.")
-                        continue # Skip to the next task name
+                        continue
 
-                    logger.info(f"Attempting to create Task '{task_name}' with Type '{task_type['name']}'...")
+                    logger.info(f"Preparing to create Task '{task_name}' with Type '{task_type['name']}'...")
                     
-                    task = session.create('Task', {
+                    session.create('Task', {
                         'name': task_name,
                         'parent': shot_object,
-                        'type': task_type,      # NEW: Set the specific type
-                        'status': status,       # NEW: Set the status
-                        'priority': priority    # NEW: Set the priority
+                        'type': task_type,
+                        'status': status,
+                        'priority': priority
                     })
-
-                    session.commit()
-                    logger.info(f"Created Task '{task['name']}' with Type '{task_type['name']}'")
-                    logger.info(f"  -> SUCCESS! Created Task '{task['name']}' at Path: '{shot_object}'")
+                    tasks_created_count += 1
                 
+                # +++ FIX 2: BATCH COMMIT +++
+                # Commit all prepared tasks in a single transaction outside the loop.
+                if tasks_created_count > 0:
+                    session.commit()
+                    logger.info(f"SUCCESS! Committed {tasks_created_count} new tasks for shot '{shot_object['name']}'.")
+                else:
+                    logger.info("No new tasks were created (they may have all existed already).")
+
                 logger.info("--- Finished Task Creation ---")
 
             except Exception as e:
-                logger.exception(f"CRITICAL: An error occurred while processing shot ID {shot_id}. Error: {e}")
+                # Rollback any changes in the batch if an error occurs
+                session.rollback()
+                logger.exception(f"CRITICAL: An error occurred while processing shot ID {shot_id}. Transaction rolled back. Error: {e}")
+
 
 
 def register_event_listener(session):
