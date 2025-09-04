@@ -1,0 +1,23 @@
+# docker-compose.yml
+services:
+  ftrack-server:
+    # Build the Docker image from the Dockerfile in the current directory (.)
+    build:
+      context: .
+      dockerfile: Dockerfile
+    
+    # Name the image that will be built
+    image: ftrack-server:latest
+    
+    # Automatically restart the container unless it is manually stopped
+    restart: unless-stopped
+    
+    # Load environment variables from a .env file in the same directory
+    env_file:
+      - .env
+      
+    # Expose the application's port. 
+    # Uncomment and change this to match your application.
+    # Format is "HOST_PORT:CONTAINER_PORT"
+    # ports:
+    #   - "8000:8000"
