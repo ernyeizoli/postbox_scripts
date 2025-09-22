@@ -9,6 +9,8 @@ SCRIPT_FILENAME_SET = "PBV_filename_set.py"
 SCRIPT_LIGHT_PASS = "PBV_vray_light_pass_creator.py"
 SCRIPT_LIGHT_RENAME = "PBV_vray_light_renamer.py"
 
+SCRIPT_FILENAME_SET_REMIX = "PBV_filename_set_REMIX.py"
+
 class MyScriptsDialog(c4d.gui.GeDialog):
 
     def GetIcon(self, name):
@@ -29,23 +31,8 @@ class MyScriptsDialog(c4d.gui.GeDialog):
         self.GroupBegin(1000, c4d.BFH_SCALEFIT | c4d.BFV_SCALEFIT, 1, 0, "Scripts")
         self.GroupBorderSpace(10, 10, 10, 10)
 
-        # --- Bitmap Button for "Set Render Filename" ---
-        self.AddCustomGui(1001, c4d.CUSTOMGUI_BITMAPBUTTON, "", c4d.BFH_SCALEFIT, 15, 15)
-        bmp = self.GetIcon("PBV_filename_set.tif")
-        if bmp:
-            gui = self.FindCustomGui(1001, c4d.CUSTOMGUI_BITMAPBUTTON)
-            if gui:
-                gui.SetImage(bmp)
-        self.AddStaticText(1101, c4d.BFH_LEFT, 0, 0, "Set Render Filename")
-
-        # --- Bitmap Button for "Create V-Ray Light Passes" ---
-        self.AddCustomGui(1002, c4d.CUSTOMGUI_BITMAPBUTTON, "", c4d.BFH_SCALEFIT, 15, 15)
-        bmp = self.GetIcon("PBV_vray_light_pass_creator.tif")
-        if bmp:
-            gui = self.FindCustomGui(1002, c4d.CUSTOMGUI_BITMAPBUTTON)
-            if gui:
-                gui.SetImage(bmp)
-        self.AddStaticText(1102, c4d.BFH_LEFT, 0, 0, "Create V-Ray Light Passes")
+        # Header text for the group
+        self.AddStaticText(1200, c4d.BFH_CENTER, 0, 0, "--- PBV TOOLS ---")
 
         # --- Bitmap Button for "Rename V-Ray Lights" ---
         self.AddCustomGui(1003, c4d.CUSTOMGUI_BITMAPBUTTON, "", c4d.BFH_SCALEFIT, 15, 15)
@@ -56,7 +43,47 @@ class MyScriptsDialog(c4d.gui.GeDialog):
                 gui.SetImage(bmp)
         self.AddStaticText(1103, c4d.BFH_LEFT, 0, 0, "Rename V-Ray Lights")
 
+        # --- Bitmap Button for "Create V-Ray Light Passes" ---
+        self.AddCustomGui(1002, c4d.CUSTOMGUI_BITMAPBUTTON, "", c4d.BFH_SCALEFIT, 15, 15)
+        bmp = self.GetIcon("PBV_vray_light_pass_creator.tif")
+        if bmp:
+            gui = self.FindCustomGui(1002, c4d.CUSTOMGUI_BITMAPBUTTON)
+            if gui:
+                gui.SetImage(bmp)
+        self.AddStaticText(1102, c4d.BFH_LEFT, 0, 0, "Create V-Ray Light Passes")
+
+        # --- Bitmap Button for "Set Render Filename" ---
+        self.AddCustomGui(1001, c4d.CUSTOMGUI_BITMAPBUTTON, "", c4d.BFH_SCALEFIT, 15, 15)
+        bmp = self.GetIcon("PBV_filename_set.tif")
+        if bmp:
+            gui = self.FindCustomGui(1001, c4d.CUSTOMGUI_BITMAPBUTTON)
+            if gui:
+                gui.SetImage(bmp)
+        self.AddStaticText(1101, c4d.BFH_LEFT, 0, 0, "Set Render Filename")
+
         self.GroupEnd()
+
+
+
+        self.GroupBegin(2000, c4d.BFH_SCALEFIT | c4d.BFV_SCALEFIT, 1, 0, "REMIX_TOOLS")
+        self.GroupBorderSpace(10, 10, 10, 10)
+
+        # Header text for the group (unique ID)
+        self.AddStaticText(2200, c4d.BFH_CENTER, 0, 0, "--- REMIX TOOLS ---")
+
+        # --- Bitmap Button for "Set Render Filename for REMIX" ---
+        self.AddCustomGui(2010, c4d.CUSTOMGUI_BITMAPBUTTON, "", c4d.BFH_SCALEFIT, 15, 15)
+        bmp = self.GetIcon("PBV_filename_set_REMIX.tif")
+        if bmp:
+            gui = self.FindCustomGui(2010, c4d.CUSTOMGUI_BITMAPBUTTON)
+            if gui:
+                gui.SetImage(bmp)
+        self.AddStaticText(2110, c4d.BFH_LEFT, 0, 0, "Set Render Filename REMIX")
+
+        self.GroupEnd()
+
+
+
         return True
 
     def RunScript(self, script_name):
@@ -84,6 +111,8 @@ class MyScriptsDialog(c4d.gui.GeDialog):
             self.RunScript(SCRIPT_LIGHT_PASS)
         if id == 1003:
             self.RunScript(SCRIPT_LIGHT_RENAME)
+        if id == 2010:
+            self.RunScript(SCRIPT_FILENAME_SET_REMIX)
         return True
 
 class MyScriptsPlugin(c4d.plugins.CommandData):
