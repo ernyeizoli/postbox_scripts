@@ -1,12 +1,11 @@
 // --- The Ultimate EXR Organizer ---
-// v3.0 - Final Optimized Version
+// v3.1, September 2025 (select, ls bugfix)
 //
 // This script provides a panel with three tools to streamline EXR workflows:
 // 1. FLATTEN: Replaces precomps with their source footage, copying all transforms and effects.
 // 2. ORGANIZE: Intelligently sorts and sets up EXR passes, adds adjustment layers, and applies effects.
 // 3. DELETE UNUSED: Safely removes hidden layers that are not part of any parent/matte relationship.
 //
-// All performance issues, compatibility bugs, and plugin errors have been resolved.
 
 (function organizeEXRLayers(thisObj) {
     var scriptName = "Ultimate EXR Organizer";
@@ -161,7 +160,10 @@
                         layer.enabled = false;
                         isSpecial = true;
                     }
-                    if (isSpecial) specialLayerIndices[layer.index] = true;
+                    if (isSpecial) { 
+                        specialLayerIndices[layer.index] = true;
+                        layer.enabled = true; // Ensure special layers are enabled
+                    }
                     else {
                         layer.enabled = false; // Disable non-special layers immediately
                     }
