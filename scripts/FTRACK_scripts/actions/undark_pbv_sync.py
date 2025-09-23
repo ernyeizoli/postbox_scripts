@@ -47,10 +47,10 @@ def sync_3d_task(session_pbv, session_undark, event):
             task_name = task['name']
             logger.info(f"Task created: {task_name}")
 
-            if '3d-task' in task_name.lower():
+            if 'asset-request' in task_name.lower():
                 project = task['project']
                 project_name = project['name']
-                logger.info(f"Detected '3d-task' in task name. Project: {project_name}")
+                logger.info(f"Detected 'asset-request' in task name. Project: {project_name}")
 
                 # List all projects in session_undark
                 projects_undark = session_undark.query('select name, id from Project').all()
