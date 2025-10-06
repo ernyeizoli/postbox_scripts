@@ -55,28 +55,27 @@ def create_tasks_for_new_shot(session, event):
                 # --- Define your task template here ---
                 task_names = ['Animation', 'Lighting', 'Compositing']
                 
+
                 status = session.query('Status where name is "Not Started"').first()
                 priority = session.query('Priority where name is "None"').first()
 
-                if not status:
-                    logger.warning("Could not find Status 'Not Started'. Tasks will be created with the default status.")
+                if not status or status.get('entity_type') != 'Task':
+                    logger.warning("Could not find a valid Task Status 'Not Started'. Tasks will be created with the default status.")
+                    status = None
                 if not priority:
                     logger.warning("Could not find Priority 'None'. Tasks will be created with the default priority.")
 
                 logger.info(f"--- Starting Task Creation for Shot: '{shot_object['name']}' (ID: {shot_id}) ---")
-                
+
                 tasks_created_count = 0
                 for task_name in task_names:
-                    
-                    # +++ FIX 1: IDEMPOTENCY CHECK +++
-                    # Check if a task with the same name already exists on this shot.
+                    # Idempotency check
                     existing_task = session.query(
                         f'Task where name is "{task_name}" and parent.id is "{shot_id}"'
                     ).first()
-
                     if existing_task:
                         logger.info(f"Task '{task_name}' already exists. Skipping.")
-                        continue # Move to the next task name
+                        continue
 
                     task_type = session.query(f'Type where name is "{task_name}"').first()
                     if not task_type:
@@ -84,17 +83,18 @@ def create_tasks_for_new_shot(session, event):
                         continue
 
                     logger.info(f"Preparing to create Task '{task_name}' with Type '{task_type['name']}'...")
-                    
-                    session.create('Task', {
+                    task_data = {
                         'name': task_name,
                         'parent': shot_object,
-                        'type': task_type,
-                        'status': status,
-                        'priority': priority
-                    })
+                        'type': task_type
+                    }
+                    if priority:
+                        task_data['priority'] = priority
+                    if status:
+                        task_data['status'] = status
+                    session.create('Task', task_data)
                     tasks_created_count += 1
-                
-                # +++ FIX 2: BATCH COMMIT +++
+
                 # Commit all prepared tasks in a single transaction outside the loop.
                 if tasks_created_count > 0:
                     session.commit()
