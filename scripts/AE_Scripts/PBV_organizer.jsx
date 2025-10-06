@@ -1,12 +1,11 @@
 // --- The Ultimate EXR Organizer ---
-// v3.0 - Final Optimized Version
+// v3.1, September 2025 (select, ls bugfix)
 //
 // This script provides a panel with three tools to streamline EXR workflows:
 // 1. FLATTEN: Replaces precomps with their source footage, copying all transforms and effects.
 // 2. ORGANIZE: Intelligently sorts and sets up EXR passes, adds adjustment layers, and applies effects.
 // 3. DELETE UNUSED: Safely removes hidden layers that are not part of any parent/matte relationship.
 //
-// All performance issues, compatibility bugs, and plugin errors have been resolved.
 
 (function organizeEXRLayers(thisObj) {
     var scriptName = "Ultimate EXR Organizer";
@@ -84,7 +83,10 @@
         myPanel.grp.flattenBtn.onClick = function() {
             var comp = app.project.activeItem;
             if (!(comp && comp instanceof CompItem)) { return alert("No active composition selected."); }
-            
+            if (comp && comp instanceof CompItem && comp.selectedLayers.length > 0) {
+                var selectedLayers = comp.selectedLayers; // Get the array of selected layers
+                return alert("DESELECT ALL LAYERS AND TRY AGAIN! " + selectedLayers.length + " layers selected.");        
+            }
             app.beginUndoGroup("Flatten Precomps with Effects");
             var replacedCount = 0;
             for (var j = comp.numLayers; j >= 1; j--) {
@@ -135,25 +137,45 @@
                     if (!layer.source) continue;
                     var isSpecial = false, name = layer.name, sourceName = layer.source.name;
                     if (name.indexOf("LS_") === 0 || sourceName.indexOf("LS_") === 0) {
-                        lsLayers.push(layer); layer.label = 2; /*Yellow*/ layer.blendingMode = BlendingMode.ADD; isSpecial = true;
+                        lsLayers.push(layer); 
+                        layer.label = 2; /*Yellow*/ 
+                        layer.blendingMode = BlendingMode.ADD; 
+                        isSpecial = true;
+                        layer.enabled = true;
                     }
                     if (!cryptomatteLayer && layer.property("Effects")) {
                         for (var j = 1; j <= layer.property("Effects").numProperties; j++) {
                             if (layer.property("Effects").property(j).name.toLowerCase().indexOf("cryptomatte") !== -1) {
-                                cryptomatteLayer = layer; layer.label = 10; /*Purple*/ layer.enabled = false; isSpecial = true;
+                                cryptomatteLayer = layer;
+                                layer.label = 10; /*Purple*/
+                                layer.enabled = false;
+                                isSpecial = true;
                             }
                         }
                     }
                     if (!extraTexLayer && (name.toLowerCase().indexOf("extra tex") !== -1 || sourceName.toLowerCase().indexOf("extra tex") !== -1)) {
-                        extraTexLayer = layer; layer.label = 16; /*Dark Green*/ layer.blendingMode = BlendingMode.MULTIPLY; layer.enabled = false; isSpecial = true;
+                        extraTexLayer = layer;
+                        layer.label = 16; /*Dark Green*/
+                        layer.blendingMode = BlendingMode.MULTIPLY;
+                        layer.enabled = false;
+                        isSpecial = true;
                     }
-                    if (isSpecial) specialLayerIndices[layer.index] = true;
+                    if (isSpecial) { 
+                        specialLayerIndices[layer.index] = true;
+                        layer.enabled = true; // Ensure special layers are enabled
+                    }
+                    else {
+                        layer.enabled = false; // Disable non-special layers immediately
+                    }
                 }
 
+                //alert("Found " + lsLayers.length + " Light Select layers.\n")
+
                 // Pass 2: Disable non-special layers using a fast lookup
-                for (var k = 1; k <= comp.numLayers; k++) {
-                    var l = comp.layer(k); if (!specialLayerIndices[l.index]) l.enabled = false;
-                }
+                //for (var k = 1; k <= comp.numLayers; k++) {
+                //    var l = comp.layer(k);
+                //    if (!specialLayerIndices[l.index]) l.enabled = false;
+                //}
 
                 // Pass 3: Create Adjustment Layers if configured
                 var coloristaLayer;
