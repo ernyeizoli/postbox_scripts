@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 # Import the register functions from your action files
 from actions.shot_creation_action import register as register_shot_automation
 from actions.template_action import register as register_project_copy
+from actions.undark_pbv_sync import register as register_undark_pbv_sync
 
 # --- Setup ---
 logging.basicConfig(level=logging.INFO)
@@ -20,6 +21,8 @@ def run_listener(register_function, name):
     """Initializes a session and runs a listener function."""
     logger.info(f"Starting listener process: {name}")
     try:
+        # Each process must load the .env file to get credentials
+        load_dotenv()
         # Each process gets its own session
         session = ftrack_api.Session(auto_connect_event_hub=True)
         register_function(session)
@@ -36,7 +39,8 @@ if __name__ == '__main__':
     # A list of all actions to run
     actions_to_run = [
         (register_shot_automation, "Shot Creation Automation"),
-        (register_project_copy, "Project Copy Action")
+        (register_project_copy, "Project Copy Action"),
+        (register_undark_pbv_sync, "Undark PBV Sync Listener")
     ]
 
     processes = []
