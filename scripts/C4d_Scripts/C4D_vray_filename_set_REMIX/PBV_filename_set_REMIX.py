@@ -51,8 +51,9 @@ def get_current_file_path():
         full_path = f"{file_path}/{file_name}"
         return file_path, file_name, full_path
     else:
-        return file_path, None, "Unsaved Document"
         gui.MessageDialog("Unsaved Document")
+        return file_path, None, "Unsaved Document"
+        
 
 def get_render_setting_name():
     doc = c4d.documents.GetActiveDocument()  # Get the active document
@@ -73,7 +74,6 @@ def set_render_save_path(file_path, render_settings_name):
     # Create beauty render path and Vray MP render path
     if render_settings_name not in RENDER_SETTINGS:
         raise Exception(f"Render setting '{render_settings_name}' not recognized.")
-        return
 
     # Search for the V-Ray VideoPost
     vp = rd.GetFirstVideoPost()
@@ -92,8 +92,8 @@ def set_render_save_path(file_path, render_settings_name):
     doc.AddUndo(c4d.UNDOTYPE_CHANGE, rd)
     
     #Move up one level to set the folder path
-    render_folder_path = os.path.dirname(os.path.dirname(file_path)) + "\\2_RNDR\\"
-
+    render_folder_path = os.path.dirname(file_path) + "\\2_RNDR\\"
+    print(f"Render folder path set to: {render_folder_path}")
 
     # Set the paths
     # Set standard C4D render output path
