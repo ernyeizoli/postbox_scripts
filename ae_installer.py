@@ -137,12 +137,13 @@ def main():
         print(f"❌ A critical error occurred: {e}")
 
 if __name__ == "__main__":
+    #For now we don't need admin priviliges. The privilige issue is solved with Group policiy!
     # If on Windows, check for admin rights. If not admin, request them and restart.
-    if platform.system() == "Windows":
-        if not is_admin():
-            print("Administrator privileges are required. Requesting permission...")
-            run_as_admin()
-            sys.exit() # Exit the non-admin instance
+    #if platform.system() == "Windows":
+    #    if not is_admin():
+    #        print("Administrator privileges are required. Requesting permission...")
+    #        run_as_admin()
+    #        sys.exit() # Exit the non-admin instance
 
     # Run the main installer logic
     main()
