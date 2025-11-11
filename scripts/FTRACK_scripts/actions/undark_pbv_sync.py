@@ -1,278 +1,306 @@
+"""
+UNDARK ↔ PBV Ftrack Sync Tool
+----------------------------------
+Synchronizes Tasks, Notes, and AssetVersions between two ftrack servers.
+Enhanced with detailed logging and defensive error handling.
+"""
+
 import os
 import threading
 import logging
+import functools
+import time
 from dotenv import load_dotenv
 import ftrack_api
-import functools
 
-# --- Setup Logging ---
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(message)s')
-logger = logging.getLogger(__name__)
 
-# --- Load environment variables ---
+# --- Logging Configuration ---
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+)
+logger = logging.getLogger("undark_pbv_sync")
+
+
+# --- Load Environment ---
 load_dotenv()
 
-# --- FTRACK API credentials for both instances ---
-PBV_FTRACK_API_KEY = os.getenv('FTRACK_API_KEY')
-PBV_FTRACK_API_USER = os.getenv('FTRACK_API_USER')
-PBV_FTRACK_API_URL = os.getenv('FTRACK_SERVER')
+PBV_FTRACK_API_KEY = os.getenv("FTRACK_API_KEY")
+PBV_FTRACK_API_USER = os.getenv("FTRACK_API_USER")
+PBV_FTRACK_API_URL = os.getenv("FTRACK_SERVER")
 
-UNDARK_FTRACK_API_KEY = os.getenv('UNDARK_FTRACK_API_KEY')
-UNDARK_FTRACK_API_USER = os.getenv('UNDARK_FTRACK_API_USER')
-UNDARK_FTRACK_API_URL = os.getenv('UNDARK_FTRACK_API_URL')
+UNDARK_FTRACK_API_KEY = os.getenv("UNDARK_FTRACK_API_KEY")
+UNDARK_FTRACK_API_USER = os.getenv("UNDARK_FTRACK_API_USER")
+UNDARK_FTRACK_API_URL = os.getenv("UNDARK_FTRACK_API_URL")
 
+
+# --- Helper Functions ---
 def get_ftrack_session(api_key, api_user, api_url):
-    """Initializes and returns an ftrack API session."""
-    return ftrack_api.Session(
-        api_key=api_key,
-        api_user=api_user,
-        server_url=api_url,
-        auto_connect_event_hub=True
-    )
-
-def sync_event_handler(session_pbv, session_undark, event):
-    """Callback function to handle ftrack events for synchronization."""
-    logger.info("Event received.")
-    for entity in event['data'].get('entities', []):
-        action = entity.get('action')
-        entity_type = entity.get('entity_type', '').lower()
-
-        # Route event to the correct handler
-        if entity_type == 'task' and action == 'add':
-            handle_task_creation(entity, session_pbv, session_undark)
-        elif entity_type == 'note' and action in ['add', 'update']:
-            handle_note_creation(entity, session_pbv, session_undark)
-        elif entity_type == 'assetversion' and action == 'add':
-            handle_version_creation(entity, session_pbv, session_undark)
-def handle_version_creation(entity, session_pbv, session_undark):
-    """
-    Syncs AssetVersion creation between servers with a single attempt.
-    This version uses specific projections to fetch all required data at once.
-    """
-    version_id = entity.get('entityId')
-    if not version_id:
-        logger.warning("[VERSION SYNC] Event is missing version_id. Skipping.")
-        return
-
-    logger.info(f"[VERSION SYNC] Processing event for version_id: {version_id}")
-
-    # This specific query is still essential to get the asset and project info.
-    query_projection = (
-        'select name, comment, status, user, '
-        'asset.name, asset.project.name, asset.project.id '
-        'from AssetVersion '
-        f'where id is "{version_id}"'
-    )
-
-    source_session = None
-    target_session = None
-    source_name = None
-
-    # Determine the source server of the event
-    if session_pbv.query(f'AssetVersion where id is "{version_id}"').first():
-        source_session = session_pbv
-        target_session = session_undark
-        source_name = "PBV"
-    elif session_undark.query(f'AssetVersion where id is "{version_id}"').first():
-        source_session = session_undark
-        target_session = session_pbv
-        source_name = "UNDARK"
-    else:
-        logger.error(f"[VERSION SYNC] Version ID {version_id} not found on either server.")
-        return
-
-    # Perform the query a single time
-    source_version = source_session.query(query_projection).first()
-
-    # Check if the data is complete. If not, exit.
-    if not source_version or not source_version.get('name'):
-        logger.error(f"[VERSION SYNC] Failed to get complete version data from {source_name} for {version_id}. The data may not have been ready. Skipping.")
-        return
-
-    # Extract data (this is now safe because of the projection)
-    project_name = source_version['asset']['project']['name']
-    asset_name = source_version['asset']['name']
-    version_name = source_version['name']
-    target_name = "UNDARK" if source_name == "PBV" else "PBV"
-
-    logger.info(f"[VERSION SYNC] Source {source_name}: '{project_name}' > '{asset_name}' > '{version_name}'")
-
+    logger.info("Connecting to ftrack server: %s as %s", api_url, api_user)
     try:
-        # Find the corresponding project and asset on the target server
-        target_project = target_session.query(f'Project where name is "{project_name}"').first()
-        if not target_project:
-            logger.warning(f"[VERSION SYNC] Project '{project_name}' not found on target {target_name}. Skipping.")
-            return
-
-        target_asset = target_session.query(f'Asset where name is "{asset_name}" and project.id is "{target_project["id"]}"').first()
-        if not target_asset:
-            logger.warning(f"[VERSION SYNC] Asset '{asset_name}' not found on target {target_name}. Skipping.")
-            return
-
-        # Check if version already exists on the target
-        existing_version = target_session.query(f'AssetVersion where name is "{version_name}" and asset.id is "{target_asset["id"]}"').first()
-        if existing_version:
-            logger.info(f"[VERSION SYNC] Version '{version_name}' already exists on target {target_name}. Skipping.")
-            return
-
-        # Create the new version on the target server
-        target_session.create('AssetVersion', {
-            'name': version_name,
-            'asset': target_asset,
-            'status': source_version['status'],
-            'comment': source_version['comment'],
-            'user': source_version['user']
-        })
-        target_session.commit()
-        logger.info(f"[VERSION SYNC] SUCCESS: Synced version '{version_name}' to {target_name}.")
-
+        session = ftrack_api.Session(
+            api_key=api_key,
+            api_user=api_user,
+            server_url=api_url,
+            auto_connect_event_hub=True,
+        )
+        logger.info("Connected successfully to %s", api_url)
+        return session
     except Exception as e:
-        logger.error(f"[VERSION SYNC] An unexpected error occurred during sync to {target_name}: {e}", exc_info=True)
+        logger.critical("Failed to connect to %s: %s", api_url, e)
+        raise
 
+
+def _escape(value):
+    if isinstance(value, str):
+        return value.replace('"', '\\"')
+    return value
+
+
+def _get(entity, key, default=None):
+    try:
+        if hasattr(entity, "get"):
+            return entity.get(key, default)
+        return entity[key]
+    except Exception:
+        return default
+
+
+def _safe_str(value):
+    try:
+        return str(value)
+    except Exception:
+        return "<unprintable>"
+
+
+def _resolve_entity_type(entity):
+    return (entity.get("entity_type") or entity.get("entityType") or "").lower()
+
+
+def _resolve_action(entity):
+    return (entity.get("action") or entity.get("operation") or "").lower()
+
+
+def _resolve_note_id(entity):
+    return entity.get("entityId") or entity.get("id")
+
+
+# --- Task Sync ---
 def handle_task_creation(entity, session_pbv, session_undark):
-    """Handles one-way sync of a new task from PBV to UNDARK."""
-    task_id = entity.get('entityId')
+    task_id = entity.get("entityId")
     if not task_id:
         return
 
     try:
-        task = session_pbv.query(f'Task where id is "{task_id}"').one()
-        if 'asset-request' not in task['name'].lower():
+        logger.info("[TASK SYNC] Checking for new task %s on PBV...", task_id)
+        task = session_pbv.query(f'Task where id is "{task_id}"').first()
+        if not task:
+            logger.warning("[TASK SYNC] Task %s not found on PBV.", task_id)
             return
 
-        project_name = task['project']['name']
-        logger.info(f"Processing 'asset-request' task creation: '{task['name']}' in project '{project_name}'")
-
-        target_project = session_undark.query(f'Project where name is "{project_name}"').first()
-        if not target_project:
-            logger.warning(f"Project '{project_name}' not found in UNDARK. Cannot sync task.")
+        name = task["name"]
+        if "asset-request" not in name.lower():
+            logger.debug("[TASK SYNC] Task %s is not an 'asset-request'; skipping.", name)
             return
 
-        # Check if task already exists in the target project
-        existing_task = session_undark.query(
-            f'Task where name is "{task["name"]}" and parent.id is "{target_project["id"]}"'
+        project_name = task["project"]["name"]
+        logger.info("[TASK SYNC] Syncing '%s' in project '%s'...", name, project_name)
+
+        target_project = session_undark.query(
+            f'Project where name is "{_escape(project_name)}"'
         ).first()
+        if not target_project:
+            logger.warning("[TASK SYNC] Target project not found on UNDARK: %s", project_name)
+            return
 
-        if not existing_task:
-            session_undark.create('Task', {'name': task['name'], 'parent': target_project})
-            session_undark.commit()
-            logger.info(f"SUCCESS: Synced task '{task['name']}' to UNDARK.")
-        else:
-            logger.info(f"Task '{task['name']}' already exists in UNDARK. Skipping.")
+        existing = session_undark.query(
+            f'Task where name is "{_escape(name)}" and parent.id is "{target_project["id"]}"'
+        ).first()
+        if existing:
+            logger.info("[TASK SYNC] Task '%s' already exists on UNDARK.", name)
+            return
+
+        new_task = session_undark.create("Task", {"name": name, "parent": target_project})
+        session_undark.commit()
+        logger.info("[TASK SYNC] Created task '%s' (id=%s) on UNDARK.", name, new_task["id"])
 
     except Exception as e:
-        logger.error(f"Error processing task creation sync: {e}")
-def handle_version_creation(entity, session_pbv, session_undark):
-    """
-    Syncs AssetVersion creation.
-    CORRECTED: Uses the 'version' attribute (integer) instead of the non-existent 'name' attribute.
-    """
-    version_id = entity.get('entityId')
-    if not version_id:
-        logger.warning("[VERSION SYNC] Event is missing version_id. Skipping.")
+        logger.exception("[TASK SYNC] Error syncing task: %s", e)
+
+
+# --- Note Sync ---
+def handle_note_creation(entity, session_pbv, session_undark):
+    note_id = _resolve_note_id(entity)
+    action = _resolve_action(entity)
+    logger.info("[NOTE SYNC] Event received: id=%s action=%s", note_id, action)
+
+    if not note_id or action != "add":
         return
-
-    logger.info(f"[VERSION SYNC] Processing event for version_id: {version_id}")
-
-    # <<< CHANGE 1: Corrected the query to select 'version', not 'name'. >>>
-    query_projection = (
-        'select version, comment, status, user, '
-        'asset.name, asset.project.name, asset.project.id '
-        'from AssetVersion '
-        f'where id is "{version_id}"'
-    )
-
-    source_session = None
-    target_session = None
-    source_name = None
-
-    # Determine the source server of the event
-    if session_pbv.query(f'AssetVersion where id is "{version_id}"').first():
-        source_session = session_pbv
-        target_session = session_undark
-        source_name = "PBV"
-    elif session_undark.query(f'AssetVersion where id is "{version_id}"').first():
-        source_session = session_undark
-        target_session = session_pbv
-        source_name = "UNDARK"
-    else:
-        logger.error(f"[VERSION SYNC] Version ID {version_id} not found on either server.")
-        return
-
-    # Perform the query a single time
-    source_version = source_session.query(query_projection).first()
-
-    # The check should be just for the existence of the entity now
-    if not source_version:
-        logger.error(f"[VERSION SYNC] Failed to get version data from {source_name} for {version_id}. Skipping.")
-        return
-
-    # <<< CHANGE 2: Use the integer 'version' number, not a name. >>>
-    project_name = source_version['asset']['project']['name']
-    asset_name = source_version['asset']['name']
-    version_number = source_version['version'] # This is an integer
-    target_name = "UNDARK" if source_name == "PBV" else "PBV"
-
-    logger.info(f"[VERSION SYNC] Source {source_name}: '{project_name}' > '{asset_name}' > v{version_number}")
 
     try:
-        # Find the corresponding project and asset on the target server
-        target_project = target_session.query(f'Project where name is "{project_name}"').first()
+        # Determine which server has the note
+        note_pbv = session_pbv.query(f'Note where id is "{note_id}"').first()
+        note_undark = session_undark.query(f'Note where id is "{note_id}"').first()
+
+        if note_pbv and note_undark:
+            logger.info("[NOTE SYNC] Note already exists on both servers.")
+            return
+
+        source, target = (session_pbv, session_undark) if note_pbv else (session_undark, session_pbv)
+        source_name, target_name = ("PBV", "UNDARK") if note_pbv else ("UNDARK", "PBV")
+        source_note = note_pbv or note_undark
+        logger.info("[NOTE SYNC] Source=%s Target=%s", source_name, target_name)
+
+        # Populate parent
+        source.populate(source_note, ["parent", "parent.project"])
+        parent = _get(source_note, "parent")
+        if not parent:
+            logger.warning("[NOTE SYNC] No parent found for note %s; skipping.", note_id)
+            return
+
+        project_name = _get(parent["project"], "name")
+        task_name = _get(parent, "name")
+
+        logger.debug("[NOTE SYNC] Parent project=%s task=%s", project_name, task_name)
+
+        # Find matching project/task on target
+        target_project = target.query(f'Project where name is "{_escape(project_name)}"').first()
         if not target_project:
-            logger.warning(f"[VERSION SYNC] Project '{project_name}' not found on target {target_name}. Skipping.")
+            logger.warning("[NOTE SYNC] Project not found on %s: %s", target_name, project_name)
             return
 
-        target_asset = target_session.query(f'Asset where name is "{asset_name}" and project.id is "{target_project["id"]}"').first()
-        if not target_asset:
-            logger.warning(f"[VERSION SYNC] Asset '{asset_name}' not found on target {target_name}. Skipping.")
-            return
-
-        # <<< CHANGE 3: Check for existing version using the version NUMBER and asset ID. >>>
-        # Note: No quotes around {version_number} because it's an integer comparison.
-        existing_version = target_session.query(
-            f'AssetVersion where version is {version_number} and asset.id is "{target_asset["id"]}"'
+        target_task = target.query(
+            f'Task where name is "{_escape(task_name)}" and project.id is "{target_project["id"]}"'
         ).first()
-        if existing_version:
-            logger.info(f"[VERSION SYNC] Version {version_number} for asset '{asset_name}' already exists on target {target_name}. Skipping.")
+        if not target_task:
+            logger.warning("[NOTE SYNC] Task not found on %s: %s", target_name, task_name)
             return
 
-        # <<< CHANGE 4: Create the new version using the 'version' attribute. >>>
-        target_session.create('AssetVersion', {
-            'version': version_number,
-            'asset': target_asset,
-            'status': source_version['status'],
-            'comment': source_version['comment'],
-            'user': source_version['user']
-        })
-        target_session.commit()
-        logger.info(f"[VERSION SYNC] SUCCESS: Synced version {version_number} to {target_name}.")
+        # Build payload
+        note_payload = {
+            "parent": target_task,
+            "content": _get(source_note, "content") or "",
+            "subject": _get(source_note, "subject") or "",
+            "metadata": {"synced_from": source_name},
+        }
+
+        # Author resolution
+        author = _get(source_note, "user") or _get(source_note, "author")
+        if author:
+            username = _get(author, "username") or _get(author, "name")
+            found = target.query(f'User where username is "{_escape(username)}"').first()
+            if found:
+                note_payload["author"] = found
+                logger.debug("[NOTE SYNC] Author mapped to %s", username)
+            else:
+                logger.warning("[NOTE SYNC] Author %s not found on target.", username)
+
+        # Avoid setting unsupported attributes like 'recipients'
+        schema = target.types["Note"]
+        if "recipients" in schema.keys():
+            logger.debug("[NOTE SYNC] Recipients supported; adding fallback recipients.")
+            note_payload["recipients"] = [note_payload.get("author")] if note_payload.get("author") else []
+
+        logger.info("[NOTE SYNC] Creating note on %s: %s", target_name, note_payload)
+        target.create("Note", note_payload)
+        target.commit()
+        logger.info("[NOTE SYNC] SUCCESS: Synced note '%s' to %s.", _safe_str(note_payload["content"])[:50], target_name)
 
     except Exception as e:
-        logger.error(f"[VERSION SYNC] An unexpected error occurred during sync to {target_name}: {e}", exc_info=True)
+        logger.exception("[NOTE SYNC] Failed to sync note %s: %s", note_id, e)
 
+
+# --- Version Sync ---
+def handle_version_creation(entity, session_pbv, session_undark):
+    version_id = entity.get("entityId")
+    if not version_id:
+        return
+
+    logger.info("[VERSION SYNC] Version ID: %s", version_id)
+
+    pbv_ver = session_pbv.query(f'AssetVersion where id is "{version_id}"').first()
+    undark_ver = session_undark.query(f'AssetVersion where id is "{version_id}"').first()
+
+    if not pbv_ver and not undark_ver:
+        logger.warning("[VERSION SYNC] Version %s not found anywhere.", version_id)
+        return
+
+    source, target = (session_pbv, session_undark) if pbv_ver else (session_undark, session_pbv)
+    src_name, tgt_name = ("PBV", "UNDARK") if pbv_ver else ("UNDARK", "PBV")
+    version = pbv_ver or undark_ver
+
+    asset = version["asset"]
+    project_name = asset["project"]["name"]
+    asset_name = asset["name"]
+    version_name = version["name"]
+
+    logger.info("[VERSION SYNC] %s → %s: %s / %s / %s", src_name, tgt_name, project_name, asset_name, version_name)
+
+    tgt_project = target.query(f'Project where name is "{_escape(project_name)}"').first()
+    if not tgt_project:
+        logger.warning("[VERSION SYNC] Project not found on %s: %s", tgt_name, project_name)
+        return
+
+    tgt_asset = target.query(
+        f'Asset where name is "{_escape(asset_name)}" and project.id is "{tgt_project["id"]}"'
+    ).first()
+    if not tgt_asset:
+        logger.warning("[VERSION SYNC] Asset not found on %s: %s", tgt_name, asset_name)
+        return
+
+    exists = target.query(
+        f'AssetVersion where name is "{_escape(version_name)}" and asset.id is "{tgt_asset["id"]}"'
+    ).first()
+    if exists:
+        logger.info("[VERSION SYNC] Version already exists on %s: %s", tgt_name, version_name)
+        return
+
+    target.create("AssetVersion", {"name": version_name, "asset": tgt_asset})
+    target.commit()
+    logger.info("[VERSION SYNC] SUCCESS: Created %s on %s.", version_name, tgt_name)
+
+
+# --- Event Dispatcher ---
+def sync_event_handler(session_pbv, session_undark, event):
+    logger.debug("[EVENT] Raw event data: %s", event)
+    for entity in event["data"].get("entities", []):
+        action = _resolve_action(entity)
+        etype = _resolve_entity_type(entity)
+        logger.debug("[EVENT] Entity=%s Action=%s", etype, action)
+
+        if etype == "task" and action == "add":
+            handle_task_creation(entity, session_pbv, session_undark)
+        elif etype == "note" and action == "add":
+            handle_note_creation(entity, session_pbv, session_undark)
+        elif etype == "assetversion" and action == "add":
+            handle_version_creation(entity, session_pbv, session_undark)
+
+
+# --- Registration ---
 def register(session_pbv):
-    """Registers the event listeners for both sessions."""
-    logger.info("Registering UNDARK-PBV Sync listeners...")
-    session_undark = get_ftrack_session(UNDARK_FTRACK_API_KEY, UNDARK_FTRACK_API_USER, UNDARK_FTRACK_API_URL)
+    logger.info("Registering event listeners...")
+    session_undark = get_ftrack_session(
+        UNDARK_FTRACK_API_KEY, UNDARK_FTRACK_API_USER, UNDARK_FTRACK_API_URL
+    )
 
-    # Create a single callback function with all sessions
     callback = functools.partial(sync_event_handler, session_pbv, session_undark)
-    
-    # Subscribe both hubs to the same callback
-    session_pbv.event_hub.subscribe('topic=ftrack.update', callback)
-    session_undark.event_hub.subscribe('topic=ftrack.update', callback)
+    topics = ["ftrack.update", "ftrack.note"]
 
-    # **FIX**: Start the UNDARK listener in a separate thread
-    undark_thread = threading.Thread(target=session_undark.event_hub.wait)
-    undark_thread.daemon = True
-    undark_thread.start()
-    logger.info("UNDARK listener started in a separate thread.")
+    for topic in topics:
+        session_pbv.event_hub.subscribe(f"topic={topic}", callback)
+        session_undark.event_hub.subscribe(f"topic={topic}", callback)
+        logger.info("Subscribed to topic: %s", topic)
 
-if __name__ == '__main__':
-    logger.info("Starting UNDARK-PBV Sync standalone process...")
-    session_pbv = get_ftrack_session(PBV_FTRACK_API_KEY, PBV_FTRACK_API_USER, PBV_FTRACK_API_URL)
-    register(session_pbv)
-    
-    logger.info("Main thread waiting for PBV ftrack events...")
-    # **FIX**: The main thread will now wait for PBV events, while the other thread waits for UNDARK events
-    session_pbv.event_hub.wait()
+    # Background listener for UNDARK
+    thread = threading.Thread(target=session_undark.event_hub.wait, daemon=True)
+    thread.start()
+    logger.info("UNDARK listener thread started.")
+
+
+# --- Main ---
+if __name__ == "__main__":
+    logger.info("Starting UNDARK-PBV Sync Service...")
+    pbv = get_ftrack_session(PBV_FTRACK_API_KEY, PBV_FTRACK_API_USER, PBV_FTRACK_API_URL)
+    register(pbv)
+    logger.info("Listening for PBV events...")
+    pbv.event_hub.wait()
