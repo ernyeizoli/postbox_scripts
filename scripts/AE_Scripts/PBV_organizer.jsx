@@ -89,6 +89,8 @@
             }
             app.beginUndoGroup("Flatten Precomps with Effects");
             var replacedCount = 0;
+            var originalDisplayStart = comp.displayStartTime;
+            var frameDuration = comp.frameDuration;
             for (var j = comp.numLayers; j >= 1; j--) {
                 var layer = comp.layer(j);
                 if (!layer.source || !(layer.source instanceof CompItem)) continue;
@@ -118,8 +120,38 @@
                     replacedCount++;
                 }
             }
+            var earliestLayerStart = null;
+            for (var k = 1; k <= comp.numLayers; k++) {
+                var currentLayer = comp.layer(k);
+                if (!currentLayer) { continue; }
+                var layerStart = currentLayer.inPoint;
+                if (earliestLayerStart === null || layerStart < earliestLayerStart) {
+                    earliestLayerStart = layerStart;
+                }
+            }
+            var startChangeLog = "Comp start unchanged.";
+            var newDisplayStart = originalDisplayStart;
+            if (earliestLayerStart !== null) {
+                var snappedStart = Math.round(earliestLayerStart / frameDuration) * frameDuration;
+                comp.displayStartTime = snappedStart; // Align comp start with earliest layer
+                comp.time = snappedStart; // Keep playhead parked on the new start frame
+                try {
+                    var compViewer = comp.openInViewer(); // Refresh the active viewer to reflect the new start frame
+                    if (compViewer && compViewer.type === ViewerType.VIEWER_COMPOSITION) {
+                        compViewer.time = snappedStart;
+                    }
+                } catch (viewerErr) {
+                    // Safe fail if viewer update is unavailable
+                }
+                newDisplayStart = comp.displayStartTime;
+                var originalFrame = Math.round(originalDisplayStart / frameDuration);
+                var newFrame = Math.round(newDisplayStart / frameDuration);
+                startChangeLog = "Comp start changed from frame " + originalFrame + " (" + originalDisplayStart.toFixed(3) + "s) to frame " + newFrame + " (" + newDisplayStart.toFixed(3) + "s).";
+            }
             app.endUndoGroup();
-            alert("✅ Flatten complete.\n\nReplaced layers: " + replacedCount);
+            var message = "✅ Flatten complete.\n\nReplaced layers: " + replacedCount + "\n" + startChangeLog;
+            alert(message);
+            $.writeln("[Ultimate EXR Organizer] " + startChangeLog);
         };
 
         // --- ORGANIZE BUTTON (Fully Optimized) ---
