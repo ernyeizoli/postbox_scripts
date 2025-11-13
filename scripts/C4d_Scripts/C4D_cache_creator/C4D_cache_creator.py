@@ -5,7 +5,6 @@ import subprocess
 from datetime import datetime
 
 # --- CONFIGURATION ---
-BASE_PATH = r"C:\Users\User\Documents\dev\cache_aut"
 C4D_EXECUTABLE = r"C:\Program Files\Maxon Cinema 4D 2024\Cinema 4D.exe"
 
 # IMPORTANT: Set this to FALSE for heavy scenes to prevent freezing
@@ -14,17 +13,51 @@ C4D_EXECUTABLE = r"C:\Program Files\Maxon Cinema 4D 2024\Cinema 4D.exe"
 RENDER = False
 USE_DIRECT_RENDER = False
 
-# X-Particles cache configuration
-ENABLE_XP_CACHE_FILL = True  # Set False to skip X-Particles cache fills
+# Cache configuration
+BASE_PATH_OVERRIDE = None  # Set to a custom path if you don't want to use the document folder
+BASE_PATH = None  # Resolved at runtime based on the active document
+
+# Cache toggles
+XPART = True   # Set False to skip X-Particles cache fills
+NATIVE = False  # Set True to bake native cloth cache
+
+# Scene object configuration
+XP_EMITTER_OBJECT_NAME = "xpEmitter"
+
+# Cache variants to process (variant_name: settings)
+CACHE_VARIANTS = {
+    "turbo020_emit150": {
+        "turbulence_scale": 20,
+        "xp_emitter_rect_width": 150,
+    },
+    "turbo100_emit200": {
+        "turbulence_scale": 100,
+        "xp_emitter_rect_width": 200,
+    },
+    "turbo001_emit250": {
+        "turbulence_scale": 1,
+        "xp_emitter_rect_width": 250,
+    },
+}
 
 try:
     XPARTICLES_CACHE_FILL_ID = c4d.XOCA_CACHE_FILL
 except AttributeError:
     XPARTICLES_CACHE_FILL_ID = None
 
-# Ensure base path exists
-if not os.path.exists(BASE_PATH):
-    os.makedirs(BASE_PATH)
+
+def resolve_base_path(doc):
+    """Determines where cache files should be written"""
+    if BASE_PATH_OVERRIDE:
+        return BASE_PATH_OVERRIDE
+
+    doc_path = doc.GetDocumentPath()
+    if doc_path:
+        return doc_path
+
+    fallback = os.path.join(os.path.expanduser("~"), "Documents", "cache_aut")
+    return fallback
+
 
 def show_status(message):
     """Displays status in console and status bar"""
@@ -126,6 +159,114 @@ def find_xparticles_cache_object(doc):
     return traverse(doc.GetFirstObject())
 
 
+def detect_xp_cache_parameters(xp_cache):
+    """Attempts to identify cache path and name parameters on the xpCache object"""
+    path_descid = None
+    name_descid = None
+
+    if not xp_cache:
+        return None, None
+
+    try:
+        description = xp_cache.GetDescription(c4d.DESCFLAGS_DESC_0)
+        for descid, param in description:
+            if param is None:
+                continue
+
+            # Extract human-readable label
+            label = ""
+            try:
+                label = param.GetString(c4d.DESC_NAME)
+            except Exception:
+                try:
+                    label_data = param[c4d.DESC_NAME]
+                    if isinstance(label_data, str):
+                        label = label_data
+                    elif label_data is not None:
+                        try:
+                            label = label_data.GetString()
+                        except Exception:
+                            label = str(label_data)
+                except Exception:
+                    label = ""
+            label_lower = label.lower()
+
+            custom_gui = param.GetInt32(c4d.DESC_CUSTOMGUI)
+
+            if not path_descid:
+                if custom_gui == c4d.CUSTOMGUI_FILENAME or "cache path" in label_lower or "cache folder" in label_lower:
+                    path_descid = descid
+
+            if not name_descid and "cache name" in label_lower:
+                name_descid = descid
+
+            if path_descid and name_descid:
+                break
+    except Exception as exc:
+        print(f"[WARNING] Could not inspect xpCache parameters: {exc}")
+
+    return path_descid, name_descid
+
+
+def ensure_variant_xp_cache(doc, template_cache, variant_name, path_descid=None, name_descid=None):
+    """Clones the template xpCache object per variant and updates cache settings"""
+    if not template_cache:
+        print("[ERROR] No xpCache template available.")
+        return None
+
+    variant_object_name = f"{template_cache.GetName()}_{variant_name}"
+    cache_folder = os.path.join(BASE_PATH, "xp_cache", variant_name)
+    try:
+        os.makedirs(cache_folder, exist_ok=True)
+    except Exception as exc:
+        print(f"[ERROR] Failed to create cache folder '{cache_folder}': {exc}")
+
+    existing = doc.SearchObject(variant_object_name)
+    if existing:
+        if path_descid is not None:
+            try:
+                existing[path_descid] = cache_folder
+            except Exception as exc:
+                print(f"[WARNING] Could not update cache folder on '{variant_object_name}': {exc}")
+        if name_descid is not None:
+            try:
+                existing[name_descid] = variant_name
+            except Exception as exc:
+                print(f"[WARNING] Could not update cache name on '{variant_object_name}': {exc}")
+        c4d.EventAdd(c4d.EVENT_ANIMATE)
+        return existing
+
+    clone = template_cache.GetClone()
+    if not clone:
+        print(f"[ERROR] Failed to clone xpCache for variant '{variant_name}'.")
+        return None
+
+    clone.SetName(variant_object_name)
+
+    parent = template_cache.GetUp()
+    if parent:
+        clone.InsertUnder(parent)
+    else:
+        clone.InsertAfter(template_cache)
+
+    if path_descid is not None:
+        try:
+            clone[path_descid] = cache_folder
+        except Exception as exc:
+            print(f"[WARNING] Could not assign cache folder on '{variant_object_name}': {exc}")
+    else:
+        print(f"[WARNING] Cache folder parameter not resolved; '{variant_object_name}' will reuse template path.")
+
+    if name_descid is not None:
+        try:
+            clone[name_descid] = variant_name
+        except Exception as exc:
+            print(f"[WARNING] Could not assign cache name on '{variant_object_name}': {exc}")
+
+    c4d.EventAdd(c4d.EVENT_ANIMATE)
+    return clone
+
+
 def fill_xparticles_cache(xp_cache):
     """Triggers the X-Particles cache fill cycle"""
     if not xp_cache:
@@ -193,9 +334,27 @@ def set_turbulence_scale(turbulence, scale_percent):
     print(f"[INFO] Turbulence scale set to: {scale_percent}%")
     return True
 
-def save_project_copy(doc, scale):
+
+def set_xp_emitter_width(emitter, rect_width):
+    """Sets X-Particles emitter rectangle width"""
+    if not emitter:
+        print("[ERROR] X-Particles emitter object not found!")
+        return False
+
+    try:
+        emitter[c4d.PARTICLES_EMITTER_SHAPE_RECT_W] = rect_width
+    except Exception as exc:
+        print(f"[ERROR] Failed to set emitter width: {exc}")
+        return False
+
+    emitter.Message(c4d.MSG_UPDATE)
+    c4d.EventAdd()
+    print(f"[INFO] X-Particles emitter width set to: {rect_width}")
+    return True
+
+def save_project_copy(doc, variant_name):
     """Saves a copy of the project with unique name"""
-    filename = f"cloth_cache_turbulence_{scale:03d}.c4d"
+    filename = f"cloth_cache_{variant_name}.c4d"
     filepath = os.path.join(BASE_PATH, filename)
     
     print(f"[INFO] Saving project copy: {filename}...")
@@ -208,16 +367,16 @@ def save_project_copy(doc, scale):
     print(f"[INFO] Project saved: {filename}")
     return filepath
 
-def render_direct(doc, scale):
+def render_direct(doc, variant_name):
     """Renders directly in current session (may freeze UI)"""
     render_data = doc.GetActiveRenderData()
-    output_path = os.path.join(BASE_PATH, f"render_turbulence_{scale:03d}")
+    output_path = os.path.join(BASE_PATH, f"render_{variant_name}")
     render_data[c4d.RDATA_PATH] = output_path
     
     c4d.EventAdd()
     c4d.DrawViews()
     
-    msg = f"Rendering scale {scale}%..."
+    msg = f"Rendering variant {variant_name}..."
     print(f"[INFO] {msg}")
     show_status(msg)
     
@@ -251,13 +410,13 @@ def render_direct(doc, scale):
     time.sleep(1)
     return True
 
-def render_command_line(doc, scale):
+def render_command_line(doc, variant_name):
     """Renders using command line (non-blocking, recommended)"""
-    project_file = os.path.join(BASE_PATH, f"cloth_cache_turbulence_{scale:03d}.c4d")
-    output_file = os.path.join(BASE_PATH, f"render_turbulence_{scale:03d}")
+    project_file = os.path.join(BASE_PATH, f"cloth_cache_{variant_name}.c4d")
+    output_file = os.path.join(BASE_PATH, f"render_{variant_name}")
     
     # Save project with correct render path
-    if not save_project_copy(doc, scale):
+    if not save_project_copy(doc, variant_name):
         return False
     
     # Update render path in saved file
@@ -276,7 +435,7 @@ def render_command_line(doc, scale):
     try:
         # Start process and don't wait
         subprocess.Popen(cmd, shell=True, close_fds=True)
-        print(f"[INFO] ✓ Render launched for scale {scale}%")
+        print(f"[INFO] ✓ Render launched for variant {variant_name}")
         print(f"[INFO] Output will be: {output_file}")
         return True
     except Exception as e:
@@ -285,6 +444,16 @@ def render_command_line(doc, scale):
 
 def main():
     doc = c4d.documents.GetActiveDocument()
+    if not doc:
+        c4d.gui.MessageDialog("ERROR: No active document found!")
+        return False
+
+    global BASE_PATH
+    BASE_PATH = resolve_base_path(doc)
+    if not os.path.exists(BASE_PATH):
+        os.makedirs(BASE_PATH, exist_ok=True)
+    print(f"[INFO] Cache base path: {BASE_PATH}")
+
     show_status("Initializing script...")
     
     print("\n" + "="*70)
@@ -296,50 +465,91 @@ def main():
     
     plane = doc.SearchObject("Plane")
     turbulence = doc.SearchObject("Turbulence")
-    xp_cache = None
-    if ENABLE_XP_CACHE_FILL:
+    xp_emitter = None
+    xp_cache_template = None
+    xp_cache_path_descid = None
+    xp_cache_name_descid = None
+    if XPART:
+        xp_emitter = doc.SearchObject(XP_EMITTER_OBJECT_NAME)
+        if not xp_emitter:
+            print(f"[WARNING] X-Particles emitter '{XP_EMITTER_OBJECT_NAME}' not found. Width adjustments will be skipped.")
         if XPARTICLES_CACHE_FILL_ID is None:
             print("[WARNING] X-Particles cache fill parameter unavailable. Skipping X-Particles cache fills.")
         else:
-            xp_cache = find_xparticles_cache_object(doc)
-            if not xp_cache:
+            xp_cache_template = find_xparticles_cache_object(doc)
+            if not xp_cache_template:
                 print("[WARNING] No X-Particles cache object with fill parameter found. Skipping X-Particles cache fills.")
+            else:
+                xp_cache_path_descid, xp_cache_name_descid = detect_xp_cache_parameters(xp_cache_template)
+                if xp_cache_path_descid is None:
+                    print("[WARNING] Could not resolve xpCache folder parameter; caches may overwrite each other.")
+                if xp_cache_name_descid is None:
+                    print("[WARNING] Could not resolve xpCache name parameter; using template naming.")
     
     if not plane or not turbulence:
         c4d.gui.MessageDialog("ERROR: 'Plane' or 'Turbulence' object not found!")
         return False
     
-    cloth_tag = plane.GetTag(c4d.Tcloth)
-    if not cloth_tag:
-        c4d.gui.MessageDialog("ERROR: No Cloth tag found on 'Plane' object!")
-        return False
+    cloth_tag = None
+    if NATIVE:
+        cloth_tag = plane.GetTag(c4d.Tcloth)
+        if not cloth_tag:
+            c4d.gui.MessageDialog("ERROR: No Cloth tag found on 'Plane' object!")
+            return False
     
-    # Test with ONE scale first
-    scales = [20, 100, 1]  # Change to [20, 50, 100] after testing
     render_started = False
+    total_variants = len(CACHE_VARIANTS)
     
-    for i, scale in enumerate(scales):
+    for index, (variant_name, settings) in enumerate(CACHE_VARIANTS.items()):
+        scale = settings.get("turbulence_scale")
+        emitter_width = settings.get("xp_emitter_rect_width")
+
         print(f"\n{'='*60}")
-        print(f"STEP {i+1}/{len(scales)}: Processing Turbulence Scale {scale}%")
+        print(f"STEP {index + 1}/{total_variants}: Processing variant '{variant_name}'")
+        print(f"- Turbulence Scale: {scale}%")
+        if emitter_width is not None:
+            print(f"- XP Emitter Width: {emitter_width}")
         print(f"{'='*60}")
         
-        if not set_turbulence_scale(turbulence, scale):
+        if scale is not None and not set_turbulence_scale(turbulence, scale):
             continue
+
+        if XPART and emitter_width is not None and xp_emitter:
+            if not set_xp_emitter_width(xp_emitter, emitter_width):
+                c4d.gui.MessageDialog(f"ERROR: Failed to set emitter width for variant '{variant_name}'")
+                continue
+        elif XPART and not xp_emitter:
+            print("[INFO] Skipping emitter width adjustment (emitter not found).")
         
-        if not bake_cloth_cache(doc, cloth_tag):
-            c4d.gui.MessageDialog(f"ERROR: Failed to bake cache for scale {scale}%")
-            continue
+        if NATIVE:
+            if not bake_cloth_cache(doc, cloth_tag):
+                c4d.gui.MessageDialog(f"ERROR: Failed to bake cache for variant '{variant_name}'")
+                continue
+        else:
+            print("[INFO] Native cloth cache disabled. Skipping cloth bake.")
         
-        if ENABLE_XP_CACHE_FILL and xp_cache and XPARTICLES_CACHE_FILL_ID is not None:
-            if not fill_xparticles_cache(xp_cache):
-                c4d.gui.MessageDialog(f"ERROR: Failed to fill X-Particles cache for scale {scale}%")
+        if XPART and xp_cache_template and XPARTICLES_CACHE_FILL_ID is not None:
+            variant_cache = ensure_variant_xp_cache(
+                doc,
+                xp_cache_template,
+                variant_name,
+                path_descid=xp_cache_path_descid,
+                name_descid=xp_cache_name_descid,
+            )
+
+            if not variant_cache:
+                c4d.gui.MessageDialog(f"ERROR: Could not prepare X-Particles cache object for variant '{variant_name}'")
+                continue
+
+            if not fill_xparticles_cache(variant_cache):
+                c4d.gui.MessageDialog(f"ERROR: Failed to fill X-Particles cache for variant '{variant_name}'")
                 continue
 
         if RENDER:
             if USE_DIRECT_RENDER:
-                render_direct(doc, scale)
+                render_direct(doc, variant_name)
             else:
-                render_command_line(doc, scale)
+                render_command_line(doc, variant_name)
             render_started = True
             
             # Critical: Let C4D breathe between iterations
@@ -349,8 +559,6 @@ def main():
                 c4d.DrawViews()
                 time.sleep(0.2)
             print(" done.")
-        else:
-            msg = "Render was not on."
     
     c4d.gui.StatusClear()
     
