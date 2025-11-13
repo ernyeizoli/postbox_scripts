@@ -14,6 +14,14 @@ C4D_EXECUTABLE = r"C:\Program Files\Maxon Cinema 4D 2024\Cinema 4D.exe"
 RENDER = False
 USE_DIRECT_RENDER = False
 
+# X-Particles cache configuration
+ENABLE_XP_CACHE_FILL = True  # Set False to skip X-Particles cache fills
+
+try:
+    XPARTICLES_CACHE_FILL_ID = c4d.XOCA_CACHE_FILL
+except AttributeError:
+    XPARTICLES_CACHE_FILL_ID = None
+
 # Ensure base path exists
 if not os.path.exists(BASE_PATH):
     os.makedirs(BASE_PATH)
@@ -44,6 +52,101 @@ def wait_for_editor_completion():
     
     print("\n[INFO] Operation completed.")
     return True
+
+
+def wait_for_xparticles_cache(xp_cache, timeout=600):
+    """Polls X-Particles cache fill state until completion or timeout"""
+    if XPARTICLES_CACHE_FILL_ID is None:
+        print("[ERROR] X-Particles support unavailable (missing constant).")
+        return False
+
+    print("\n[INFO] Waiting for X-Particles cache fill...", end="", flush=True)
+    waited = 0.0
+    read_error_logged = False
+    active_detected = False
+
+    def is_fill_active():
+        nonlocal read_error_logged
+        try:
+            return bool(xp_cache[XPARTICLES_CACHE_FILL_ID])
+        except Exception as exc:
+            if not read_error_logged:
+                print(f"\n[WARNING] Could not read X-Particles cache state: {exc}")
+                read_error_logged = True
+            return False
+
+    while waited < timeout:
+        active = is_fill_active()
+
+        if active:
+            active_detected = True
+            if int(waited * 5) % 5 == 0:  # Dot roughly every second
+                print(".", end="", flush=True)
+        else:
+            if active_detected:
+                print("\n[INFO] X-Particles cache fill completed.")
+                return True
+            if waited >= 1.0:
+                print("\n[INFO] No cache fill state detected; assuming completion.")
+                return True
+
+        c4d.GeSyncMessage(c4d.EVMSG_ASYNCEDITORMOVE)
+        c4d.DrawViews()
+        time.sleep(0.2)
+        waited += 0.2
+
+    if active_detected and is_fill_active():
+        print("\n[ERROR] X-Particles cache fill timed out!")
+        return False
+
+    print("\n[INFO] X-Particles cache fill completed.")
+    return True
+
+
+def find_xparticles_cache_object(doc):
+    """Scans the document hierarchy for an object exposing the cache fill parameter"""
+    if XPARTICLES_CACHE_FILL_ID is None:
+        return None
+
+    def traverse(op):
+        while op:
+            try:
+                op[XPARTICLES_CACHE_FILL_ID]
+                return op
+            except Exception:
+                pass
+
+            child_result = traverse(op.GetDown())
+            if child_result:
+                return child_result
+
+            op = op.GetNext()
+        return None
+
+    return traverse(doc.GetFirstObject())
+
+
+def fill_xparticles_cache(xp_cache):
+    """Triggers the X-Particles cache fill cycle"""
+    if not xp_cache:
+        print("[ERROR] X-Particles cache object not found!")
+        return False
+
+    if XPARTICLES_CACHE_FILL_ID is None:
+        print("[ERROR] X-Particles cache fill parameter unavailable.")
+        return False
+
+    show_status("Filling X-Particles cache...")
+    triggered = c4d.CallButton(xp_cache, XPARTICLES_CACHE_FILL_ID)
+    c4d.EventAdd(c4d.EVENT_ANIMATE)
+
+    if not triggered:
+        print("[WARNING] X-Particles cache fill button did not trigger. Assuming manual completion.")
+        return True
+
+    success = wait_for_xparticles_cache(xp_cache)
+    time.sleep(0.5)
+    return success
 
 def clear_cloth_cache(cloth_tag):
     """Safely clears cloth cache using UI buttons"""
@@ -193,6 +296,14 @@ def main():
     
     plane = doc.SearchObject("Plane")
     turbulence = doc.SearchObject("Turbulence")
+    xp_cache = None
+    if ENABLE_XP_CACHE_FILL:
+        if XPARTICLES_CACHE_FILL_ID is None:
+            print("[WARNING] X-Particles cache fill parameter unavailable. Skipping X-Particles cache fills.")
+        else:
+            xp_cache = find_xparticles_cache_object(doc)
+            if not xp_cache:
+                print("[WARNING] No X-Particles cache object with fill parameter found. Skipping X-Particles cache fills.")
     
     if not plane or not turbulence:
         c4d.gui.MessageDialog("ERROR: 'Plane' or 'Turbulence' object not found!")
@@ -205,6 +316,7 @@ def main():
     
     # Test with ONE scale first
     scales = [20, 100, 1]  # Change to [20, 50, 100] after testing
+    render_started = False
     
     for i, scale in enumerate(scales):
         print(f"\n{'='*60}")
@@ -218,11 +330,17 @@ def main():
             c4d.gui.MessageDialog(f"ERROR: Failed to bake cache for scale {scale}%")
             continue
         
+        if ENABLE_XP_CACHE_FILL and xp_cache and XPARTICLES_CACHE_FILL_ID is not None:
+            if not fill_xparticles_cache(xp_cache):
+                c4d.gui.MessageDialog(f"ERROR: Failed to fill X-Particles cache for scale {scale}%")
+                continue
+
         if RENDER:
             if USE_DIRECT_RENDER:
                 render_direct(doc, scale)
             else:
                 render_command_line(doc, scale)
+            render_started = True
             
             # Critical: Let C4D breathe between iterations
             print("[INFO] Cooling down...", end="", flush=True)
@@ -237,12 +355,14 @@ def main():
     c4d.gui.StatusClear()
     
     # Final message
-    if not FINAL:
+    if not RENDER:
         msg = "Render was not turned on."
     elif USE_DIRECT_RENDER:
         msg = "Direct rendering complete! Check Picture Viewer."
+    elif render_started:
+        msg = "Command line renders launched! Check the output folder for results."
     else:
-        msg = "Command line renders launched! Or script ended who knows??"
+        msg = "No renders were launched."
     
     c4d.gui.MessageDialog(msg)
     print("\n" + "="*70)
