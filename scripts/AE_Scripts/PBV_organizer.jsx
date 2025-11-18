@@ -185,11 +185,17 @@
                 var snappedStart = toTimeValue(snappedStartFrame);
                 comp.displayStartTime = snappedStart; // Align comp start with earliest layer
                 comp.time = snappedStart; // Keep playhead parked on the new start frame
-                app.project.activeItem.time = snappedStart; // Explicitly park active comp timeline cursor
+                if (app.project.activeItem && app.project.activeItem === comp) {
+                    app.project.activeItem.time = snappedStart; // Explicitly park active comp timeline cursor
+                }
                 try {
                     var compViewer = comp.openInViewer(); // Refresh the active viewer to reflect the new start frame
                     if (compViewer && compViewer.type === ViewerType.VIEWER_COMPOSITION) {
                         compViewer.time = snappedStart;
+                        compViewer.setActive();
+                    }
+                    if (app.activeViewer && app.activeViewer.type === ViewerType.VIEWER_COMPOSITION) {
+                        app.activeViewer.time = snappedStart;
                     }
                 } catch (viewerErr) {
                     // Safe fail if viewer update is unavailable
