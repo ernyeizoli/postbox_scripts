@@ -89,6 +89,8 @@
             }
             app.beginUndoGroup("Flatten Precomps with Effects");
             var replacedCount = 0;
+            var originalDisplayStart = comp.displayStartTime;
+            var frameDuration = comp.frameDuration;
             for (var j = comp.numLayers; j >= 1; j--) {
                 var layer = comp.layer(j);
                 if (!layer.source || !(layer.source instanceof CompItem)) continue;
@@ -118,8 +120,95 @@
                     replacedCount++;
                 }
             }
+            function toFrameIndex(timeValue) {
+                if (typeof timeToFrames === "function") {
+                    return timeToFrames(timeValue, comp.frameRate);
+                }
+                return Math.round(timeValue / frameDuration);
+            }
+
+            function toTimeValue(frameIndex) {
+                if (typeof framesToTime === "function") {
+                    return framesToTime(frameIndex, comp.frameRate);
+                }
+                return frameIndex * frameDuration + 0.001;
+            }
+
+            function extractFrameFromName(name) {
+                if (!name) { return null; }
+                var rangeMatch = name.match(/\[(\d+)[^\]]*\]/);
+                if (rangeMatch && rangeMatch[1]) { return parseInt(rangeMatch[1], 10); }
+                var trailingMatch = name.match(/\.\D*?(\d{3,})/);
+                return trailingMatch && trailingMatch[1] ? parseInt(trailingMatch[1], 10) : null;
+            }
+
+            function detectPlateStartFrame() {
+                for (var idx = 1; idx <= comp.numLayers; idx++) {
+                    var lyr = comp.layer(idx);
+                    if (!lyr || !lyr.source) { continue; }
+                    var sourceName = lyr.source.name;
+                    var layerName = lyr.name;
+                    var fileName = (lyr.source.mainSource && lyr.source.mainSource.file) ? lyr.source.mainSource.file.name : null;
+                    var matchFrame = extractFrameFromName(sourceName) || extractFrameFromName(layerName) || extractFrameFromName(fileName);
+                    if (matchFrame !== null) { return matchFrame; }
+                }
+                return null;
+            }
+
+            var earliestLayerStartFrame = null;
+            for (var k = 1; k <= comp.numLayers; k++) {
+                var currentLayer = comp.layer(k);
+                if (!currentLayer) { continue; }
+                var layerStartFrame = toFrameIndex(currentLayer.inPoint);
+                if (earliestLayerStartFrame === null || layerStartFrame < earliestLayerStartFrame) {
+                    earliestLayerStartFrame = layerStartFrame;
+                }
+            }
+            var startChangeLog = "Comp start unchanged.";
+            var newDisplayStart = originalDisplayStart;
+            var detectedStartFrame = detectPlateStartFrame();
+            var targetStartFrame = null;
+            if (detectedStartFrame !== null) {
+                targetStartFrame = detectedStartFrame;
+            } else {
+                var dialogDefault = (earliestLayerStartFrame !== null) ? earliestLayerStartFrame : 1001;
+                var manualFrameInput = prompt("No frame number was detected in your EXR name. Enter the first frame for this comp:", dialogDefault.toString(), "Ultimate EXR Organizer");
+                if (manualFrameInput === null) {
+                    targetStartFrame = dialogDefault;
+                } else {
+                    var manualFrame = parseInt(manualFrameInput, 10);
+                    targetStartFrame = isNaN(manualFrame) ? dialogDefault : manualFrame;
+                }
+            }
+            if (targetStartFrame !== null) {
+                var snappedStartFrame = targetStartFrame;
+                var snappedStart = toTimeValue(snappedStartFrame);
+                comp.displayStartTime = snappedStart; // Align comp start with earliest layer
+                comp.time = snappedStart; // Keep playhead parked on the new start frame
+                if (app.project.activeItem && app.project.activeItem === comp) {
+                    app.project.activeItem.time = snappedStart; // Explicitly park active comp timeline cursor
+                }
+                try {
+                    var compViewer = comp.openInViewer(); // Refresh the active viewer to reflect the new start frame
+                    if (compViewer && compViewer.type === ViewerType.VIEWER_COMPOSITION) {
+                        compViewer.time = snappedStart;
+                        compViewer.setActive();
+                    }
+                    if (app.activeViewer && app.activeViewer.type === ViewerType.VIEWER_COMPOSITION) {
+                        app.activeViewer.time = snappedStart;
+                    }
+                } catch (viewerErr) {
+                    // Safe fail if viewer update is unavailable
+                }
+                newDisplayStart = comp.displayStartTime;
+                var originalFrame = Math.round(originalDisplayStart / frameDuration);
+                var newFrame = snappedStartFrame;
+                startChangeLog = "Comp start changed from frame " + originalFrame + " (" + originalDisplayStart.toFixed(3) + "s) to frame " + newFrame + " (" + toTimeValue(newFrame).toFixed(3) + "s).";
+            }
             app.endUndoGroup();
-            alert("✅ Flatten complete.\n\nReplaced layers: " + replacedCount);
+            var message = "✅ Flatten complete.\n\nReplaced layers: " + replacedCount + "\n" + startChangeLog;
+            alert(message);
+            $.writeln("[Ultimate EXR Organizer] " + startChangeLog);
         };
 
         // --- ORGANIZE BUTTON (Fully Optimized) ---
