@@ -1,0 +1,387 @@
+// PBV Delivery 3.2 — _REPLACEABLE_EXR, Color Layers (A/B), RENAME (Adjustment -> FX names, Null -> Parent of ...)
+// JUST DO IT! now also runs RENAME across all comps at the end.
+{
+    function myScript(thisObj){
+        function myScript_buildUI(thisObj){
+            var myPanel = (thisObj instanceof Panel) ? thisObj : new Window("palette", "PBV Delivery 3.3", undefined, {resizeable:true});
+            var justDoItButton = myPanel.add("button",[10,10,180,30], "JUST DO IT!");
+            var divider = myPanel.add("panel", [10, 10, 180, 15]);
+            divider.graphics.backgroundColor = divider.graphics.newBrush (divider.graphics.BrushType.SOLID_COLOR, [1, 1, 0], 1);
+
+            var myButton      = myPanel.add("button",[10,10,180,30], "Folder Structure");
+            var movecomps     = myPanel.add("button",[10,10,180,30], "Move Comps");
+            var moveAi        = myPanel.add("button",[10,10,180,30], "Move Vector files");
+            var movepng       = myPanel.add("button",[10,10,180,30], "Move Images");
+            var movepsd       = myPanel.add("button",[10,10,180,30], "Move PSD files");
+            var moveplates    = myPanel.add("button",[10,10,180,30], "Move Footages");
+            var movesound     = myPanel.add("button",[10,10,180,30], "Move Sound");
+            var movesolids    = myPanel.add("button",[10,10,180,30], "Move Solids");
+            var colorActive   = myPanel.add("button",[10,10,180,30], "Color Layers (Active Comp)");
+            var colorAll      = myPanel.add("button",[10,10,180,30], "Color Layers (All Comps)");
+            var renameAdjBtn  = myPanel.add("button",[10,10,180,30], "RENAME (Adjustment/Null)");
+            var deletefolders = myPanel.add("button",[10,10,180,30], "Delete Empty Folders");
+
+            var label = myPanel.add("statictext", [28, 0, 150, 30], "Postbox Delivery - 2026");
+            label.graphics.font = ScriptUI.newFont("Arial-BoldMT", "BOLD", 16);
+            label.graphics.foregroundColor = label.graphics.newPen(label.graphics.PenType.SOLID_COLOR, [1, 1, 0], 1);
+            label.alignment = "center";
+            movesolids.graphics.foregroundColor = label.graphics.newPen(label.graphics.PenType.SOLID_COLOR, [1, 1, 0], 1);
+
+            // ---------- helpers ----------
+            function getExt(name){
+                var i = name.lastIndexOf(".");
+                return (i>=0) ? name.substring(i+1).toLowerCase() : "";
+            }
+            function isEXRSequence(footageItem){
+                try {
+                    if (!(footageItem instanceof FootageItem)) return false;
+                    if (getExt(footageItem.name) !== "exr") return false;
+                    return (footageItem.mainSource && footageItem.mainSource.isStill === false);
+                } catch(e){ return false; }
+            }
+            function isEXRStill(footageItem){
+                try {
+                    if (!(footageItem instanceof FootageItem)) return false;
+                    if (getExt(footageItem.name) !== "exr") return false;
+                    return (footageItem.mainSource && footageItem.mainSource.isStill === true);
+                } catch(e){ return false; }
+            }
+            function findOrCreateFolder(parentFolder, name){
+                for (var j=1; j<=parentFolder.numItems; j++){
+                    var it = parentFolder.item(j);
+                    if (it instanceof FolderItem && it.name === name) return it;
+                }
+                return parentFolder.items.addFolder(name);
+            }
+            function getOrCreateStructure(){
+                var root = app.project.rootFolder;
+                var ASSETS = findOrCreateFolder(root, "_ASSETS");
+                var REPL_EXR = findOrCreateFolder(root, "_REPLACEABLE_EXR"); // next to _ASSETS
+
+                var AUDIO   = findOrCreateFolder(ASSETS, "AUDIO");
+                var COMPS   = findOrCreateFolder(ASSETS, "COMPS");
+                var ELEMENTS= findOrCreateFolder(ASSETS, "ELEMENTS");
+                var FOOTAGE = findOrCreateFolder(ASSETS, "FOOTAGE");
+                var SOLIDS  = findOrCreateFolder(ASSETS, "SOLIDS");
+
+                var AI      = findOrCreateFolder(ELEMENTS, "AI");
+                var IMG     = findOrCreateFolder(ELEMENTS, "IMG");
+                var PS      = findOrCreateFolder(ELEMENTS, "PS");
+
+                return {root:root, ASSETS:ASSETS, REPL_EXR:REPL_EXR, AUDIO:AUDIO, COMPS:COMPS, ELEMENTS:ELEMENTS, FOOTAGE:FOOTAGE, SOLIDS:SOLIDS, AI:AI, IMG:IMG, PS:PS};
+            }
+
+            // ---------- Folder Structure ----------
+            myButton.helpTip = "Create the right Directories (adds _REPLACEABLE_EXR next to _ASSETS)";
+            myButton.onClick = function() { getOrCreateStructure(); };
+
+            // ---------- Move Comps ----------
+            movecomps.helpTip = "Move all the compositions to _ASSETS/COMPS (active comp stays in root).";
+            movecomps.onClick = function() {
+                var S = getOrCreateStructure();
+                var compFolder = S.COMPS;
+                var rootFolder = S.root;
+                var activeComp = app.project.activeItem;
+
+                var comps = [];
+                for (var i = 1; i <= app.project.numItems; i++) {
+                    if (app.project.item(i) instanceof CompItem) comps.push(app.project.item(i));
+                }
+                for (var k = 0; k < comps.length; k++) {
+                    if (activeComp && comps[k] === activeComp){
+                        activeComp.parentFolder = rootFolder; // keep in root
+                    } else {
+                        comps[k].parentFolder = compFolder;
+                    }
+                }
+            };
+
+            // ---------- Move AI/EPS/PDF/SVG ----------
+            moveAi.helpTip = "Move all the Illustrator/Vector files to _ASSETS/ELEMENTS/AI";
+            moveAi.onClick = function (){
+                var S = getOrCreateStructure();
+                var aiFolder = S.AI; if (!aiFolder) return;
+                var ai = [];
+                for(var i = 1; i <= app.project.numItems; i++){
+                    var it = app.project.item(i);
+                    var ext = getExt(it.name);
+                    if ((it instanceof FootageItem) && (ext==="ai" || ext==="eps" || ext==="pdf" || ext==="svg")){
+                        ai.push(it);
+                    }
+                }
+                for (var j = 0; j < ai.length; j++) ai[j].parentFolder = aiFolder;
+            };
+
+            // ---------- Move Images (incl. EXR stills) ----------
+            movepng.helpTip = "Move images to _ASSETS/ELEMENTS/IMG (png/jpg/jpeg/tif/tiff/bmp/gif/webp + EXR stills)";
+            movepng.onClick = function (){
+                var S = getOrCreateStructure();
+                var pngFolder = S.IMG; if (!pngFolder) return;
+                var items = [];
+                for(var i = 1; i <= app.project.numItems; i++){
+                    var it = app.project.item(i);
+                    if (!(it instanceof FootageItem)) continue;
+                    var ext = getExt(it.name);
+                    var isImg = (ext==="png" || ext==="jpg" || ext==="jpeg" || ext==="tif" || ext==="tiff" || ext==="bmp" || ext==="gif" || ext==="webp");
+                    if (isImg || isEXRStill(it)){ items.push(it); }
+                }
+                for (var j = 0; j < items.length; j++) items[j].parentFolder = pngFolder;
+            };
+
+            // ---------- Move PSD/PSB ----------
+            movepsd.helpTip = "Move all the PSD/PSB files to _ASSETS/ELEMENTS/PS";
+            movepsd.onClick = function (){
+                var S = getOrCreateStructure();
+                var psdFolder = S.PS; if (!psdFolder) return;
+                var psds = [];
+                for(var i = 1; i <= app.project.numItems; i++){
+                    var it = app.project.item(i);
+                    var ext = getExt(it.name);
+                    if ((it instanceof FootageItem) && (ext === "psd" || ext === "psb")) psds.push(it);
+                }
+                for (var j = 0; j < psds.length; j++) psds[j].parentFolder = psdFolder;
+            };
+
+            // ---------- Move Footage (EXR seq excluded; they go to _REPLACEABLE_EXR) ----------
+            moveplates.helpTip = "Move video footages to _ASSETS/FOOTAGE (EXR sequences go to _REPLACEABLE_EXR)";
+            moveplates.onClick = function (){
+                var S = getOrCreateStructure();
+                var platesFolder = S.FOOTAGE; if (!platesFolder) return;
+                var exrFolder = S.REPL_EXR;
+
+                var vids = [], exrSeq = [];
+                for(var i = 1; i <= app.project.numItems; i++){
+                    var it = app.project.item(i);
+                    if (!(it instanceof FootageItem)) continue;
+                    var ext = getExt(it.name);
+
+                    if (ext === "exr"){
+                        if (isEXRSequence(it)) exrSeq.push(it);
+                        continue; // EXR stillt a Move Images kezeli
+                    }
+
+                    if (ext==="mov" || ext==="mp4" || ext==="mxf" || ext==="avi" || ext==="mkv" || ext==="r3d" || ext==="ari" || ext==="mts" || ext==="m2ts" || ext==="webm"){
+                        vids.push(it);
+                    }
+                }
+                for (var v=0; v<vids.length; v++) vids[v].parentFolder = platesFolder;
+                for (var e=0; e<exrSeq.length; e++) exrSeq[e].parentFolder = exrFolder;
+            };
+
+            // ---------- Move Sound ----------
+            movesound.helpTip = "Move all the Sound files to _ASSETS/AUDIO";
+            movesound.onClick = function (){
+                var S = getOrCreateStructure();
+                var soundFolder = S.AUDIO; if (!soundFolder) return;
+                var sounds = [];
+                for(var i = 1; i <= app.project.numItems; i++){
+                    var it = app.project.item(i);
+                    var ext = getExt(it.name);
+                    if ((it instanceof FootageItem) && (ext==="wav" || ext==="aif" || ext==="aiff" || ext==="mp3" || ext==="ogg" || ext==="flac")){
+                        sounds.push(it);
+                    }
+                }
+                for (var j = 0; j < sounds.length; j++) sounds[j].parentFolder = soundFolder;
+            };
+
+            // ---------- Move Solids (from any 'Solids' folder) ----------
+            movesolids.helpTip = "Move all items from any 'Solids' folder into _ASSETS/SOLIDS";
+            movesolids.onClick = function () {
+                var S = getOrCreateStructure();
+                var solidsTarget = S.SOLIDS;
+
+                function findFoldersByName(folder, name, resultArray) {
+                    for (var i = 1; i <= folder.numItems; i++) {
+                        if (folder.item(i) instanceof FolderItem && folder.item(i).name === name) {
+                            resultArray.push(folder.item(i));
+                        } else if (folder.item(i) instanceof FolderItem) {
+                            findFoldersByName(folder.item(i), name, resultArray);
+                        }
+                    }
+                    return resultArray;
+                }
+
+                var solidsFolders = findFoldersByName(app.project.rootFolder, "Solids", []);
+                for (var l = 0; l < solidsFolders.length; l++) {
+                    var currentSolidsFolder = solidsFolders[l];
+                    for (var m = currentSolidsFolder.numItems; m >= 1; m--) {
+                        try { currentSolidsFolder.item(m).parentFolder = solidsTarget; } catch(e){}
+                    }
+                }
+            };
+
+            // ---------- COLOR LABELS ----------
+            // 1. lépés: Hozzáadjuk a GREEN-t a listához (9-es index)
+            var LABELS = {
+                YELLOW: 2,  ORANGE: 11, BLUE: 8, RED: 1, CYAN: 14, 
+                PEACH: 6, FUCHSIA: 13, PURPLE: 10, GREEN: 9 
+            };
+
+            // Globális cache változók a rekurzív kereséshez (hogy ne fagyjon le a gép nagy projektnél)
+            var compContainsTextCache = {};
+            var compContainsEXRCache = {};
+
+            // Segédfüggvény: Törli a cache-t minden futtatás előtt
+            function resetCache() {
+                compContainsTextCache = {};
+                compContainsEXRCache = {};
+            }
+
+            // REKURZÍV keresés: Tartalmaz-e Text layert (bármilyen mélységben)?
+            function scanCompForText(comp) {
+                // Ha már vizsgáltuk ezt a compot, adjuk vissza az eltárolt eredményt
+                if (compContainsTextCache[comp.id] !== undefined) {
+                    return compContainsTextCache[comp.id];
+                }
+
+                var found = false;
+                for (var i = 1; i <= comp.numLayers; i++) {
+                    var layer = comp.layer(i);
+                    // 1. Eset: Közvetlen Text Layer
+                    if (layer instanceof TextLayer) {
+                        found = true;
+                        break;
+                    }
+                    // 2. Eset: Precomp -> Rekurzív hívás
+                    if (layer instanceof AVLayer && layer.source instanceof CompItem) {
+                        if (scanCompForText(layer.source)) {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+                // Eredmény tárolása és visszaadása
+                compContainsTextCache[comp.id] = found;
+                return found;
+            }
+
+            // REKURZÍV keresés: Tartalmaz-e EXR szekvenciát (bármilyen mélységben)?
+            function scanCompForEXR(comp) {
+                if (compContainsEXRCache[comp.id] !== undefined) {
+                    return compContainsEXRCache[comp.id];
+                }
+
+                var found = false;
+                for (var i = 1; i <= comp.numLayers; i++) {
+                    var layer = comp.layer(i);
+                    // 1. Eset: Közvetlen EXR Szekvencia
+                    // (Itt használjuk a fenti isEXRSequence segédfüggvényt, de layerre alkalmazva)
+                    var isEXRLayer = (layer instanceof AVLayer) && 
+                                     (layer.source instanceof FootageItem) && 
+                                     isEXRSequence(layer.source);
+                    
+                    if (isEXRLayer) {
+                        found = true;
+                        break;
+                    }
+                    // 2. Eset: Precomp -> Rekurzív hívás
+                    if (layer instanceof AVLayer && layer.source instanceof CompItem) {
+                        if (scanCompForEXR(layer.source)) {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+                compContainsEXRCache[comp.id] = found;
+                return found;
+            }
+
+            function colorizeComp(comp){
+                if (!(comp && comp instanceof CompItem)) return;
+                
+                for (var i=1; i<=comp.numLayers; i++){
+                    var L = comp.layer(i);
+
+                    var isPrecompLayer    = (L instanceof AVLayer) && (L.source instanceof CompItem);
+                    var isFootageLayer    = (L instanceof AVLayer) && (L.source instanceof FootageItem);
+                    var isTextLayer       = (L instanceof TextLayer);
+                    var isShapeLayer      = (L instanceof ShapeLayer);
+                    var isAdjustmentLayer = (L.adjustmentLayer === true);
+                    var isSolidLayer      = (L instanceof AVLayer) && isFootageLayer && (function(){
+                        try { return (L.source.mainSource instanceof SolidSource); } catch(e){ return false; }
+                    })();
+                    var isNullLayer       = (L instanceof AVLayer) && (function(){
+                        try { return L.nullLayer === true; } catch(e){ return false; }
+                    })();
+                    var isAudioLayer      = (L instanceof AVLayer) && (function(){
+                        try { return (L.hasAudio === true && L.hasVideo === false); } catch(e){ return false; }
+                    })();
+                    var isCameraLayer     = (L instanceof CameraLayer);
+
+                    // --- JAVÍTOTT LOGIKA ---
+                    
+                    if (isAdjustmentLayer || isSolidLayer){ 
+                        L.label = LABELS.ORANGE;
+
+                    } else if (isNullLayer){ 
+                        L.label = LABELS.RED;
+
+                    } else if (isAudioLayer){ 
+                        L.label = LABELS.CYAN; // Audio előbbre hozva!
+
+                    } else if (isTextLayer){ 
+                        L.label = LABELS.YELLOW;
+
+                    } else if (isCameraLayer){ 
+                        L.label = LABELS.PEACH;
+
+                    } else if (isShapeLayer){ 
+                        L.label = LABELS.FUCHSIA;
+
+                    } else if (isPrecompLayer){
+                        // ITT A LÉNYEG: Precompok speciális vizsgálata
+                        // A sorrend számít: Ha van Text, az nyer (Yellow). Ha nincs Text, de van EXR, az Green.
+                        
+                        if (scanCompForText(L.source)) {
+                            L.label = LABELS.YELLOW; // Van benne szöveg (mélyen is)
+                        } else if (scanCompForEXR(L.source)) {
+                            L.label = LABELS.GREEN;  // Van benne EXR (mélyen is)
+                        } else {
+                            L.label = LABELS.PURPLE; // Egyik sincs, sima precomp
+                        }
+
+                    } else if (isFootageLayer){
+                        // Ellenőrizzük, hogy ez maga nem-e egy EXR sequence közvetlenül
+                        if (isEXRSequence(L.source)) {
+                            L.label = LABELS.GREEN;
+                        } else {
+                            L.label = LABELS.BLUE;
+                        }
+                    }
+                }
+            }
+
+            colorActive.helpTip = "Színezi az AKTÍV kompozíció rétegeit (Deep Text/EXR check).";
+            colorActive.onClick = function(){
+                var comp = app.project.activeItem;
+                if (!(comp && comp instanceof CompItem)) return alert("No active composition found.");
+                
+                resetCache(); // Cache ürítése futtatás előtt
+                app.beginUndoGroup("Color Layers (Active Comp)");
+                colorizeComp(comp);
+                app.endUndoGroup();
+            };
+
+            colorAll.helpTip = "Színezi a TELJES PROJEKT összes kompozíciójának rétegeit (Deep Text/EXR check).";
+            colorAll.onClick = function(){
+                resetCache(); // Cache ürítése futtatás előtt
+                app.beginUndoGroup("Color Layers (All Comps)");
+                for (var i=1; i<=app.project.numItems; i++){
+                    var it = app.project.item(i);
+                    if (it instanceof CompItem) colorizeComp(it);
+                }
+                app.endUndoGroup();
+            };
+
+            myPanel.layout.layout(true);
+            return myPanel;
+        }
+
+        var myScriptPal = myScript_buildUI(thisObj);
+        if (myScriptPal != null && myScriptPal instanceof Window){
+            myScriptPal.center();
+            myScriptPal.show();
+        }
+    }
+    myScript(this);
+}
