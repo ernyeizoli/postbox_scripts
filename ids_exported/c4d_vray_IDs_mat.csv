@@ -1,0 +1,215 @@
+--- Inspecting Material: aerial ---
+
+Found Node: com.chaos.vray_node.texbitmap
+------------------------------
+C:\Users\user\AppData\Roaming\Maxon\Maxon Cinema 4D 2025_789E552B\library\scripts\C4D_filename_set.py:44: DeprecationWarning: GetDefaultValue is deprecated use GetPortValue (since 2024.4).
+  def parse_folder(folder_path):
+Port ID: com.chaos.vray_node.texbitmap.file | Value: file://10.10.101.10/creative/work/Postbox/10_Internal-Projects/PM0002_LV_FORTKNOXX/04_Resources/Libraries/PolyHaven/texture/aerial_rocks_02_rough_1k.jpg
+Port ID: com.chaos.vray_node.texbitmap.uv_tiling_mode | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.filter_type | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.interpolation | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.filter_blur | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.transfer_function | Value: 3
+Port ID: com.chaos.vray_node.texbitmap.gamma | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.rgb_primaries | Value: 2
+Port ID: com.chaos.vray_node.texbitmap.imported_primaries | Value: true
+Port ID: com.chaos.vray_node.texbitmap.allow_negative_colors | Value: false
+Port ID: com.chaos.vray_node.texbitmap.color_mult | Value: R:1.0, G:1.0, B:1.0, Alpha:1.0
+Port ID: com.chaos.vray_node.texbitmap.color_offset | Value: R:0.0, G:0.0, B:0.0, Alpha:1.0
+Port ID: com.chaos.vray_node.texbitmap.invert | Value: true
+Port ID: com.chaos.vray_node.texbitmap.alpha_from_intensity | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.invert_alpha | Value: true
+Port ID: com.chaos.vray_node.texbitmap.alpha_mult | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.alpha_offset | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.nouvw_color | Value: R:0.5, G:0.5, B:0.5, Alpha:1.0
+Port ID: com.chaos.vray_node.texbitmap.tile | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.placement_type | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.tile_u | Value: false
+Port ID: com.chaos.vray_node.texbitmap.u | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.w | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.tile_v | Value: false
+Port ID: com.chaos.vray_node.texbitmap.v | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.h | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.jitter | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.uv_noise_on | Value: false
+Port ID: com.chaos.vray_node.texbitmap.uv_noise_animate | Value: false
+Port ID: com.chaos.vray_node.texbitmap.uv_noise_amount | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.uv_noise_levels | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.uv_noise_size | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.un_noise_phase | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.uvwgen | Value: None
+Port ID: com.chaos.vray_node.texbitmap.animation_type | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.animation_mode | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.timing_type | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.timing_range_start | Value: net.maxon.datatype.timevalue
+Port ID: com.chaos.vray_node.texbitmap.timing_range_end | Value: net.maxon.datatype.timevalue
+Port ID: com.chaos.vray_node.texbitmap.timing_loops | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.start_frame | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.end_frame | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.frame_rate | Value: 30
+Port ID: com.chaos.vray_node.texbitmap.frame_sequence | Value: false
+Port ID: com.chaos.vray_node.texbitmap.use_current_animation_frame | Value: true
+Port ID: com.chaos.vray_node.texbitmap.frame_number | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.frame_offset | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.ifl_start_frame | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.ifl_playback_rate | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.ifl_end_condition | Value: 0
+
+Found Node: com.chaos.vray_node.texbitmap
+------------------------------
+Port ID: com.chaos.vray_node.texbitmap.file | Value: file://10.10.101.10/creative/work/Postbox/10_Internal-Projects/PM0002_LV_FORTKNOXX/04_Resources/Libraries/PolyHaven/texture/aerial_rocks_02_nor_gl_1k.jpg
+Port ID: com.chaos.vray_node.texbitmap.uv_tiling_mode | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.filter_type | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.interpolation | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.filter_blur | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.transfer_function | Value: 3
+Port ID: com.chaos.vray_node.texbitmap.gamma | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.rgb_primaries | Value: 2
+Port ID: com.chaos.vray_node.texbitmap.imported_primaries | Value: true
+Port ID: com.chaos.vray_node.texbitmap.allow_negative_colors | Value: false
+Port ID: com.chaos.vray_node.texbitmap.color_mult | Value: R:1.0, G:1.0, B:1.0, Alpha:1.0
+Port ID: com.chaos.vray_node.texbitmap.color_offset | Value: R:0.0, G:0.0, B:0.0, Alpha:1.0
+Port ID: com.chaos.vray_node.texbitmap.invert | Value: false
+Port ID: com.chaos.vray_node.texbitmap.alpha_from_intensity | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.invert_alpha | Value: true
+Port ID: com.chaos.vray_node.texbitmap.alpha_mult | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.alpha_offset | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.nouvw_color | Value: R:0.5, G:0.5, B:0.5, Alpha:1.0
+Port ID: com.chaos.vray_node.texbitmap.tile | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.placement_type | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.tile_u | Value: false
+Port ID: com.chaos.vray_node.texbitmap.u | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.w | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.tile_v | Value: false
+Port ID: com.chaos.vray_node.texbitmap.v | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.h | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.jitter | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.uv_noise_on | Value: false
+Port ID: com.chaos.vray_node.texbitmap.uv_noise_animate | Value: false
+Port ID: com.chaos.vray_node.texbitmap.uv_noise_amount | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.uv_noise_levels | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.uv_noise_size | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.un_noise_phase | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.uvwgen | Value: None
+Port ID: com.chaos.vray_node.texbitmap.animation_type | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.animation_mode | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.timing_type | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.timing_range_start | Value: net.maxon.datatype.timevalue
+Port ID: com.chaos.vray_node.texbitmap.timing_range_end | Value: net.maxon.datatype.timevalue
+Port ID: com.chaos.vray_node.texbitmap.timing_loops | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.start_frame | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.end_frame | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.frame_rate | Value: 30
+Port ID: com.chaos.vray_node.texbitmap.frame_sequence | Value: false
+Port ID: com.chaos.vray_node.texbitmap.use_current_animation_frame | Value: true
+Port ID: com.chaos.vray_node.texbitmap.frame_number | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.frame_offset | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.ifl_start_frame | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.ifl_playback_rate | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.ifl_end_condition | Value: 0
+
+Found Node: com.chaos.vray_node.texbitmap
+------------------------------
+Port ID: com.chaos.vray_node.texbitmap.file | Value: file://10.10.101.10/creative/work/Postbox/10_Internal-Projects/PM0002_LV_FORTKNOXX/04_Resources/Libraries/PolyHaven/texture/aerial_rocks_02_disp_1k.jpg
+Port ID: com.chaos.vray_node.texbitmap.uv_tiling_mode | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.filter_type | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.interpolation | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.filter_blur | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.transfer_function | Value: 3
+Port ID: com.chaos.vray_node.texbitmap.gamma | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.rgb_primaries | Value: 2
+Port ID: com.chaos.vray_node.texbitmap.imported_primaries | Value: true
+Port ID: com.chaos.vray_node.texbitmap.allow_negative_colors | Value: false
+Port ID: com.chaos.vray_node.texbitmap.color_mult | Value: R:1.0, G:1.0, B:1.0, Alpha:1.0
+Port ID: com.chaos.vray_node.texbitmap.color_offset | Value: R:0.0, G:0.0, B:0.0, Alpha:1.0
+Port ID: com.chaos.vray_node.texbitmap.invert | Value: false
+Port ID: com.chaos.vray_node.texbitmap.alpha_from_intensity | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.invert_alpha | Value: true
+Port ID: com.chaos.vray_node.texbitmap.alpha_mult | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.alpha_offset | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.nouvw_color | Value: R:0.5, G:0.5, B:0.5, Alpha:1.0
+Port ID: com.chaos.vray_node.texbitmap.tile | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.placement_type | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.tile_u | Value: false
+Port ID: com.chaos.vray_node.texbitmap.u | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.w | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.tile_v | Value: false
+Port ID: com.chaos.vray_node.texbitmap.v | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.h | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.jitter | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.uv_noise_on | Value: false
+Port ID: com.chaos.vray_node.texbitmap.uv_noise_animate | Value: false
+Port ID: com.chaos.vray_node.texbitmap.uv_noise_amount | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.uv_noise_levels | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.uv_noise_size | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.un_noise_phase | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.uvwgen | Value: None
+Port ID: com.chaos.vray_node.texbitmap.animation_type | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.animation_mode | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.timing_type | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.timing_range_start | Value: net.maxon.datatype.timevalue
+Port ID: com.chaos.vray_node.texbitmap.timing_range_end | Value: net.maxon.datatype.timevalue
+Port ID: com.chaos.vray_node.texbitmap.timing_loops | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.start_frame | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.end_frame | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.frame_rate | Value: 30
+Port ID: com.chaos.vray_node.texbitmap.frame_sequence | Value: false
+Port ID: com.chaos.vray_node.texbitmap.use_current_animation_frame | Value: true
+Port ID: com.chaos.vray_node.texbitmap.frame_number | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.frame_offset | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.ifl_start_frame | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.ifl_playback_rate | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.ifl_end_condition | Value: 0
+
+Found Node: com.chaos.vray_node.texbitmap
+------------------------------
+Port ID: com.chaos.vray_node.texbitmap.file | Value: file://10.10.101.10/creative/work/Postbox/10_Internal-Projects/PM0002_LV_FORTKNOXX/04_Resources/Libraries/PolyHaven/texture/aerial_rocks_02_diff_1k.jpg
+Port ID: com.chaos.vray_node.texbitmap.uv_tiling_mode | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.filter_type | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.interpolation | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.filter_blur | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.transfer_function | Value: 3
+Port ID: com.chaos.vray_node.texbitmap.gamma | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.rgb_primaries | Value: 2
+Port ID: com.chaos.vray_node.texbitmap.imported_primaries | Value: true
+Port ID: com.chaos.vray_node.texbitmap.allow_negative_colors | Value: false
+Port ID: com.chaos.vray_node.texbitmap.color_mult | Value: R:1.0, G:1.0, B:1.0, Alpha:1.0
+Port ID: com.chaos.vray_node.texbitmap.color_offset | Value: R:0.0, G:0.0, B:0.0, Alpha:1.0
+Port ID: com.chaos.vray_node.texbitmap.invert | Value: false
+Port ID: com.chaos.vray_node.texbitmap.alpha_from_intensity | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.invert_alpha | Value: true
+Port ID: com.chaos.vray_node.texbitmap.alpha_mult | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.alpha_offset | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.nouvw_color | Value: R:0.5, G:0.5, B:0.5, Alpha:1.0
+Port ID: com.chaos.vray_node.texbitmap.tile | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.placement_type | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.tile_u | Value: false
+Port ID: com.chaos.vray_node.texbitmap.u | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.w | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.tile_v | Value: false
+Port ID: com.chaos.vray_node.texbitmap.v | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.h | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.jitter | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.uv_noise_on | Value: false
+Port ID: com.chaos.vray_node.texbitmap.uv_noise_animate | Value: false
+Port ID: com.chaos.vray_node.texbitmap.uv_noise_amount | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.uv_noise_levels | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.uv_noise_size | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.un_noise_phase | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.uvwgen | Value: None
+Port ID: com.chaos.vray_node.texbitmap.animation_type | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.animation_mode | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.timing_type | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.timing_range_start | Value: net.maxon.datatype.timevalue
+Port ID: com.chaos.vray_node.texbitmap.timing_range_end | Value: net.maxon.datatype.timevalue
+Port ID: com.chaos.vray_node.texbitmap.timing_loops | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.start_frame | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.end_frame | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.frame_rate | Value: 30
+Port ID: com.chaos.vray_node.texbitmap.frame_sequence | Value: false
+Port ID: com.chaos.vray_node.texbitmap.use_current_animation_frame | Value: true
+Port ID: com.chaos.vray_node.texbitmap.frame_number | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.frame_offset | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.ifl_start_frame | Value: 0
+Port ID: com.chaos.vray_node.texbitmap.ifl_playback_rate | Value: 1
+Port ID: com.chaos.vray_node.texbitmap.ifl_end_condition | Value: 0
