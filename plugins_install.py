@@ -226,6 +226,14 @@ def main():
     
     print(f"\n📂 Found {len(c4d_versions)} C4D installation(s): {', '.join(c4d_versions)}")
     
+    # Prompt user to continue or force upgrade
+    print("\n" + "─" * 40)
+    user_input = input("Press Enter to continue or type 'f' to force upgrade all: ").strip().lower()
+    force_mode = user_input == 'f'
+    
+    if force_mode:
+        print("⚡ Force mode enabled - will reinstall all versions regardless of current state")
+    
     updated_count = 0
     skipped_count = 0
     
@@ -241,7 +249,17 @@ def main():
         if installed_folder:
             print(f"  Currently installed: {installed_folder} (v{installed_version})")
             
-            if source_version > installed_version:
+            if force_mode:
+                # Force mode: always reinstall
+                print(f"  ⚡ Force reinstalling v{source_version}...")
+                # Remove existing folder first
+                existing_path = os.path.join(plugins_path, installed_folder)
+                if os.path.exists(existing_path):
+                    shutil.rmtree(existing_path)
+                    print(f"  🗑️ Removed existing: {installed_folder}")
+                if copy_insydium_folder(source_full_path, plugins_path):
+                    updated_count += 1
+            elif source_version > installed_version:
                 print(f"  ⬆️ Upgrade available: v{installed_version} → v{source_version}")
                 if copy_insydium_folder(source_full_path, plugins_path, installed_folder):
                     updated_count += 1
@@ -256,7 +274,7 @@ def main():
                 updated_count += 1
     
     print("\n" + "=" * 60)
-    print(f"Installation complete: {updated_count} updated, {skipped_count} already up to date")
+    print(f"Installation complete: {updated_count} updated, {skipped_count} skipped")
     print("=" * 60)
 
 
