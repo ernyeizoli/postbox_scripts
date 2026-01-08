@@ -36,6 +36,7 @@ ID_TEX_BITMAP_FILE = "com.chaos.vray_node.texbitmap.file"
 ID_TEX_BITMAP_UVWGEN = "com.chaos.vray_node.texbitmap.uvwgen"
 ID_TEX_BITMAP_RGB_PRIMARIES = "com.chaos.vray_node.texbitmap.rgb_primaries"
 ID_TEX_BITMAP_IMPORTED_PRIMARIES = "com.chaos.vray_node.texbitmap.imported_primaries"
+ID_TEX_BITMAP_TRANSFER_FUNCTION = "com.chaos.vray_node.texbitmap.transfer_function"
 
 # Asset ID for the UVW Generator
 ID_UVW_GEN = "com.chaos.vray_node.uvwgenchannel"
@@ -214,72 +215,63 @@ def create_vray_material(doc, mat_name, textures_map):
                 if not success:
                     print(f"Error: Could not set file path for {tex_type} ({mat_name}).")
             
-            # --- NEW: Set RGB Primaries to sRGB for Color Textures ---
+            # --- Color Space Settings for Bitmap Textures ---
+            # Color/Albedo textures: Imported=False, sRGB primaries (value 2)
+            # All other textures: Imported=True, Linear transfer function (value 0), Raw primaries (value 0)
+            
+            imported_primaries_port = bitmap_node.GetInputs().FindChild(ID_TEX_BITMAP_IMPORTED_PRIMARIES)
+            primaries_port = bitmap_node.GetInputs().FindChild(ID_TEX_BITMAP_RGB_PRIMARIES)
+            transfer_port = bitmap_node.GetInputs().FindChild(ID_TEX_BITMAP_TRANSFER_FUNCTION)
+            
             if tex_type == 'texturesColor':
-                print(f"DEBUG: Processing Color Texture for {mat_name}")
-                # 1. Disable "Imported Primaries" (Crucial for RGB Primaries to take effect)
-                imported_primaries_port = bitmap_node.GetInputs().FindChild(ID_TEX_BITMAP_IMPORTED_PRIMARIES)
+                # Color/Albedo: Linear transfer + ACEScg primaries
+                # Keep Imported Primaries = True (like other textures)
                 if imported_primaries_port:
                     try:
-                        imported_primaries_port.SetPortValue(False)
-                        print("DEBUG: Set Imported Primaries to False (Port)")
+                        imported_primaries_port.SetPortValue(True)
                     except Exception as e:
-                        print(f"DEBUG: Failed to set Imported Primaries (Port): {e}")
-                else:
+                        print(f"Warning: Failed to set Imported Primaries: {e}")
+                
+                # Set Transfer Function to Linear (Value 0)
+                if transfer_port:
                     try:
-                        bitmap_node.SetValue(ID_TEX_BITMAP_IMPORTED_PRIMARIES, False)
-                        print("DEBUG: Set Imported Primaries to False (Direct)")
+                        transfer_port.SetPortValue(0)  # 0 = Linear
                     except Exception as e:
-                        print(f"DEBUG: Failed to set Imported Primaries (Direct): {e}")
-
-                # 2. Set "RGB Primaries" to sRGB (Value 2)
-                primaries_port = bitmap_node.GetInputs().FindChild(ID_TEX_BITMAP_RGB_PRIMARIES)
+                        print(f"Warning: Failed to set Transfer Function to Linear: {e}")
+                
+                # Set RGB Primaries to ACEScg (trying value 3 - adjust if needed)
                 if primaries_port:
                     try:
-                        primaries_port.SetPortValue(2) # 2 = sRGB
-                        print("DEBUG: Set RGB Primaries to 2 (Port)")
+                        primaries_port.SetPortValue(2)  # 2 = ACEScg (third in dropdown, 0-indexed)
+                        check_val = primaries_port.GetPortValue()
+                        print(f"DEBUG: Set Color texture to Linear/ACEScg for {mat_name} (verify: primaries={check_val})")
                     except Exception as e:
-                        print(f"DEBUG: Failed to set RGB Primaries (Port): {e}")
-                else:
-                    # Fallback: Try setting value directly on the node if port finding fails
+                        print(f"Warning: Failed to set RGB Primaries to ACEScg: {e}")
+            else:
+                # Non-color textures (Metal, Roughness, Normal, etc.): Linear + Raw
+                # Keep Imported Primaries = True, but set Transfer Function and RGB Primaries
+                if imported_primaries_port:
                     try:
-                        bitmap_node.SetValue(ID_TEX_BITMAP_RGB_PRIMARIES, 2)
-                        print("DEBUG: Set RGB Primaries to 2 (Direct)")
+                        imported_primaries_port.SetPortValue(True)
                     except Exception as e:
-                        print(f"DEBUG: Failed to set RGB Primaries (Direct): {e}")
-
-            # C. Connect UVW Transform -> Bitmap
-            if uvw_output_port:
-                uvw_input_port = bitmap_node.GetInputs().FindChild(ID_TEX_BITMAP_UVWGEN)
-                if uvw_input_port:
-                    uvw_output_port.Connect(uvw_input_port)
-                        bitmap_node.SetValue(ID_TEX_BITMAP_IMPORTED_PRIMARIES, False)
-                        print("DEBUG: Set Imported Primaries to False (Direct)")
+                        print(f"Warning: Failed to set Imported Primaries: {e}")
+                
+                # 1. Set Transfer Function to Linear (Value 0)
+                if transfer_port:
+                    try:
+                        transfer_port.SetPortValue(0)  # 0 = Linear
                     except Exception as e:
-                        print(f"DEBUG: Failed to set Imported Primaries (Direct): {e}")
-
-                # 2. Set "RGB Primaries" to sRGB (Value 2)
-                primaries_port = bitmap_node.GetInputs().FindChild(ID_TEX_BITMAP_RGB_PRIMARIES)
+                        print(f"Warning: Failed to set Transfer Function to Linear: {e}")
+                
+                # 2. Set RGB Primaries to Raw (Value 0)
                 if primaries_port:
                     try:
-                        primaries_port.SetPortValue(2) # 2 = sRGB
-                        print("DEBUG: Set RGB Primaries to 2 (Port)")
-                        
-                        # --- VERIFICATION ---
-                        # Read back the values to confirm they stuck
-                        check_imp = imported_primaries_port.GetPortValue() if imported_primaries_port else "N/A"
-                        check_prim = primaries_port.GetPortValue()
-                        print(f"DEBUG: VERIFY - Imported: {check_imp}, RGB: {check_prim}")
-                        
+                        primaries_port.SetPortValue(0)  # 0 = Raw
+                        # Verify the value was set
+                        check_val = primaries_port.GetPortValue()
+                        print(f"DEBUG: Set {tex_type} to Linear/Raw for {mat_name} (verify: primaries={check_val})")
                     except Exception as e:
-                        print(f"DEBUG: Failed to set RGB Primaries (Port): {e}")
-                else:
-                    # Fallback: Try setting value directly on the node if port finding fails
-                    try:
-                        bitmap_node.SetValue(ID_TEX_BITMAP_RGB_PRIMARIES, 2)
-                        print("DEBUG: Set RGB Primaries to 2 (Direct)")
-                    except Exception as e:
-                        print(f"DEBUG: Failed to set RGB Primaries (Direct): {e}")
+                        print(f"Warning: Failed to set RGB Primaries to Raw: {e}")
 
             # C. Connect UVW Transform -> Bitmap
             if uvw_output_port:
