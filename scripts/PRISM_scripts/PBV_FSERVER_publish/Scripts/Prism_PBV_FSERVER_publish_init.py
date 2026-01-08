@@ -32,11 +32,11 @@
 # along with Prism.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from Prism_publish_to_fserver_Variables import Prism_publish_to_fserver_Variables
-from Prism_publish_to_fserver_Functions import Prism_publish_to_fserver_Functions
+from Prism_PBV_FSERVER_publish_Variables import Prism_PBV_FSERVER_publish_Variables
+from Prism_PBV_FSERVER_publish_Functions import Prism_PBV_FSERVER_publish_Functions
 
 
-class Prism_publish_to_fserver(Prism_publish_to_fserver_Variables, Prism_publish_to_fserver_Functions):
+class Prism_PBV_FSERVER_publish(Prism_PBV_FSERVER_publish_Variables, Prism_PBV_FSERVER_publish_Functions):
     def __init__(self, core):
-        Prism_publish_to_fserver_Variables.__init__(self, core, self)
-        Prism_publish_to_fserver_Functions.__init__(self, core, self)
+        Prism_PBV_FSERVER_publish_Variables.__init__(self, core, self)
+        Prism_PBV_FSERVER_publish_Functions.__init__(self, core, self)

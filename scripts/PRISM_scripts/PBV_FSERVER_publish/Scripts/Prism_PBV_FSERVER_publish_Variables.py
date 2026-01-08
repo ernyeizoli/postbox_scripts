@@ -35,10 +35,10 @@
 import os
 
 
-class Prism_publish_to_fserver_Variables(object):
+class Prism_PBV_FSERVER_publish_Variables(object):
     def __init__(self, core, plugin):
         self.version = "v2.0.0"
-        self.pluginName = "publish_to_fserver"
+        self.pluginName = "PBV_FSERVER_publish"
         self.pluginType = "Custom"
         self.platforms = ["Windows"]
         self.pluginDirectory = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
