@@ -372,7 +372,117 @@
                 }
                 app.endUndoGroup();
             };
+// ---------- RENAME (Adjustment -> FX names, Null -> Parent of: child names) ----------
+            function getEffectNamesFromLayer(layer){
+                var names = [];
+                try{
+                    var fx = layer.property("Effects");
+                    if (!fx) return names;
+                    for (var j = 1; j <= fx.numProperties; j++){
+                        var eff = fx.property(j);
+                        if (eff && eff.name) names.push(eff.name);
+                    }
+                }catch(e){}
+                return names;
+            }
+            function renameAdjustmentLayersInComp(comp){
+                if (!(comp && comp instanceof CompItem)) return;
+                for (var i = 1; i <= comp.numLayers; i++){
+                    var L = comp.layer(i);
+                    if (L && L.adjustmentLayer === true){
+                        var fxNames = getEffectNamesFromLayer(L);
+                        if (fxNames.length > 0){ L.name = fxNames.join(", "); }
+                    }
+                }
+            }
+            function renameNullParentsInComp(comp){
+                if (!(comp && comp instanceof CompItem)) return;
+                var nulls = [];
+                for (var i=1; i<=comp.numLayers; i++){
+                    var L = comp.layer(i);
+                    try { if (L instanceof AVLayer && L.nullLayer === true){ nulls.push(L); } } catch(e){}
+                }
+                for (var n=0; n<nulls.length; n++){
+                    var N = nulls[n], childNames = [];
+                    for (var k=1; k<=comp.numLayers; k++){
+                        var C = comp.layer(k);
+                        try{ if (C !== N && C.parent === N){ childNames.push(C.name); } }catch(e){}
+                    }
+                    if (childNames.length > 0){ N.name = "Parent of: " + childNames.join(", "); }
+                }
+            }
+            function renameInAllComps(){
+                for (var i=1; i<=app.project.numItems; i++){
+                    var it = app.project.item(i);
+                    if (it instanceof CompItem){
+                        renameAdjustmentLayersInComp(it);
+                        renameNullParentsInComp(it);
+                    }
+                }
+            }
 
+            renameAdjBtn.helpTip = "AKTÍV kompozíció: Adjustment → FX names; Null → Parent of: <children>";
+            renameAdjBtn.onClick = function(){
+                var comp = app.project.activeItem;
+                if (!(comp && comp instanceof CompItem)) return alert("No active composition found.");
+                app.beginUndoGroup("Rename: Adjustment + Null (Active Comp)");
+                renameAdjustmentLayersInComp(comp);
+                renameNullParentsInComp(comp);
+                app.endUndoGroup();
+            };
+
+            // ---------- Delete Empty Folders (eredeti viselkedés) ----------
+            deletefolders.helpTip = "Delete all empty folders";
+            deletefolders.onClick = function removeFolders(theFolder) {
+                var del = [];
+                for (var i = 1; i<=app.project.numItems; i++) {
+                    if (app.project.item(i) instanceof FolderItem && app.project.item(i).numItems==0)
+                        del.push(app.project.item(i));
+                }
+                for (var k = 0; k < del.length; k++) del[k].remove();
+            };
+
+            // ---------- JUST DO IT (temp-átnevezős eredeti logika + végén RENAME ALL COMPS) ----------
+            justDoItButton.onClick = function() {
+                // Pre-funkció: az összes mappa átnevezése "temp"-re (eredeti viselkedés)
+                for (var i = 1; i <= app.project.numItems; i++) {
+                    var item = app.project.item(i);
+                    if (item instanceof FolderItem) { item.name = "temp"; }
+                }
+
+                // 20x kör, eredeti sorrendben
+                for (var r = 0; r < 20; r++) {
+                    myButton.onClick();
+                    movecomps.onClick();
+                    moveAi.onClick();
+                    movepng.onClick();
+                    movepsd.onClick();
+                    moveplates.onClick(); // EXR seq -> _REPLACEABLE_EXR, videók -> FOOTAGE
+                    movesound.onClick();
+                    movesolids.onClick();
+                    colorAll.onClick();
+
+                    // Temp mappa tartalmának áthelyezése a SOLIDS mappába
+                    var tempFolder = null, solidsFolder = null;
+                    for (var j = 1; j <= app.project.numItems; j++) {
+                        if ((app.project.item(j) instanceof FolderItem) && (app.project.item(j).name == "temp")) { tempFolder = app.project.item(j); break; }
+                    }
+                    for (var k = 1; k <= app.project.numItems; k++) {
+                        if ((app.project.item(k) instanceof FolderItem) && (app.project.item(k).name == "SOLIDS")) { solidsFolder = app.project.item(k); break; }
+                    }
+                    if (tempFolder && solidsFolder) {
+                        for (var l = tempFolder.numItems; l >= 1; l--) {
+                            tempFolder.item(l).parentFolder = solidsFolder;
+                        }
+                    }
+                    deletefolders.onClick();
+                }
+
+                // ÚJ: RENAME minden kompozíción (Adjustment + Null)
+                app.beginUndoGroup("JUST DO IT! — Rename All Comps");
+                renameInAllComps();
+                app.endUndoGroup();
+            };
             myPanel.layout.layout(true);
             return myPanel;
         }
