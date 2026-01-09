@@ -1,0 +1,87 @@
+--- Start V-Ray Node ID Dump ---
+Name: Smoke | ID: com.chaos.vray_node.texsmoke
+Name: Hair Next | ID: com.chaos.vray_node.brdfhair4
+Name: Layered | ID: com.chaos.vray_node.texlayeredmax
+Name: Combine Float | ID: com.chaos.vray_node.texcombinefloat
+Name: Mask | ID: com.chaos.vray_node.texmaskmax
+Name: Dirt | ID: com.chaos.vray_node.texdirt
+Name: UVW Randomizer | ID: com.chaos.vray_node.uvwgenrandomizer
+Name: Scene Asset Texture | ID: com.chaos.vray_node.scene_asset_texture
+Name: Light | ID: com.chaos.vray_node.brdflight
+Name: Scene Asset BRDF | ID: com.chaos.vray_node.scene_asset_brdf
+Name: Al Surface | ID: com.chaos.vray_node.brdfalsurface
+Name: Color Channel | ID: com.chaos.vray_node.texacolorchannel
+Name: Splat | ID: com.chaos.vray_node.texsplat
+Name: Scatter Surface Color | ID: com.chaos.vray_node.scattersurfacecolor
+Name: Hair Sampler | ID: com.chaos.vray_node.texhairsampler
+Name: Blend | ID: com.chaos.vray_node.brdflayered
+Name: OCIO | ID: com.chaos.vray_node.texocio
+Name: Random | ID: com.chaos.vray_node.texrandom
+Name: Remap | ID: com.chaos.vray_node.texremap
+Name: Edges | ID: com.chaos.vray_node.texedges
+Name: Condition | ID: com.chaos.vray_node.texcondition2
+Name: Scanned | ID: com.chaos.vray_node.brdfscanned
+Name: Checker | ID: com.chaos.vray_node.texchecker
+Name: Output | ID: com.chaos.vray_node.texoutput
+Name: Luminance | ID: com.chaos.vray_node.texluminance
+Name: RGB to HSV | ID: com.chaos.vray_node.texrgbtohsv
+Name: Color Correction | ID: com.chaos.vray_node.colorcorrection
+Name: Normal Map | ID: com.chaos.vray_node.texnormalbump
+Name: Bitmap | ID: com.chaos.vray_node.texbitmap
+Name: Distance | ID: com.chaos.vray_node.texdistance
+Name: UVW Channel | ID: com.chaos.vray_node.uvwgenchannel
+Name: Combine Color | ID: com.chaos.vray_node.texcombinecolor
+Name: UVW Place 2D | ID: com.chaos.vray_node.uvwgenmayaplace2dtexture
+Name: Noise Max | ID: com.chaos.vray_node.texnoisemax
+Name: Sampler Info | ID: com.chaos.vray_node.texsampler
+Name: Fast SSS2 | ID: com.chaos.vray_node.brdfsss2complex
+Name: Stucco | ID: com.chaos.vray_node.texstucco
+Name: Falloff | ID: com.chaos.vray_node.texfalloff
+Name: Compose Color | ID: com.chaos.vray_node.float3toacolor
+Name: Material | ID: com.chaos.vray_node.mtlsinglebrdf
+Name: UVW Object | ID: com.chaos.vray_node.uvwgenobject
+Name: UVW Projection | ID: com.chaos.vray_node.uvwgenprojection
+Name: UVW to Color | ID: com.chaos.vray_node.texuvw
+Name: User Integer | ID: com.chaos.vray_node.texuserinteger
+Name: User Scalar | ID: com.chaos.vray_node.texuserscalar
+Name: Two Sided Material | ID: com.chaos.vray_node.mtl2sided
+Name: Grid | ID: com.chaos.vray_node.texgrid
+Name: Tiles | ID: com.chaos.vray_node.textiles
+Name: Fresnel | ID: com.chaos.vray_node.texfresnel
+Name: Mix | ID: com.chaos.vray_node.texmix
+Name: Maxon Noise | ID: com.chaos.vray_node.maxon_noise
+Name: V-Ray Material | ID: com.chaos.vray_node.brdfvraymtl
+Name: Color Arithmetic | ID: com.chaos.vray_node.texacolorop
+Name: Stochastic Flakes | ID: com.chaos.vray_node.brdfstochasticflakes
+Name: User Color | ID: com.chaos.vray_node.texusercolor
+Name: Float Arithmetic | ID: com.chaos.vray_node.texfloatop
+Name: Substance | ID: com.chaos.vray_node.substance
+Name: Override Material | ID: com.chaos.vray_node.mtloverride
+Name: TriPlanar | ID: com.chaos.vray_node.textriplanar
+Name: Vertex Color | ID: com.chaos.vray_node.texmeshvertexcolorchannel
+Name: MtlOSL | ID: com.chaos.vray_node.mtlosl
+Name: Cellular | ID: com.chaos.vray_node.texcellular
+Name: Softbox | ID: com.chaos.vray_node.texsoftbox
+Name: Ramp | ID: com.chaos.vray_node.texramp
+Name: TexOSL | ID: com.chaos.vray_node.texosl
+Name: Toon Material | ID: com.chaos.vray_node.brdftoonmtl
+Name: Car Paint 2 | ID: com.chaos.vray_node.brdfcarpaint2
+Name: VRmat | ID: com.chaos.vray_node.mtlvrmat
+Name: Switch | ID: com.chaos.vray_node.mtlmulti
+Name: Particle Sampler | ID: com.chaos.vray_node.texparticlesampler
+Name: Invert Float | ID: com.chaos.vray_node.texinvertfloat
+Name: Color to UVW | ID: com.chaos.vray_node.uvwgenexplicit
+Name: Clamp | ID: com.chaos.vray_node.texclamp
+Name: Bump | ID: com.chaos.vray_node.brdfbump
+Name: Color Range | ID: com.chaos.vray_node.texsetrange
+Name: UVW Transform | ID: com.chaos.vray_node.uvwgenselect
+Name: Bump To Glossiness | ID: com.chaos.vray_node.texbump2glossiness
+Name: Outlines | ID: com.chaos.vray_node.brdftoonoverride
+Name: Float to Color | ID: com.chaos.vray_node.texfloattocolor
+Name: Color to Float | ID: com.chaos.vray_node.texcolortofloat
+Name: MultiSubTex | ID: com.chaos.vray_node.texmulti
+Name: Vector Product | ID: com.chaos.vray_node.texvectorproduct
+Name: Invert | ID: com.chaos.vray_node.texinvert
+Name: Ray Switch | ID: com.chaos.vray_node.texrayswitch
+Name: Curvature | ID: com.chaos.vray_node.texcurvature
+--- Found 85 V-Ray Nodes ---
