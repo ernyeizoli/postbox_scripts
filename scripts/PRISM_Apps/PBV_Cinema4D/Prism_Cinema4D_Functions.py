@@ -710,6 +710,17 @@ class Prism_Cinema4D_Functions(object):
             original_format = bc.GetInt32(c4d.RDATA_FORMAT)
             bc.SetInt32(c4d.RDATA_FORMAT, original_format)
         elif rendererName == "V-Ray":
+            bc.SetFilename(c4d.RDATA_PATH, rSettings["outputName"])
+            bc.SetBool(c4d.RDATA_GLOBALSAVE, True)
+            bc.SetBool(c4d.RDATA_SAVEIMAGE, True)
+            base, ext = os.path.splitext(rSettings["outputName"].lower())
+            if ext == ".exr":
+                bc.SetInt32(c4d.RDATA_FORMAT, c4d.FILTER_EXR)
+            elif ext == ".png":
+                bc.SetInt32(c4d.RDATA_FORMAT, c4d.FILTER_PNG)
+            elif ext == ".jpg":
+                bc.SetInt32(c4d.RDATA_FORMAT, c4d.FILTER_JPG)
+
             ID_VRAY_VIDEOPOST = 1053272
             VRAY_VP_OUTPUT_SETTINGS_FILENAME = 1000403
             if not doc:
@@ -729,7 +740,9 @@ class Prism_Cinema4D_Functions(object):
 
             doc.StartUndo()
             doc.AddUndo(c4d.UNDOTYPE_CHANGE, vp)
-            vp[VRAY_VP_OUTPUT_SETTINGS_FILENAME] = rSettings["outputName"]
+            vray_path = rSettings["outputName"].replace("beauty", "mp")
+            vray_path = vray_path.replace("..", ".$frame.")
+            vp[VRAY_VP_OUTPUT_SETTINGS_FILENAME] = vray_path
             doc.EndUndo()
             c4d.EventAdd()
 
