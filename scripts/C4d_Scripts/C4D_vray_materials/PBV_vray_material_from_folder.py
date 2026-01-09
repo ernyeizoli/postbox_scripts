@@ -93,8 +93,14 @@ def parse_folder(folder_path):
             
             chosen_file = file_list[0]
             
+            # RULE: Color/Diffuse (Prefer ACEScg converted files)
+            if type_key == 'texturesColor':
+                acescg_files = [f for f in file_list if 'acescg' in f.lower()]
+                if acescg_files:
+                    chosen_file = acescg_files[0]
+            
             # RULE: Normal Maps (Prefer GL over DX)
-            if type_key == 'texturesNormal':
+            elif type_key == 'texturesNormal':
                 gl_files = [f for f in file_list if 'gl' in f.lower().replace('.', '_').split('_')]
                 if gl_files:
                     chosen_file = gl_files[0]
