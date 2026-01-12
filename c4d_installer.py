@@ -4,7 +4,7 @@ import platform
 
 # Add the names of the script folders you want to install
 
-SCRIPTS = ["C4D_vray_filename_set", "C4D_vray_filename_set_REMIX", "C4D_vray_light_renamer", "C4D_vray_render_elements", "C4D_vray_materials", "C4D_redshift_lights"]
+SCRIPTS = ["C4D_vray_filename_set", "C4D_vray_light_renamer", "C4D_vray_render_elements", "C4D_vray_materials", "C4D_redshift_lights"]
 
 PLUGINS = ["C4D_pbv_gui"]
 
