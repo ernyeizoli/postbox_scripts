@@ -8,6 +8,7 @@ PLUGIN_ID = 1000001
 SCRIPT_FILENAME_SET = "PBV_filename_set.py"
 SCRIPT_LIGHT_PASS = "PBV_vray_light_pass_creator.py"
 SCRIPT_LIGHT_RENAME = "PBV_vray_light_renamer.py"
+SCRIPT_REDSHIFT_LIGHT = "PBV_redshift_light.py"
 
 SCRIPT_FILENAME_SET_REMIX = "PBV_filename_set_REMIX.py"
 
@@ -28,11 +29,11 @@ class MyScriptsDialog(c4d.gui.GeDialog):
 
     def CreateLayout(self):
         self.SetTitle("PBV Tools")
-        self.GroupBegin(1000, c4d.BFH_SCALEFIT | c4d.BFV_SCALEFIT, 1, 0, "Scripts")
-        self.GroupBorderSpace(10, 10, 10, 10)
 
-        # Header text for the group
-        self.AddStaticText(1200, c4d.BFH_CENTER, 0, 0, "--- PBV TOOLS ---")
+        # ==================== V-RAY TOOLS ====================
+        self.GroupBegin(1000, c4d.BFH_SCALEFIT | c4d.BFV_SCALEFIT, 1, 0, "VRay_Tools")
+        self.GroupBorderSpace(10, 10, 10, 10)
+        self.AddStaticText(1200, c4d.BFH_CENTER, 0, 0, "--- V-RAY TOOLS ---")
 
         # --- Bitmap Button for "Rename V-Ray Lights" ---
         self.AddCustomGui(1003, c4d.CUSTOMGUI_BITMAPBUTTON, "", c4d.BFH_SCALEFIT, 15, 15)
@@ -52,6 +53,29 @@ class MyScriptsDialog(c4d.gui.GeDialog):
                 gui.SetImage(bmp)
         self.AddStaticText(1102, c4d.BFH_LEFT, 0, 0, "Create V-Ray Light Passes")
 
+        self.GroupEnd()
+
+        # ==================== REDSHIFT TOOLS ====================
+        self.GroupBegin(2000, c4d.BFH_SCALEFIT | c4d.BFV_SCALEFIT, 1, 0, "Redshift_Tools")
+        self.GroupBorderSpace(10, 10, 10, 10)
+        self.AddStaticText(2200, c4d.BFH_CENTER, 0, 0, "--- REDSHIFT TOOLS ---")
+
+        # --- Bitmap Button for "Redshift Light Renamer" ---
+        self.AddCustomGui(1004, c4d.CUSTOMGUI_BITMAPBUTTON, "", c4d.BFH_SCALEFIT, 15, 15)
+        bmp = self.GetIcon("PBV_redshift_light.tiff")
+        if bmp:
+            gui = self.FindCustomGui(1004, c4d.CUSTOMGUI_BITMAPBUTTON)
+            if gui:
+                gui.SetImage(bmp)
+        self.AddStaticText(1104, c4d.BFH_LEFT, 0, 0, "Redshift Light Organizer")
+
+        self.GroupEnd()
+
+        # ==================== PROJECT TOOLS ====================
+        self.GroupBegin(3000, c4d.BFH_SCALEFIT | c4d.BFV_SCALEFIT, 1, 0, "Project_Tools")
+        self.GroupBorderSpace(10, 10, 10, 10)
+        self.AddStaticText(3200, c4d.BFH_CENTER, 0, 0, "--- PROJECT TOOLS ---")
+
         # --- Bitmap Button for "Set Render Filename" ---
         self.AddCustomGui(1001, c4d.CUSTOMGUI_BITMAPBUTTON, "", c4d.BFH_SCALEFIT, 15, 15)
         bmp = self.GetIcon("PBV_filename_set.tif")
@@ -61,17 +85,7 @@ class MyScriptsDialog(c4d.gui.GeDialog):
                 gui.SetImage(bmp)
         self.AddStaticText(1101, c4d.BFH_LEFT, 0, 0, "Set Render Filename")
 
-        self.GroupEnd()
-
-
-
-        self.GroupBegin(2000, c4d.BFH_SCALEFIT | c4d.BFV_SCALEFIT, 1, 0, "REMIX_TOOLS")
-        self.GroupBorderSpace(10, 10, 10, 10)
-
-        # Header text for the group (unique ID)
-        self.AddStaticText(2200, c4d.BFH_CENTER, 0, 0, "--- REMIX TOOLS ---")
-
-        # --- Bitmap Button for "Set Render Filename for REMIX" ---
+        # --- Bitmap Button for "Set Render Filename REMIX" ---
         self.AddCustomGui(2010, c4d.CUSTOMGUI_BITMAPBUTTON, "", c4d.BFH_SCALEFIT, 15, 15)
         bmp = self.GetIcon("PBV_filename_set_REMIX.tif")
         if bmp:
@@ -81,8 +95,6 @@ class MyScriptsDialog(c4d.gui.GeDialog):
         self.AddStaticText(2110, c4d.BFH_LEFT, 0, 0, "Set Render Filename REMIX")
 
         self.GroupEnd()
-
-
 
         return True
 
@@ -113,6 +125,8 @@ class MyScriptsDialog(c4d.gui.GeDialog):
             self.RunScript(SCRIPT_LIGHT_RENAME)
         if id == 2010:
             self.RunScript(SCRIPT_FILENAME_SET_REMIX)
+        if id == 1004:
+            self.RunScript(SCRIPT_REDSHIFT_LIGHT)
         return True
 
 class MyScriptsPlugin(c4d.plugins.CommandData):
