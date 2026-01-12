@@ -17,4 +17,6 @@ if __name__ == "__main__":
     input("Press Enter to start the install...")
     run_script("ae_installer.py")
     run_script("c4d_installer.py")
+    run_script("prism_installer.py")
+    run_script("plugins_install.py")
     input("\nAll done! Press Enter to exit.")

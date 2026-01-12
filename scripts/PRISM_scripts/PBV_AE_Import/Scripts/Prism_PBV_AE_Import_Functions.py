@@ -1,18 +1,56 @@
-name = "PBV_AE_Import"
-classname = "PBV_AE_Import"
+# -*- coding: utf-8 -*-
+#
+####################################################
+#
+# PRISM - Pipeline for animation and VFX projects
+#
+# www.prism-pipeline.com
+#
+# contact: contact@prism-pipeline.com
+#
+####################################################
+#
+#
+# Copyright (C) 2016-2023 Richard Frangenberg
+# Copyright (C) 2023 Prism Software GmbH
+#
+# Licensed under GNU LGPL-3.0-or-later
+#
+# This file is part of Prism.
+#
+# Prism is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Prism is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with Prism.  If not, see <https://www.gnu.org/licenses/>.
+
 
 import socket
 import logging
 from qtpy.QtWidgets import QAction
-from PrismUtils.Decorators import err_catcher
+
+from PrismUtils.Decorators import err_catcher_plugin as err_catcher
+
 
 logger = logging.getLogger(__name__)
 
-class PBV_AE_Import:
-    def __init__(self, core):
+
+class Prism_PBV_AE_Import_Functions(object):
+    def __init__(self, core, plugin):
         self.core = core
-        self.version = "v1.0.0"
+        self.plugin = plugin
         self.core.registerCallback("mediaPlayerContextMenuRequested", self.mediaPlayerContextMenuRequested, plugin=self)
+
+    @err_catcher(name=__name__)
+    def isActive(self):
+        return True
 
     def mediaPlayerContextMenuRequested(self, origin, menu):
         if self.core.requestedApp == "AfterEffects":
@@ -22,10 +60,7 @@ class PBV_AE_Import:
                 
             menu.addSeparator()
             my_action = QAction("PBV Import to After Effects from folder", menu)
-            
-            # Simplified connect statement - no middleman function needed.
             my_action.triggered.connect(lambda: self.importMedia(filepaths[0]))
-            
             menu.addAction(my_action)
 
     @err_catcher(name=__name__)

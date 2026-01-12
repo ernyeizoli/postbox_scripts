@@ -1,0 +1,5 @@
+opencolorio
+numpy
+Pillow
+PySide6
+openimageio
