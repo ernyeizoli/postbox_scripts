@@ -56,8 +56,13 @@ def get_c4d_plugin_path(version_folder):
 
 def copy_files(src, dst):
     """Copies all files from a source directory to a destination directory."""
+    # Files to skip (system files that may be locked)
+    SKIP_FILES = {"Thumbs.db", ".DS_Store", "desktop.ini"}
+    
     os.makedirs(dst, exist_ok=True)
     for item in os.listdir(src):
+        if item in SKIP_FILES:
+            continue
         src_item = os.path.join(src, item)
         if os.path.isfile(src_item):
             shutil.copy2(src_item, dst)
