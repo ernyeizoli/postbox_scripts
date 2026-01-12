@@ -10,7 +10,6 @@ SCRIPT_LIGHT_PASS = "PBV_vray_light_pass_creator.py"
 SCRIPT_LIGHT_RENAME = "PBV_vray_light_renamer.py"
 SCRIPT_REDSHIFT_LIGHT = "PBV_redshift_light.py"
 
-SCRIPT_FILENAME_SET_REMIX = "PBV_filename_set_REMIX.py"
 
 class MyScriptsDialog(c4d.gui.GeDialog):
 
@@ -85,14 +84,6 @@ class MyScriptsDialog(c4d.gui.GeDialog):
                 gui.SetImage(bmp)
         self.AddStaticText(1101, c4d.BFH_LEFT, 0, 0, "Set Render Filename")
 
-        # --- Bitmap Button for "Set Render Filename REMIX" ---
-        self.AddCustomGui(2010, c4d.CUSTOMGUI_BITMAPBUTTON, "", c4d.BFH_SCALEFIT, 15, 15)
-        bmp = self.GetIcon("PBV_filename_set_REMIX.tif")
-        if bmp:
-            gui = self.FindCustomGui(2010, c4d.CUSTOMGUI_BITMAPBUTTON)
-            if gui:
-                gui.SetImage(bmp)
-        self.AddStaticText(2110, c4d.BFH_LEFT, 0, 0, "Set Render Filename REMIX")
 
         self.GroupEnd()
 
@@ -123,8 +114,6 @@ class MyScriptsDialog(c4d.gui.GeDialog):
             self.RunScript(SCRIPT_LIGHT_PASS)
         if id == 1003:
             self.RunScript(SCRIPT_LIGHT_RENAME)
-        if id == 2010:
-            self.RunScript(SCRIPT_FILENAME_SET_REMIX)
         if id == 1004:
             self.RunScript(SCRIPT_REDSHIFT_LIGHT)
         return True
